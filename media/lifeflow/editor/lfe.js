@@ -4,6 +4,12 @@ var display_error = function(txt, elem) {
   msg.insertAfter($(elem)).fadeIn('slow').animate({opacity: 1.0}, 5000).fadeOut('slow', function() { msg.remove(); });
 };
 
+var display_message = function(txt, elem) {
+  if (elem == undefined) { elem = "#messages" };
+  var msg = $('<div class="normal-msg"><span>'+txt+'</span></div>');
+  msg.insertAfter($(elem)).fadeIn('slow').animate({opacity: 1.0}, 1000).fadeOut('slow', function() { msg.remove(); });
+};
+
 
 /* Talking with the LifeFlow API */
 
@@ -22,10 +28,18 @@ var create_model = function(model, args, onCompleteFunc) {
 }
 
 var update_model = function(model, pk, args) {
+  var onComplete = function(res,status) {
+    if (status == "success") {
+      display_message("Saved.");
+    }
+    else {
+      display_error(res.responseText);
+    }
+  }
   if (!args) args = {};
   args["model"] = model;
   args["pk"] = pk;
-  $.ajax({type:"POST", url:'/editor/update/', data:args});
+  $.ajax({type:"POST", url:'/editor/update/', data:args, complete:onComplete});
 };
 
 /* Used by projects.html */

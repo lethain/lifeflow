@@ -98,6 +98,16 @@ div.error-msg {
     background-color: red;
 }
 
+div.normal-msg {
+    background-color: #0099FF;
+    z-index: 100;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
 div.editing {
     margin-top: 10px;
     margin-left: 10%;
