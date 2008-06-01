@@ -427,3 +427,18 @@ div.files div.add {
     border: solid 1px cyan;
     float: left;
 }
+
+
+/* Styling for the Rendering view */
+
+#render {
+    overflow: auto;
+}
+
+#render em {
+    background: none;
+}
+
+#render p {
+    padding-bottom: 20px;
+}
