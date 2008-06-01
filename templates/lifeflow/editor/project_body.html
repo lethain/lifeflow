@@ -1,119 +1,13 @@
 {% extends "lifeflow/editor/base.html" %}
 
 {% block body %}
-<script>
-var update = function() {
-  var data = { use_markdown:$("#use_markdown").attr('value'),
-               body:$("#text").val() };
-  update_model("project",{{object.pk}},data);
-}
-
-$(document).ready(function() {
-  $("#text").hover(function(){},function(){ update(); });
-  $("#use_markdown").change(function(){ update(); });
-});
-</script>
-
 <div class="breadcrumbs">
   <span class="selected"> <a href="../details/">Details</a> </span>
   <span> <a href="../body/">Body & Files</a> </span>
 </div>
 
-<div class="editing">
-    <div class="li-mimic">
-    <p class="dropdown"> How do you want this text to be rendered? </p>
-    <select name="use_markdown" class="dropdown" id="use_markdown">
-      <option value="true"{% if object.use_markdown %} selected="selected"{% endif %}>Treat is as Markdown.</option>
-      <option value="false" {% if not object.use_markdown %} selected="selected"{% endif %}>Treat it as raw HTML.</option>
-    </select>
-  </div>
-  <div class="writing">
-    <textarea id="text" class="writing">{{ object.body }}</textarea>
-  </div>
-  <div class="buttons writing-buttons">
-    <script>
-    $(document).ready(function() {$("#render-button").click(function() {
-      $("#render").load('/editor/render/project/{{ object.pk }}/', {'txt':$("#text").text()}).show();
-      $("#hide-button").show();
-    })});
-    $(document).ready(function() {$("#hide-button").click(function() {
-      $("#render").hide();
-      $("#hide-button").hide();
-    })});
-    $(document).ready(function() {$("#add-file-button").click(function() {
-    $("#resource").hide();
-    $("#add-resource").show();
-    })});
-    </script>
-    <a class="button positive" id="add-file-button"> Add File </a>
-    <a class="button neutral" id="render-button"> Render </a>
-    <a class="button negative" id="hide-button" style="display: none;"> Hide Rendering </a>
-  </div>
-  <div id="render" class="render li-mimic" style="display: none;"></div>
-  
-
-<script>
-$(document).ready(function() {$("#resources").change(function() {
-  var res = $("#resources");
-  var index = res[0].selectedIndex;
-  var pk = res[0][index].value;
-  $("#resource").load('/editor/display_resource/' + pk + '/').show();
-  $("#add-resource").hide();
-})});
-
-
-$(document).ready(function() {$("#resource-delete").click(function() {
-  var lst = $("#resources");
-  var index = lst[0].selectedIndex;
-  if (index == -1) { display_error("Please select a resource to delete.", "#resource-errors"); }
-  var chosen = lst.children()[index];
-  var pk = chosen.value;
-  $.ajax({url:"/editor/delete_model/", type:"post", data:{model:"resource", pk:pk}, complete:function(res, status) {
-    if (status == "success") {
-      chosen.parentNode.removeChild(chosen);
-      lst[0].selectedIndex = -1;
-      $("#resource").hide();
-    }
-    else { display_error(res.responseText); }
-}})})});
-</script>
-  <div class="error-msg" id="resource-errors" style="display: none"></div>
-  <div class="li-mimic resources">
-    <div class="resource-select">
-      <select id="resources" size="10">
-      {% for resource in resources %}
-        <option value="{{ resource.pk }}"> {{ resource.title }}</option>
-      {% endfor %}
-      </select>
-      <a class="button negative" id="resource-delete"> Delete Resource </a>
-    </div>
-    <div class="resource" id="resource"></div>
-    <div class="add-resource" id="add-resource" style="display: none;">
-      <form action="/editor/add_resource/" method="post" enctype="multipart/form-data">
-      <table>
-	<tr>
-	  <td> Title: </td>
-	  <td><input name="title" ></td>
-	</tr>
-	<tr>
-	  <td> Markdown ID: </td>
-	  <td><input name="markdown_id" ></td>
-	</tr>
-	<tr>
-	  <td> File </td>
-	  <td><input type="file" name="file" ></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <input type="hidden" name="pk" value="{{ object.pk }}">
-	  <input type="hidden" name="model" value="project">
-	  <td><input type="submit" value="Upload"></td>
-	</tr>
-      </table>
-      </form>
-    </div>
-  </div>
-
-</div>
+{% with "project" as model %}
+{% include "lifeflow/editor/body_editor_widget.html" %}
+{% endwith %}
 
 {% endblock %}
