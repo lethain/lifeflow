@@ -316,6 +316,11 @@ a.button {
     margin: 0px;
 }
 
+a.titlecase {
+    text-decoration: none;
+    
+}
+
 a.positive:hover {
     background-color: blue;
 }

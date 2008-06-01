@@ -11,6 +11,11 @@ $(document).ready(function() {
   $("#title").hover(function(){},function(){ update(); });
   $("#text").hover(function(){},function(){ update(); });
 });
+
+var capitalize_title = function () {
+  var txt = titleCaps($("#title").val());
+  $("#title").val(titleCaps($("#title").val()));
+}
 </script>
 
 <div class="breadcrumbs">
@@ -27,7 +32,7 @@ $(document).ready(function() {
   <ul>
     <li>
       <p> Choose a title for your entry. </p>
-      <input id="title" value="{{ object.title }}">
+      <input id="title" value="{{ object.title }}"> <a class="titlecase" onclick="capitalize_title();">titlecase it</a>
     </li>
     <li>
       <p> Write a brief summary of your entry (using html). </p>
