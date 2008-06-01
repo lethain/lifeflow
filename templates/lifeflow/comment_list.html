@@ -1,0 +1,40 @@
+{% load lifeflow %}
+
+<div class="comments" id="comments">
+  {% with object.pub_date as date %}
+  <div class="comments-subscribe">
+  <span><a href="/feeds/entry_comment/{{ date.year }}/{{ date.month }}/{{ date.day }}/{{ object.slug }}/">Subscribe to comments on {{ object.title }}</a></span>
+  </div>
+  {% endwith %}
+  
+  {% for comment_tuple in object.organize_comments %}
+    {% with comment_tuple.0 as comment %}
+    {% with comment_tuple.1 as depth %}
+    <div class="comment">
+      <div class="comment_{{ depth|boundary:"4" }}" id="comment_{{ comment.pk }}">
+
+      {% if comment.webpage %}
+        <span class="comment-author">
+          <a href="{{ comment.webpage }}">{{ comment.name }}</a>
+        </span>
+      {% else %}
+        <span class="comment-author">
+          {{ comment.name }}
+        </span>
+      {% endif %}
+	<span class="comment-reply"><a href="/comments/create/{{ object.pk }}/{{ comment.pk }}/"> reply </a></span>
+	{% if comment.parent %}
+	<span class="comment-parent-link">
+	  Responding to <a href="#comment_{{ comment.parent.pk }}">{{ comment.parent.name }}</a>
+	</span>
+	{% endif %}
+      <div class="comment-body">
+        <p> {{ comment.html|safe }} </p>
+      </div>
+      </div>
+    </div>
+    {% endwith %}
+    {% endwith %}
+  {% endfor %}
+    <h3 class="reply"><a href="/comments/create/{{ object.pk }}/"> Reply to this entry </a></h3>
+</div>

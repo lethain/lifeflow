@@ -1,0 +1,37 @@
+<ol class="entry-list">
+  {% for object in article_list %}
+  <li class="entry-in-entry-list">
+  <h2>
+    <a href="{{ object.get_absolute_url }}">
+      {{ object.title|escape }}
+    </a>
+  </h2>
+  <div class="article-header">
+    {% with object.authors.all as authors %}
+    {% if authors %}
+    <span class="authors"> by {% for author in authors %}{{ author.name_with_link|safe }}{% endfor %} </span>
+    <br>
+    {% endif %}
+    {% endwith %}
+    
+    <span class="date">
+      {{ object.pub_date|date:"F j, Y" }}
+    </span>
+    {% for tag in object.tags.all %}
+    <span class="tag">
+      <a href="{{ tag.get_absolute_url }}"> {{ tag.title }}</a>
+    </span>
+    {% endfor %}
+    <br>
+    {% with object.translation_set.all as translations %}
+    {% if translations %}
+    <span class="translation-header">Translations: </span>
+    {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+    {% endif %}
+    {% endwith %}
+
+  </div>
+<p class="summary">{{ object.summary|safe }}</p>
+</li>
+{% endfor %}
+</ol>

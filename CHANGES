@@ -1,0 +1,33 @@
+
+
+* Added new dynamic context in markup.lifeflowmarkup:
+  1. [previous] -> link to previous entry, if one exists
+  2. [next] -> link to next entry, if one exists
+  3. [series nth] -> link to @nth entry of current series (starts with 1)
+  4. [series slug nth] -> link to @nth entry in series with @slug
+     (starts with 1, not 0)
+  5. [file markdown_name_of_resource] -> link to file stored in a Resource
+  6. [f markdown_name_of_resource] -> shortcut for file
+
+* Substantial reworking and refactoring of markup/lifeflowmarkup.py
+
+## R66
+* Major refactoring of markup handings by LifeFlow.
+  1. Created the *markup* folder, where all markup files now live.
+  2. Restored a pristine Python-Markdown 0.9 file
+  3. Moved all code syntax highlighting parts into markup/code.py
+  4. Moved the Dynamic Blog Context bits into markup/lifeflowmarkup.py
+  5. Added lifeflowmarkup.render() function for rendering any combination of MarkDown and rendering code, Dynamic Blog Context, and footnotes.
+  6. Added relevant tests to tests.py.
+
+* Added new dynamic context in markup/lifeflowmarkup:
+  1.[author] -> /author/ if 0 or >2 authors, otherwise to the authors bio page
+  2. [tag slug] -> /tag/slug/
+  3. [comment pk] -> page returned by get_absolute_url by comment with @pk
+  4. [project slug] => /project/slug/
+
+## R64
+* Added new static context in Lifeflowmarkup: comments, projects, series, tags
+* Renamed Markdownpp to Lifeflowmarkup due to terms of license.
+
+R60

@@ -1,0 +1,25 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<div class="column span-17 edit-main" id="edit-main">
+  <textarea id="edit"> {{ entry.body }} </textarea>
+</div>
+
+
+<div class="column span-23 buttons">
+  <hr>
+  <a class="button positive" id="save">Continue</a>
+  <script>
+  $(document).ready(function() {$("#render").click(function() {
+  $("#render-txt").load('/editor/render/', {'txt':$("#edit").text()});
+      })});
+  </script>
+  <a class="button" id="render">Preview</a>
+  <hr>
+</div>
+
+<div class="column span-22 render-div last" id="render-txt">
+  <p> its a start, but is still rendering the old stuff, I think its because the text() function isn't what we want, although I'm having issues getting innerHTML to work...</p>
+</div>
+
+{% endblock %}

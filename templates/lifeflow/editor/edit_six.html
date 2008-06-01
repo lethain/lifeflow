@@ -1,0 +1,53 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<script>
+var update = function() {
+  var send_ping = $("#send_ping").attr('value');
+  var allow_comments = $("#allow_comments").attr('value')
+  var data = {allow_comments:allow_comments, send_ping:send_ping};
+  update_model("{{model}}",{{object.pk}},data);
+}
+
+$(document).ready(function() {
+  $("#send_ping").change(function(){ update(); });
+  $("#allow_comments").change(function(){ update(); });
+});
+</script>
+
+<div class="breadcrumbs">
+  <span > <a href="../1/">Title & Summary</a> </span>
+  <span> <a href="../2/">Body & Files</a> </span>
+  <span> <a href="../3/">Flows</a> </span>
+  <span> <a href="../4/">Tags</a> </span>
+  <span> <a href="../5/">Series</a> </span>
+  <span class="selected"> Date & Options </span>
+  <span> <a href="../7/">Authors & Translations</a> </span>
+</div>
+
+<div class="editing">
+  <form>
+  <ul>
+    <li>
+      <p> Please select the date and time to publish this entry. </p>
+      <p> {{ object.pub_date }} </p>
+      <p> Not implemented yet. :-/ Currently, the pub_date is set to the current time the first time you move a draft into the published bucket, and that time will be retained. </p>
+    </li>
+    <li>
+      <p class="dropdown"> Would you like to ping Technocratic when you publish this entry?</p>
+    <select name="send_ping" class="dropdown" id="send_ping">
+      <option value="true"{% if object.send_ping %} selected="selected"{% endif %}>Yes</option>
+      <option value="false" {% if not object.send_ping %} selected="selected"{% endif %}>No</option>
+    </select>
+    </li>
+    <li>
+      <p class="dropdown"> Do you want to allow comments on this entry? </p>
+      <select name="allow_comments" class="dropdown" id="allow_comments">
+      <option value="true"{% if object.allow_comments %} selected="selected"{% endif %}>Yes</option>
+      <option value="false" {% if not object.allow_comments %} selected="selected"{% endif %}>No</option>
+    </select>
+    </li>
+  </ul>
+  </form>
+</div>
+{% endblock %}

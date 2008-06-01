@@ -1,0 +1,14 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+
+{% block title %} Archive {% endblock %}
+
+
+{% block body %}
+<h2> Archive for Irrational Exuberance </h2>
+<ol>
+  {% for date in date_list %}
+  <li><a href="{{ date.year }}/">Archive for {{ date.year }}</a></li>
+  {% endfor %}
+</ol>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+
+{% block sidebar %}
+
+{% block extra_sidebar %}{% endblock %}
+
+<ul class="nav-links">
+  <li class="nav-link nav-link-header"><strong>Recent Entries</strong></li>
+  {% for entry in recent_entries %}<li><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>{% endfor %}
+</ul>
+<ul class="nav-links">
+  <li class="nav-link nav-link-header"><strong> Meta </strong></li>
+  <li class="nav-link"><a href="/author/{{ lifeflow_author_slug }}/">About</a></li>
+  <li class="nav-link"><a href="/entry/">Archive</a></li>
+  <li class="nav-link"><a href="/meta/rss/">RSS</a></li>
+  <li class="nav-link"><a href="/tags/">Tag Cloud</a></li>
+  <li class="nav-link"><a href="/language/">Translations</a></li>
+</ul>
+
+{% if blog_roll %}
+<ul class="nav-links">
+  <li class="nav-link nav-link-header"><strong>Blogs-To-See</strong></li>
+  {% for blog in blog_roll %}
+  <li class="nav-link"><a href="{{ blog.url }}">{{ blog.title|escape }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<ul class="nav-links">
+  <li class="nav-link nav-link-header"><strong>Random</strong></li>
+  {% for rand in random_entries %}
+  <li class="nav-link"><a href="{{ rand.get_absolute_url }}">{{ rand.title|escape }}</a></li>
+  {% endfor %}
+</ul>  
+</div>
+{% endblock %}

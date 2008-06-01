@@ -1,0 +1,147 @@
+div.footer {
+    text-align: center;
+}
+
+span.tag {
+    margin-left: 10px;
+}
+
+span.translation {
+    margin-right: 10px;
+}
+
+
+span.header-link {
+    margin-left: 10px;
+}
+
+span.very-large {
+    font-size: 2em;
+    margin-bottom: 0.75em;
+}
+
+h3.reply {
+    margin-top: 18px;
+    text-align: center;
+}
+
+div.author-picture {
+    float: left;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+div.author-subscribe {
+    text-align: center;
+}
+
+/* Stylings for Social Links */
+
+div.social {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+span.social {
+    margin-right: 18px;
+}
+
+/* Stylings for comments. */
+
+div.comment {
+    margin-top: 18px;
+    overflow: auto;
+}
+
+div.comment-body {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+span.comment-author {
+    float: left;
+    margin-left: 5px;
+}
+
+div.comments-subscribe {
+    text-align: center;
+}
+
+span.comment-reply {
+    float: right;
+    margin-right: 10px;
+}
+
+span.comment-parent-link {
+    float: right;
+    margin-right: 10px;
+}
+
+div.comment_0 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.comment_1 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+div.comment_2 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+div.comment_3 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+div.comment_4 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+
+/* Styling for honeypot section of comments */
+
+div.honey {
+    display: none;
+}
+
+/* Stylings for the tag-cloud. */
+
+.tag-cloud LI {
+    display: inline;
+}
+
+.tag-cloud .size1 {
+    font-size: 1em
+}
+
+.tag-cloud .size2 {
+    font-size: 1.3em
+}
+
+.tag-cloud .size3 {
+    font-size: 1.6em
+}
+
+.tag-cloud .size4 {
+    font-size: 1.9em
+}
+
+.tag-cloud .size5 {
+    font-size: 2.2em
+}

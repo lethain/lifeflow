@@ -1,0 +1,18 @@
+    {% extends "lifeflow/editor/base.html" %}
+
+    {% block body %}
+
+<div class="login">
+    {% if error_message %}
+    <p> {{ error_message }}</p>
+    {% endif %}
+    <form method="post" action=".">
+    <table>
+    <tr><td><label for="id_username">Username</label></td><td><input name="username"></tr>
+    <tr><td><label for="id_password">Password</label></td><td><input type="password" name="password"></td></tr>
+    </table>
+    <button class="button positive" type="submit">Login!</button>
+    </form>
+  </div>
+
+  {% endblock %}

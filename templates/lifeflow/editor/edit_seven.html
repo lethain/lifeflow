@@ -1,0 +1,100 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<div class="breadcrumbs">
+  <span> <a href="../1/">Title & Summary</a> </span>
+  <span> <a href="../2">Body & Files</a> </span>
+  <span>  <a href="../3/">Flows</a> </span>
+  <span> <a href="../5/">Tags</a> </span>
+  <span>  <a href="../4/">Series </span>
+  <span> <a href="../6/">Date & Options</a> </span>
+  <span class="selected">Authors & Translations</a> </span>
+</div>
+
+<script>
+var pkForId = function(id) {
+  var lst = $("#"+id);
+  var index = lst[0].selectedIndex;
+  if (index != -1) {
+    var chosen = lst.children()[index];
+    return chosen.value;
+  }
+};
+var updateTranslation = function(translation,original,language) {
+  var data = {"pk":{{ object.pk }},"original":original, "language":language};
+  var onComplete = function(res,status) {  
+    $("#translations")[0].innerHTML = res.responseText;
+  };
+  create_model("translation", data, onComplete);
+};
+
+$(document).ready(function() {
+  $("#translation-remove").click(function() {
+    updateTranslation({{object.pk}},-1,-1);
+  });
+  $("#translation-update").click(function() {
+    var language = pkForId("language");
+    var original = pkForId("original");
+    if (original && language) {
+      updateTranslation({{object.pk}},original,language);
+    }
+    else {
+      display_error("Please select a language and original.");
+    };
+  });
+  $("a.selectable").click(function () {
+    $(this).toggleClass("selected");
+  });
+  $("#select-list").hover(
+  function() {},
+  function() {
+    var selected = $.map($("a.selected"),function(x) { return x.id; });
+    var data = {"authors":selected};
+    update_model("{{ model }}",{{ object.pk }}, data);
+  });
+});
+</script>
+
+<div class="editing">
+  <ul>
+    <li id="select-list">
+    <p> Click on the authors to associate with this article. </p>
+    <div id="selectables" class="selectables">
+      {% for author, selected in authors %}
+      <a class="selectable {% if selected %} selected{% endif %}" id="{{ author.pk }}"> {{ author.name }}</a>
+      {% endfor %}
+    </div>
+    </li>
+    <li>
+    <p> Select the original entry, and the language of the translation. To finalize the selection click the <strong>Add</strong> button. To remove translations relationship, then use the <strong>Remove All</strong> button.</p>
+    <div id="translations">
+    {% include "lifeflow/editor/translations.html" %}
+    </div>
+    {% ifequal model "entry" %}
+    <div class="panel wide">
+      {% with entries as object_list %}
+      <select class="small" id="original" size="10" name="Original Entry">
+	{% include "lifeflow/editor/entries.html" %}
+      </select>
+      {% endwith %}
+    </div>
+    <div class="panel narrow">
+      <select class="small" id="language" size="10" name="Language">
+	{% with langs as object_list %}
+	{% for object in object_list %}
+	<option value="{{ object.pk }}"> {{ object }} </option>
+	  {% endfor %}
+	  {% endwith %}
+      </select>
+    </div>
+    <div class="panel narrow bottom">
+      <a class="button positive" id="translation-update"> Add </a>
+      <a class="button negative" id="translation-remove"> Remove All </a>
+    </div>
+    {% else %}
+    <p><em> Drafts cannot participate in translations. </em></p>
+    {% endifequal %}
+    </li>    
+  </ul>
+</div>
+{% endblock %}

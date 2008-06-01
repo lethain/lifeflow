@@ -1,0 +1,66 @@
+
+
+## Using LifeFlowMarkUp
+
+[markdown]: http://daringfireball.net/projects/markdown/syntax
+[pygments]: http://www.pygments.com/
+
+LifeFlowMarkUp is a superset of MarkDown. It has two types of additions not found in [MarkDown][markdown]: syntax additions, and blog-specific context.
+
+### Additions to Syntax
+
+At this time there is only one addition to the syntax. Its purpose is to provide code syntax highlighting support.
+
+It looks like this:
+
+  @@ python
+  def __unicode__(self):
+      return u"My name is %s" % self.name
+  @@
+
+On the opening line you place two apersands (@), followed by the alias for a lexer in the Pygments package.
+
+
+## Dynamic Blog Context
+
+A great deal of LifeFlow's design is the result of three observations:
+
+1. MarkDown makes writing a lot more fun (and quicker).
+2. Linking things together adds a lot of value to posts.
+3. Writing the same reference links over in different posts is frustrating (Don't Repeat Yourself should apply to writing blog entries as well as programming!).
+
+Out of these observations, Dynamic Blog Context, or DBC was concieved.
+
+DBC is essentially a battery of automatically generated references that you can use when writing your blog entries. You may find yourself writing a lot of throw away references to link to a certain tag of yours, or to a certain project. You may get annoyed having to figure out the link to the previous blog entry, or remembering the link to the first entry in some blog series.
+
+Dynamic Blog Context does its best to make this all better.
+
+Lets take a look at an example:
+
+    Please take a look [at my articles about Japan][tag japan].
+ 
+The magic here (such as it is) is that this *just works*, instead of having to write it out like this
+
+    [tag japan]: /tags/japan/
+    Please take a look [at my articles about Japan][tag japan].
+
+Its a pleasant convenience, and helps abstract your entries from the specific URLs and implementation details of your blog. Using DBC you could rearrange your blog, but you just have to resave your entries (DBC is computed at save), and they would update.
+
+A number of more tags are in the work (they are quite simple, and I am working on a way to allow users to contribute their own without breaking their SVN checkout, at the moment you can just add more by looking in lifeflow/markup/lifeflowmarkup.py, but its likely that code will be getting cleaned up somehow in the near future)--[please check the project page for the update to date details][project lifeflow]--but take a look at the currently available DBC.
+
+1. [tag slug] - creates a link to the tag with @slug
+2. [comment pk] - creates a link to the comment with @pk (works with comments posted on any entry)
+3. [project slug] - creates a link to the project with @slug
+4. [author] - creates a link to the authors's biography page if there is one author, if there are more or less authors then it creates a link to the /author/ page.
+5. [comments] - creates a link to the comment division for the current entry
+6. [projects] - creates a link to the /projects/ page
+7. [series] - creates a link to the /articles/ page
+8. [tags] - creates a link to the site's tag cloud
+
+The others on the way (probably tonight):
+
+1. [previous]
+2. [series number_of_entry]
+3. [series slug number_of_entry]
+
+There are undoubtedly other places where Dynamic Blog Context would be appropriate, and I am open to suggestions about where those places may be. Let me know if you have any good ideas!

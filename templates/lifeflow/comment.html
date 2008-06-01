@@ -1,0 +1,93 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{% block extra_head %}
+<link type="text/css" rel="stylesheet" href="/media/blueprint/plugins/buttons/buttons.css">
+{% endblock %}
+{% block title %} Commenting on {{ object.title|escape }}{% endblock %}
+{% block body %}
+<h3> You are writing a comment about <a href="{{ object.get_absolute_url }}">{{ object.title|escape }}</a>, here is a quick summary:</h3>
+<p> {{ object.summary }} </p>
+{% if parent %}
+<hr>
+<h3> You are responding to <a href="{{ object.get_absolute_url }}#comment_{{ parent.id }}"> this comment</a> written by {{ parent.name }} on {{ parent.date|date:"F jS Y, H:i" }}.</h3>
+<p> {{ parent.html|safe }} </p>
+{% endif %}
+{% if form.cleaned_data.rendered %}
+<hr>
+<h3> Preview of your comment: </h3>
+{{ form.cleaned_data.rendered|safe }}
+{% endif %}
+<hr>
+<p> Please be aware that comment forms go stale after one hour.</p>
+<form method="post" action="/comments/create/">
+<div class="comment">
+  <div class="honey">
+    <input type="text" name="honey5" />
+    <input type="text" name="honey6" />
+    <textarea name="honey7" id="honey_area" rows="10" cols="40"></textarea>
+    <span><input type="submit" name="honey8" /></span>
+  </div>
+  <div class="commentDetails">
+    <span><input type="text" class="text" name="name" value="{{ form.cleaned_data.name }}" maxlength=100 /></span>
+    <br/>
+    <span><input type="text" class="text" name="email" value="{{ form.cleaned_data.email }}" maxlength=100/></span>
+    <br/>
+    <span><input type="text" class="text" name="webpage" value="{{ form.cleaned_data.webpage }}" maxlength=100 /></span>
+    <br/>
+    <div class="honey">
+      <span><input type="submit" name="honey1" /></span>
+      <span><button type="submit" name="honey2"></button></span>
+    </div>
+      <div class="commentBody">
+    <textarea name="body" id="id_body" rows="10", cols="40">{{ form.cleaned_data.body }}</textarea>
+  </div>
+    <div class="buttons">
+      <span><button type="submit" class="button positive" name="preview" value="preview">Preview</button></span>
+      <span><button type="submit" class="button" name="submit" value="submit">Submit</button></span>
+    </div> 
+  </div>
+  </div>
+  <br/>
+  <input type="hidden" name="parent_id" value="{{ parent.id }}" />
+  <input type="hidden" name="entry_id" value="{{ object.id }}" />
+  <input type="hidden" name="identifier" value="{{ identifier }}" />
+  <input type="hidden" name="time" value="{{ time }}" />
+  <div class="honey">
+    <span><input type="submit" name="honey3" /></span>
+    <span><button type="submit" name="honey4"></span>
+  </div>
+</form>
+  <div class="comment-help">
+    <p> Comments may make use of all MarkDown++ formating. Raw html will be escaped.</p>
+<hr>
+    <h4> Quick Introduction to MarkDown++ Syntax </h4>
+    <p>A highlighted code block:</p>
+    <pre>@@ ruby
+def a (b, c):
+  b * c
+end
+@@</pre>
+    <p> Other common languages work as well: scheme, python, java, html, etc.</p>
+    <p>Other markdown syntax:</p>
+    <pre> ### This is an h3 title
+
+#### This is an h4 title
+
+**this is bold**
+
+*this is italics*
+
+1. This is an
+2. ordered list
+
+* And an unordered
+* list too
+
+[this is a link](http://www.lethain.com/ "Lethain")</pre>    
+    
+  </div>
+
+  
+</div>
+
+{% endblock %}
+{% block sidebar %}{% endblock %}

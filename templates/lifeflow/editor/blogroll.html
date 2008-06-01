@@ -1,0 +1,48 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<script>
+var delete_blog = function(pk) {
+  delete_model("recommendedsite",pk);
+  var id = "#blog_" + pk;
+  $(id).fadeOut('slow');
+}
+</script>
+
+<div class="editing blogs">
+<ul>
+  <li>
+  <form method="post" action="/editor/create_model/">
+  <table>
+    <tr><td></td><td> Add a blog to the blogroll. </td></tr>
+    <tr><td> Title </td><td><input name="title"></td></tr>
+    <tr><td> Url </td><td><input name="url" value="http://"></td></tr>
+    <input type="hidden" value="recommendedsite" name="model">
+    <tr><td></td><td><button type="submit" class="button positive">Create</button></td></tr>
+    </table>
+  </form>
+    
+  </li>
+  <li>
+  <ul>
+{% for blog in blogroll %}
+  <li id="blog_{{ blog.pk }}">
+  <div class="data left">
+  <p> {{ blog.title }} <em>@</em> <a href="{{blog.url}}">{{ blog.url }}</a></p>
+
+  </div>
+  <div class="controls right">
+    <a class="button negative" onclick="delete_blog({{ blog.pk }})">delete</a>
+  </div>
+  </li>
+{% endfor %}
+  </ul>
+  </li>
+
+</ul>
+
+</div>
+
+
+
+{% endblock %}

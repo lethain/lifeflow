@@ -1,0 +1,85 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<script>
+$(document).ready(function () {
+    var rough_advance_func = function() {
+      move($("#rough-entries"), $("#edited-entries"), "rough_to_edited");
+    }
+    $("#rough-advance").click(rough_advance_func);
+    var edited_retreat_func = function() {
+      move($("#edited-entries"), $("#rough-entries"), "edited_to_rough");
+    }
+    $("#edited-retreat").click(edited_retreat_func);
+    var edited_advance_func = function() {
+      move($("#edited-entries"), $("#published-entries"), "edited_to_published");
+    }
+    $("#edited-advance").click(edited_advance_func);
+    var published_retreat_func = function() {
+      move($("#published-entries"), $("#edited-entries"), "published_to_edited");
+    }
+    $("#published-retreat").click(published_retreat_func);
+    $("#rough-delete").click(function() {
+	var lst = $("#rough-entries");
+	var index = lst[0].selectedIndex;
+	if (index == -1) {
+	  display_error("Please select a rough draft to delete.");
+        }
+	else {
+	  var chosen = lst.children()[index];
+	  var pk = chosen.value;
+	  var onComplete = function(res,status) {
+	    if (status == "success")
+              chosen.parentNode.removeChild(chosen);
+	    else
+              display_error(res.responseText);
+	  };
+	  delete_model("draft", pk, onComplete);
+	}
+      })});
+</script>
+
+<div class="panels">
+  <div class="rough panel">
+    <h3> Rough </h3>
+    <div class="top buttons">
+      <a class="button positive" id="write" href="create/"> New </a>
+      <a class="button neutral" id="rough-edit" onclick='edit($("#rough-entries"), "draft");'> Edit </a>
+      <a class="button negative" id="rough-advance"> >> </a>
+    </div>
+    {% with rough as object_list %}
+    <select id="rough-entries" size="20" name="Rough Drafts">
+      {% include "lifeflow/editor/entries.html" %}
+    </select>
+    {% endwith %}
+    <div class="bottom buttons">
+      <a class="button negative" id="rough-delete"> Delete </a>
+    </div>
+  </div>
+  <div class="edited panel">
+    <h3> Edited </h3>
+    <div class="top buttons">
+      <a class="button positive" id="edited-retreat"> << </a>
+      <a class="button neutral" id="edited-edit" onclick='edit($("#edited-entries"), "draft");'> Edit </a>
+      <a class="button negative" id="edited-advance"> >> </a>
+    </div>
+    {% with edited as object_list %}
+    <select id="edited-entries" size="20" name="Rough Drafts">
+      {% include "lifeflow/editor/entries.html" %}
+    </select>
+    {% endwith %}
+  </div>
+  <div class="published panel">
+    <h3> Published </h3>
+    <div class="top buttons">
+      <a class="button positive" id="published-retreat"> << </a>
+      <a class="button neutral" id="published-edit" onclick='edit($("#published-entries"), "entry");'> Edit </a>
+    </div>
+    {% with published as object_list %}
+    <select id="published-entries" size="20" name="Published Drafts">
+      {% include "lifeflow/editor/entries.html" %}
+    </select>
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}

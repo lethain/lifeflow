@@ -1,0 +1,16 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{% block title %} Authors {% endblock %}
+{% block body %}
+
+<h3 class="author-list-heading"> Authors </h3>
+
+<div class="authors-list">
+{% for object in object_list %}
+  <div class="author-in-list">
+    <a href="{{ object.slug }}/" >
+      <img src="{{ object.get_picture_url }}" alt="An picture of {{ object.name }}" >
+    </a>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}

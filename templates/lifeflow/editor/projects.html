@@ -1,0 +1,54 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<script>
+$(document).ready(function () {
+  $("#edit").click(function() {
+    var lst = $("#projects");
+    var index = lst[0].selectedIndex;
+    if (index == -1)
+      display_error("Please select a project to edit!");
+    else {
+      var chosen = lst.children()[index];
+      var pk = chosen.value;
+      edit_project(pk);
+    }
+  });
+  $("#delete").click(function() {
+    var lst = $("#projects");
+    var index = lst[0].selectedIndex;
+    if (index == -1)
+      display_error("Please select a project to delete!");
+    else {
+      var chosen = lst.children()[index];
+      var onComplete = function(res,status) {
+        if (status == "success")
+          chosen.parentNode.removeChild(chosen);
+        else
+          display_error(res.responseText);
+      };
+      var pk = chosen.value;
+      delete_model("project",pk,onComplete);
+    }
+  });
+
+});
+
+
+</script>
+
+<div class="li-mimic projects">
+    <div class="top buttons">
+      <a class="button positive" id="create" href="create/"> New Project </a>
+      <a class="button neutral" id="edit" onclick=''> Edit Project </a>
+    </div>
+    <select id="projects" size="20" name="Projects">
+      {% for project in projects %}
+      <option value="{{ project.pk }}"> {{ project }} </option>
+      {% endfor %}
+    </select>
+    <div class="bottom buttons">
+      <a class="button negative" id="delete"> Delete Project </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{%block body %}
+{% if not at_start %}
+<p>
+  <a href="{{ object.get_absolute_url }}?end_at={{ previous }}">
+    View more recent entries
+  </a>
+</p>
+{% endif %}
+
+{% with object_list as article_list %}
+{% include "lifeflow/show_articles_list.html" %}
+{% endwith %}
+
+{% if not at_end %}
+<p>
+  <a href="{{ object.get_absolute_url }}?end_at={{ last }}">
+    View older entries
+  </a>
+</p>
+{% endif %}
+{% endblock %}

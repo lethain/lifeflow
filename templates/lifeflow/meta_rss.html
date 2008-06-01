@@ -1,0 +1,22 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{% block title %} RSS {% endblock %}
+{% block body %}
+<h3> General Feeds </h3>
+
+<p><a href="/feeds/all/"> All Feed </a>: contains all entries. </p>
+<p><a href="/feeds/comment/"> Comment Feed </a>: contains recent comments. </p>
+{% for flow in flows %}
+<p><a href="/feeds/flow/{{ flow.slug }}/"> {{ flow.title }} Feed </a>: contains entries from the {{ flow.title }} flow. </p>
+{% endfor %}
+<p><a href="/feeds/projects/"> Project Feed </a>: contains all projects. </p>
+<p><a href="/feeds/translations/"> Translation Feed </a>: contains all translations. </p>
+
+<h3> Focused Feeds </h3>
+
+<p> Each <a href="/language/">language</a> has its own feed containing only translations in that specific language.</p>
+<p> Each entry has a feed for comments posted to it.</p>
+<p> Each <a href="/articles/">series</a> has its own feed. </p>
+<p> Each <a href="/tags/">tag</a> has its own feed. </p>
+<p> Each <a href="/author/">author</a> has its own feed as well. </p>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+{% if translations %}
+<div class="li-mimic">
+  {% for obj in translations %}
+  <p> Is a <em>{{ obj.language }}</em> translation of <strong>{{ obj.original }}</strong>.</p>
+  {% endfor %}
+</div>
+{% endif %}

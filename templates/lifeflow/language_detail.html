@@ -1,0 +1,21 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+
+{% block title %}Translations: {{ object }}{% endblock %}
+
+{% block body %}
+
+
+<span><a href="/language/">See other languages</a></span>
+<br>
+<span><a href="/feeds/language/{{ object.slug }}/">Subscribe to RSS for {{ object }}</a></span>
+<br>
+
+<h2> Translations in {{ object }}</h2>
+
+<ul>
+  {% for translation in object.translation_set.all %}
+  <li><a href="{{ translation.translated.get_absolute_url }}">{{ translation.translated.title }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

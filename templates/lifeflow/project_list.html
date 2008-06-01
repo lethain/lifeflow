@@ -1,0 +1,20 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+
+{% block title %} Projects {% endblock %}
+
+{% block body %}
+
+{% for object in object_list %}
+
+<h3><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h3>
+<span><strong>License: </strong> {{ object.license }} </span>
+<span><strong>Language: </strong> {{ object.language }} </span>
+<span><strong>Size: </strong> {{ object.size_string }} </span>
+<p> {{ object.summary|safe }} </p>
+
+
+
+
+{% endfor %}
+
+{% endblock %}

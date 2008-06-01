@@ -1,0 +1,15 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+
+{% block title %} Languages {% endblock %}
+
+{% block body %}
+
+<div class="languages-list">
+  <ul>
+  {% for object in object_list %}
+    <li> <a href="{{ object.slug }}/">{{ object }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block body %}
+<a href="/projects/">Up to projects</a>
+
+<h1> {{ object.title }} </h1>
+
+{{ object.body_html|safe }}
+
+{% endblock %}

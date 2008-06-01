@@ -1,0 +1,51 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{% block title %}Year Archive{% endblock %}
+{% block body %}
+<h2> Archive for {{ month|date:"F, Y" }}</h2>
+<ol>
+  {% for entry in object_list %}
+  <li>
+  <span><strong>Title:</strong> </span> <a href="{{ entry.get_absolute_url}}">{{ entry }}</a>
+  {% with entry.tags.all as tags %}
+  {% if tags %}
+  <br>
+  <span><em>Tags</em></span>
+  {% for tag in tags %}
+  <span class="tag">
+  <a href="{{ tag.get_absolute_url }}"> {{ tag.title }}</a>
+  </span>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% with entry.series.all as series %}
+  {% if series %}
+  <br>
+  <span><em>Series</em></span>
+  {% for a_series in series %}
+  <span><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></span>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% with entry.translation_set.all as translations %}
+  {% if translations %}
+  <br>
+  <span><em>Translations: </em></span>
+  {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+  {% endif %}
+  {% endwith %}
+  
+  {% with entry.translated.all as translated %}
+  {% if translated %}
+  <br>
+  <span><em>Translation of</em></span>
+  {% for translation in translated %}<span class="translation"><a href="{{ translation.original.get_absolute_url }}">{{ translation.original.title|safe  }}</a> <strong>in</strong> <a href="{{ translation.language.get_absolute_url}}">{{ translation.language }}</a></span>{% endfor %}
+  {% endif %}
+  {% endwith %}
+  <p> {{ entry.summary }} </p>
+  
+  {% endfor %}
+</ol>
+
+{% endblock %}

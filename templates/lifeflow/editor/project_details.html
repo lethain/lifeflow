@@ -1,0 +1,60 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+<script>
+var update = function() {
+  var size = $("#size");
+  var selected = size.children()[size[0].selectedIndex].value;
+  var data = { title:$("#title").val(),summary:$("#summary").val(),slug:$("#slug").val(),language:$("#language").val(),size:selected };
+  update_model("project", {{ object.pk }}, data);
+}
+
+$(document).ready(function() {
+  $("#details").hover(function(){},function(){ update(); });
+  $("#summary").hover(function(){},function(){ update(); });
+});
+</script>
+
+<div class="breadcrumbs">
+  <span class="selected"> <a href="../details/">Details</a> </span>
+  <span> <a href="../body/">Body & Files</a> </span>
+</div>
+
+<div class="editing">
+  <ul>
+    <li id="details">
+    <p> Edit the details for this project. </p>
+    
+    <table>
+      <tr>
+	<td> Title </td> <td><input id="title" value="{{ object.title }}"> </td>
+      </tr>
+      <tr>
+	<td> Slug </td> <td><input id="slug" value="{{ object.slug }}"></td>
+      </tr>
+      <tr>
+	<td> Language </td> <td><input id="language" value="{{ object.language }}"></td>
+      </tr>
+      <tr>
+	<td> Size </td>
+	<td>
+	  <select id="size" name="size">
+	    {% with object.size as size %}
+	    <option {% ifequal size "3" %}selected="yes"{% endifequal %} value="3">Large </option>
+	    <option {% ifequal size "2" %}selected="yes"{% endifequal %} value="2">Medium</option>
+	    <option {% ifequal size "1" %}selected="yes"{% endifequal %} value="1">Small</option>
+	    <option {% ifequal size "0" %}selected="yes"{% endifequal %} value="0">Script</option>
+	    {% endwith %}
+	  </select>
+	</td>
+      </tr>
+    </table>
+    </li>
+    
+    <li>
+      <p> Write a brief summary for this project (using html). </p>
+      <textarea id="summary">{{ object.summary }}</textarea>
+    </li>
+  </ul>
+</div>
+{% endblock %}

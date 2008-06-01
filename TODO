@@ -1,0 +1,54 @@
+
+### Teach Dynamic Blog Context the distinction between projects and entries
+
+Relevant code in lifeflow/markup/lifeflowmarkup.py
+
+
+### Considering enabling footnotes by default for entries (need to figure out how they work first)
+
+Relevant code in lifeflow/models.py (and lifeflow/markup/lifeflowmarkup.py)
+
+
+### Add Link model for storing frequently used references for MarkDown
+
+Relevant code in lifeflow/models.py
+
+
+### No specified author then about specifies to /author/
+
+Relevant code in lifeflow/context.py
+
+
+### Dynamic Blog Context work for image links
+
+At the moment DBC only works for reference links, not reference image links. Changing this should be a minor regex fix. Something like r"!?" somewhere in markup/lifeflowmarkup
+
+Relevant code in lifeflow/markup/lifeflowmarkup.py:
+
+LifeflowPreprocessor.run()
+
+
+### Improve tag cloud implementation
+
+The current tag cloud implementation crashes the database over and over. Its pretty atrocious. Just need to throw in some easy caching and its performance should increase dramatically.
+
+Relevant code in lifeflow/models.py:
+
+Tag
+
+
+### Improve Entry & Project resaving technique
+
+(I think the recent focus and implementation of Dynamic Blog Context may allow for this issue to partially or wholly disappear, depending)
+
+At the moment both Entry and Project instances need to know their ManyToMany instances before they can properly render themselves (specifically, they need to know the resources that have been assigned to them, so they can create markdown references to refer to them).
+
+The current way of handling this is simply having a signal that resaves each model a few seconds after its first save (with some checking to prevent infinite loops). This is sloppy, to say the least.
+
+A relatively easy *possible improvement* would be to implement a queue that objects that require resaving are place upon. Save them one at a time. Still a bit ackward, but would guarantee a successful save (eventually), which isn't necessary guaranteed at the moment. This is mostly a hypothetical issue, *but it can rear its ugly head when you attempt to do mass editing via the shell*.
+
+Relevant code in lifeflow/models.py:
+
+Entry.save
+Project.save
+resave_object

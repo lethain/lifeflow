@@ -1,0 +1,21 @@
+<div class="details">
+  <span><strong>Title:</strong> {{ object.title }}</span>
+  <br>
+  <span><strong>Markdown ID:</strong> {{ object.markdown_id }}</span>
+  <br>
+  <span><strong>File:</strong> <a href="{{ object.get_relative_url }}">{{ file }}</a></span>
+  <br>
+</div>
+
+
+{% ifequal type "image" %}
+<div class="extra">
+<img width="100%" height="100%" src="{{ object.get_relative_url }}">
+</div>
+{% endifequal %}
+
+{% ifequal type "zip" %}
+{% endifequal %}
+
+{% ifequal type "code" %}
+{% endifequal %}

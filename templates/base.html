@@ -1,0 +1,83 @@
+{% block doctype %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">{% endblock %}
+
+<html lang=en>
+<head>
+{% block head %}
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="author" content="{{ lifeflow_author }}">
+<meta name="description" content="{{ lifeflow_description }}">
+<meta name="keywords" content="{{ lifeflow_keywords }}">
+<link rel="alternate" type="application/rss+xml" title="Content feed" href="/feeds/all/" />
+<link rel="stylesheet" href="/media/blueprint/compressed/screen.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/media/blueprint/compressed/print.css" type="text/css" media="print">	
+<!--[if IE]><link rel="stylesheet" href="/media/blueprint/lib/ie.css" type="text/css" media="screen, projection"><![endif]-->
+<link type="text/css" rel="stylesheet" href="/media/lifeflow/lifeflow.css">
+<link type="text/css" rel="stylesheet" href="/media/lifeflow/code.css">
+{% if lifeflow_custom_css %}
+<link type="text/css" rel="stylesheet" href="{{ lifeflow_custom_css }}">
+{% endif %}
+{% if lifeflow_custom_js_header %}
+<script type="text/javascript" src="{{ lifeflow_custom_js_header }}"></script>
+{% endif %}
+
+
+<title>{% block title %}Welcome to {{ lifeflow_blog_name }}{% endblock %}</title>
+{% endblock %}
+{% block extra_head %}{% endblock %}
+</head>
+
+<body>
+<div class="container body">
+  <div class="column span-24 heading">
+    <div class="column span-12 first header-links">
+      {% for flow in lifeflow_flows %}
+      <span class="header-link"><a href="{{ flow.get_absolute_url }}">{{ flow }}</a></span>
+      {% endfor %}
+      {% if lifeflow_use_projects %}
+      <span class="header-link"><a href="/projects/">Projects</a></span>
+      {% endif %}
+      <span class="header-link"><a href="/articles/">Articles</a></span>
+      <span class="header-link"><a href="/meta/rss/">RSS</a></span>
+    </div>
+    <div class="column span-12 last heading-name">
+      {% block heading %}
+      <h1><a href="/">{{ lifeflow_blog_name }}</a></h1>
+      {% endblock %}
+    </div>
+  </div>
+  <div class="column span-24 content">
+    <div class="column span-18 first content-main">
+      <div class="content-main-internal">
+	{% block body %}{% endblock %}
+      </div>
+    </div>
+    <div class="column span-6 last content-sidebar">
+      {% block sidebar %}{% endblock %}
+    </div>
+  </div>
+  <div class="column span-24 last footer">
+    {% block footer %}
+    <span class="attribution">
+      Powered by <a href="http://www.lethain.com/projects/lifeflow/">LifeFlow</a>, <a href="http://www.djangoproject.com">Django</a>, and <a href="http://code.google.com/p/blueprintcss/">BluePrint</a>. {% if lifeflow_template_author and lifeflow_template_author_url %}Template by <a href="{{ lifeflow_template_author_url }}">{{ lifeflow_template_author }}</a>.{% endif %}
+    </span>
+    {% endblock %}
+  </div>
+</div>
+
+{% block extra_js %}{% endblock %}
+{% if lifeflow_custom_js_footer %}
+<script type="text/javascript" src="{{ lifeflow_custom_js_footer }}"></script>
+{% endif %}
+{% if lifeflow_google_analytics_id %}
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "{{ lifeflow_google_analytics_id }}";
+urchinTracker();
+</script>
+{% endif %}
+
+
+</body>
+</html>

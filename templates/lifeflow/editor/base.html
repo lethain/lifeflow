@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang=en>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/media/blueprint/compressed/screen.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/media/blueprint/compressed/print.css" type="text/css" media="print">
+<link type="text/css" rel="stylesheet" href="/media/blueprint/plugins/buttons/buttons.css">
+<!--[if IE]><link rel="stylesheet" href="/media/blueprint/lib/ie.css" type="text/css" media="screen, projection"><![endif]-->
+<link type="text/css" rel="stylesheet" href="/media/lifeflow/editor/editor.css">
+<script type="text/javascript" src="/media/lifeflow/editor/jquery.js"></script>
+<script type="text/javascript" src="/media/lifeflow/editor/lfe.js"></script>
+<title>LifeFlow Editor: {{ lifeflow_blog_name }}</title>
+</head>
+
+<body>
+<div class="control-bar">
+  {% if not login_screen %}
+  <a class="right" href="/editor/logout/">logout</a>
+  <a class="left" href="/editor/">articles</a>
+  <a class="left" href="/editor/comments/">comments</a>
+  <a class="left" href="/editor/projects/">projects</a>
+  <a class="left" href="/editor/files/">files</a>
+  <a class="left" href="/editor/blogroll/">blogroll</a>
+  {% endif %}
+</div>
+<div class="error-msg" id="errors"></div>
+{% block body %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,93 @@
+{% extends "lifeflow/lifeflow_base.html" %}
+{% block title %}{{ object.title|escape }}{% endblock %}
+{% block body %}
+<h1>{{ object.title|escape }}</h1>
+<div class="article-header">
+  {% with object.authors.all as authors %}
+  {% if authors %}
+  <span class="authors">by {% for author in authors %}{{ author.name_with_link|safe }}{% endfor %}</span>
+  <br>
+  {% endif %}
+  {% endwith %}
+  <span class="date">
+  {{ object.pub_date|date:"F j, Y" }}
+  </span>
+  {% for tag in object.tags.all %}
+  <span class="tag">
+  <a href="{{ tag.get_absolute_url }}"> {{ tag.title }}</a>
+  </span>
+  {% endfor %}
+  
+  <br>
+  {% with object.translation_set.all as translations %}
+  {% if translations %}
+  <span class="translation-header">Translations: </span>
+  {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% with object.translated.all as translated %}
+  {% if translated %}
+  <span class="translation-header">Translation of </span>
+  {% for translation in translated %}<span class="translation"><a href="{{ translation.original.get_absolute_url }}">{{ translation.original.title|safe  }}</a> in <a href="{{ translation.language.get_absolute_url}}">{{ translation.language }}</a></span>{% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+<br>
+
+{% with object.series.all as series %}
+{% if series %}
+<div class="column span-6 first series-list">
+  {% for article_series in series %}
+  <ul class="navLinks">
+    <li><strong> {{ article_series.title|escape }}</strong> <a href="/feeds/series/{{ article_series.slug }}/">subscribe</a> </li>
+    {% for entry in article_series.entry_set.all %}
+    <li>
+    <a href="{{ entry.get_absolute_url }}">
+    {{ entry.title|escape|truncatewords:5 }}
+    </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="article-body">
+{{ object.body_html|safe }}
+</div>
+
+<div>
+  {% include "lifeflow/social_submit.html" %}
+</div>
+
+{% if object.allow_comments %}
+<div class="comments">
+  {% include "lifeflow/comment_list.html" %}
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block extra_sidebar %}
+{% with object.get_next_article as next %}
+{% with object.get_previous_article as previous %}
+{% if next or previous %}
+
+{% if next %}
+<ul class="nav-links">
+<li class="nav-link nav-link-header"><strong>Next Entry</strong></li>
+<li class="nav-link"><a href="{{ next.get_absolute_url }}">{{ next.title|escape }}</a></li>
+</ul>
+{% endif %}
+{% if previous %}
+<ul class="nav-links">
+<li class="nav-link nav-link-header"><strong>Previous Entry</strong></li>
+<li class="nav-link"><a href="{{ previous.get_absolute_url }}">{{ previous.title|escape }}</a></li>
+</ul>
+{% endif %}
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endblock %}
