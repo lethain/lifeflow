@@ -244,28 +244,30 @@ div.resource-select {
     width: 100%;
 }
 
-div.resource-details {
+.resource div.details {
     padding: 5px;
-    height: 100%;
     width: 30%;
     margin-left: 5px;
     border: solid 1px cyan;
     float: left;
 }
 
-div.resource-extra {
+
+
+.resource div.extra {
     padding: 5px;
-    height: 100%;
-    width: 32%;
+    width: 30%;
     margin-left: 5px;
     border: solid 1px cyan;
     float: left;
 }
 
-.resource-extra img {
+
+
+.resource .extra img {
     margin: 0px;
-    height: 100%;
     width: 100%;
+    float: left;
 }
 
 div.add-resource {
