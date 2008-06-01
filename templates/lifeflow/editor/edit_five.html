@@ -24,6 +24,11 @@ $(document).ready(function() {
       update_model("{{model}}",{{object.pk}},data);
   });
 });
+
+var capitalize_title = function () {
+  var txt = titleCaps($("#title").val());
+  $("#title").val(titleCaps($("#title").val()));
+}
 </script>
 
 <div class="editing">
@@ -40,7 +45,7 @@ $(document).ready(function() {
       <form method="post" action="/editor/create_model/">
         <table>
 	  <tr><td><p> Create a new series. </p></td></tr>
-	  <tr><td>Title: </td><td><input name="title"></td></tr>
+	  <tr><td>Title: </td><td><input id="title" name="title"> <a class="titlecase" onclick="capitalize_title();"> titlecase it</a></td></tr>
 	  <input type="hidden" value="series" name="model">
     	  <tr><td></td><td><button type="submit" class="button positive"> Create </a></td></tr>
         </table>
