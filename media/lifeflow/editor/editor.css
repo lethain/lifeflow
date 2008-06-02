@@ -385,10 +385,35 @@ div.files {
     width: 100%;
 }
 
+div.author {
+    float: left;
+    margin: 16px;
+    border: dashed 1px cyan;
+    width: 75%;
+}
+
+div.author-picture {
+    float: right;
+    margin: 16px;
+    border: dotted 1px cyan;
+}
+
+div.author-picture img {
+    width: 200px;
+    height: 200px;
+    margin: 8px;
+}
+
 div.selections {
     width: 210px;
     float: left;
     height: 100%;
+}
+
+.authors div.selections {
+    float: left;
+    height: 100%;
+    width: 20%;
 }
 
 
