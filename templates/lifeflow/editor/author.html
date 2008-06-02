@@ -1,6 +1,6 @@
 <div class="author-picture">
   <img src="{{ author.get_picture_url }}" alt="An picture of {{ author.name }}" >
-  <form action="/editor/add_resource/" method="post" enctype="multipart/form-data">
+  <form action="/editor/add_author_picture/" method="post" enctype="multipart/form-data">
   <input type="file" name="file" >
   <input type="hidden" name="pk" value="{{ author.pk }}">
   <input type="hidden" name="model" value="author">

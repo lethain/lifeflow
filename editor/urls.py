@@ -20,6 +20,8 @@ urlpatterns = patterns('lifeflow.editor.views',
     (r'^update/$', 'update'),
     (r'^display_resource/(?P<id>\d+)/$', 'display_resource'),
     (r'^add_resource/', 'add_resource'),
+    (r'^display_author/(?P<id>\d+)/$', 'display_author'),
+    (r'^add_author_picture/', 'add_author_picture'),
     (r'^create_model/', 'create_model'),
     (r'^delete_model/', 'delete_model'),
 

@@ -217,6 +217,30 @@ def create_model(request):
     return toReturn
 
 @login_required
+def add_author_picture(request):
+    id = request.POST['pk']
+    file = request.FILES['file']
+    filename = file['filename']
+    filebase = '%s/lifeflow/author/' % settings.MEDIA_ROOT
+    filepath = "%s%s" % (filebase, filename)
+    while (os.path.isfile(filepath)):
+        filename = "_%s" % filename
+        filepath = "%s%s" % (filebase, filename)
+    fd = open(filepath, 'wb')
+    fd.write(file['content'])
+    fd.close()
+    
+    author = Author.objects.get(pk=id)
+    author.picture = "lifeflow/author/%s" % filename
+    author.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
+def display_author(request, id):
+    pass
+
+@login_required
 def add_resource(request):
     file = request.FILES['file']
     title = request.POST['title']
