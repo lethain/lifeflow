@@ -15,7 +15,7 @@ var delete_comment = function(pk) {
   <li id="comment_{{ comment.pk }}">
   <div class="data">
   <p> {{ comment.name }} ({{ comment.email }}) at {{ comment.date }} on {{ comment.entry }}. </p>
-  <p>{{ comment.html }}</p>
+  <p>{{ comment.html|safe }}</p>
   </div>
   <div class="controls">
     <a class="button negative" onclick="delete_comment({{ comment.pk }})">delete</a>
