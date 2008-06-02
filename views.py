@@ -89,12 +89,13 @@ def comments(request, entry_id=None, parent_id=None):
         email = form.cleaned_data['email']
         webpage = form.cleaned_data['webpage']
         rendered = form.cleaned_data['rendered']
+        body = form.cleaned_data['body']
         c = Comment(entry=entry,
                     parent=parent,
                     name=name,
                     email=email,
                     webpage=webpage,
-                    body="",
+                    body=body,
                     html=rendered,
                     )
         c.save()
