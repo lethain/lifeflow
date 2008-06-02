@@ -15,7 +15,7 @@ TODO
 """
 
 
-import datetime
+import datetime, os.path
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponseServerError
@@ -215,7 +215,12 @@ def add_resource(request):
     title = request.POST['title']
     markdown_id = request.POST['markdown_id']
     filename = file['filename']
-    fd = open('%s/lifeflow/resource/%s' %(settings.MEDIA_ROOT, filename), 'wb')
+    filebase = '%s/lifeflow/resource/' % settings.MEDIA_ROOT
+    filepath = "%s%s" % (filebase, filename)
+    while (os.path.isfile(filepath)):
+        filename = "_%s" % filename
+        filepath = "%s%s" % (filebase, filename)
+    fd = open(filepath, 'wb')
     fd.write(file['content'])
     fd.close()
     rec = Resource(title=title, markdown_id=markdown_id, content="lifeflow/resource/%s" % filename)
