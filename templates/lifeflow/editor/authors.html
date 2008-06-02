@@ -1,0 +1,22 @@
+{% extends "lifeflow/editor/base.html" %}
+
+
+{% block body %}
+
+<div class="authors">
+  <div class="selections" id="authors-list">
+    <a class="button positive" id="add-author"> Create </a>
+    <a class="button negative" id="delete-author"> Delete </a>
+    <select id="authors" size="20">
+      {% for author in authors %}
+      <option value="{{ author.pk }}"> {{ author.name }}</option>
+	{% endfor %}
+    </select>
+  </div>
+  <div class="author">
+    {% with authors.0 as author %}
+    {% include "lifeflow/editor/author.html" %}
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}

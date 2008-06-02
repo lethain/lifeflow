@@ -114,6 +114,13 @@ def project_body(request, id):
                               {'object':project,
                                'resources':resources},
                               RequestContext(request,{}))
+
+@login_required
+def authors(request):
+    authors = Author.objects.all()
+    return render_to_response('lifeflow/editor/authors.html',
+                              {'authors':authors},
+                              RequestContext(request,{}))
     
     
 

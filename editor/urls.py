@@ -6,6 +6,7 @@ urlpatterns = patterns('lifeflow.editor.views',
     (r'^comments/$', 'comments'),
     (r'^blogroll/$', 'blogroll'),
     (r'^files/$', 'files'),
+    (r'^authors/$', 'authors'),
 
     (r'^projects/$', 'projects'),
     (r'^projects/create/$', 'create_project'),

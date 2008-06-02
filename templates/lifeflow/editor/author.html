@@ -1,0 +1,22 @@
+<div class="author-picture">
+  
+</div>
+<div class="author-details">
+  <ul> 
+    <li>
+    <table>
+      <tr>
+	<td>Name</td><td> {{ author.name}} </td>
+      </tr>
+      <tr>
+	<td>Slug</td><td> {{ author.slug }}</td>
+      </tr>
+    </table>
+	
+    <li>
+    <p> A brief biography, written in Markdown. </p>
+    <textarea id="author-bio">{{ author.bio }}</textarea>
+  </li>
+  
+</ul>
+</div>

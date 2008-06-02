@@ -377,19 +377,22 @@ div.blogs div.controls {
 }
 
 
+div.authors {
+    width: 100%;
+}
 
 div.files {
     width: 100%;
 }
 
-div.files div.selections {
+div.selections {
     width: 210px;
     float: left;
     height: 100%;
 }
 
 
-div.files div.selections select {
+div.selections select {
     width: 100%;
 }
 
