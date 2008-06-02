@@ -1,0 +1,113 @@
+
+<div id="editor-help" class="help">
+  <div class="editor-headers">
+  <a class="section" onclick="$('#dbc-help').hide(); $('#markdown-help').show();">Markdown</a>
+  <a class="section" onclick="$('#markdown-help').hide(); $('#dbc-help').show();" >Dynamic Blog Context Markup</a>
+  <a onclick="$('#editor-help').hide();" class="close">close</a>
+  </div>
+  <br>
+  
+  <div id="editor-internal">
+    <div class="section selected" id="markdown-help">
+      <p> Markdown is a humane markup language created by John Gruber.
+      <table>
+	<tr>
+	  <td class="label"> Inlined Links </td>
+	  <td> <span class="variable">[</span>this is a link<span class="variable">](</span>http://lethain.com/ <span class="variable">"</span>A blog.<span class="variable">")</span> </td>
+	</tr>
+	<tr>
+	  <td class="label"> Reference Links </td>
+	  <td> <span class="variable">[</span>blog<span class="variable">]:</span> http://lethain.com/ <span class="variable">"</span>A blog<span class="variable">"</span><br> Never <span class="variable">[</span>read this trash<span class="variable">][</span>blog<span class="variable">]</span>! </td>
+	</tr>
+	<tr>
+	  <td class="label"> Bold </td>
+	  <td> <span class="variable">**</span>I am upset, as per usual.<span class="variable">**</span></td>
+	</tr>
+	<tr>
+	  <td class="label"> Italics</td>
+	  <td> <span class="variable">*</span>I am making a crucial point.<span class="variable">*</span> </td>
+	</tr>
+	<tr>
+	  <td class="label">H1 </td>
+	  <td> <span class="variable">#</span>This is an H1.</td>
+	</tr>
+	<tr>
+	  <td class="label"> H4 </td>
+	  <td> <span class="variable">####</span>This is an H4.</td>
+	</tr>
+	<tr>
+	  <td class="label"> Blockquote </td>
+	  <td> <span class="variable">>></span> This is all in a quote. </td>
+	</tr>
+      
+      </table>
+    </div>
+    <div class="section" id="dbc-help">
+
+<p>Dynamic Blog Context is a set of keywords exposing LifeFlow functionality in Markdown formated text. In LifeFlow, the brackets for reference style links in Markdown become a helpful mini-language. An example of using this mini-language:
+
+<blockquote>If you're interested [take a look at the project][project lifeflow]. I have written [about it a fair bit as well][tag lifeflow]. </blockquote>
+
+<h3> Supported Tags </h3>
+<table>
+  <tr>
+    <td><span class="syntax">[tag <span class="variable">slug</span>]</span></td>
+    <td>Creates a link to the tag with @slug.</td>
+  </tr>
+  <tr>
+    <td><span class="syntax">[comment <span class="variable">pk</span>]</span></td>
+    <td>Creates a link to the comment with @pk (works with comments posted on any entry).</td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[project <span class="variable">slug</span>]</span></td>
+      <td>Creates a link to the project with @slug.</td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[author]</span></td>
+      <td>Creates a link to the author's biography page if there is one author, if there are more or less authors then it creates a link to the /author/ page. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[comments]</span></td>
+      <td>Creates a link to the comment division for the current entry.</td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[projects]</span></td>
+      <td>Creates a link to the /projects/ page. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[series]</span></td>
+      <td>Creates a link to the /articles/ page.</td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[tags]</span></td>
+      <td>Creates a link to the site's tag cloud.</td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[previous]</span></td>
+      <td> Link to the previous entry. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[next]</span></td>
+      <td>Link to the next entry. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[series <span class="variable">nth</span>]</span></td>
+      <td>Link to the @nth entry in the series. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[series <span class="variable">slug nth</span>]</span></td>
+      <td>Link to the @nth entry in series with slug @slug. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[file <span class="variable">name</span>]</span></td>
+      <td>Link to the file (image or otherwise) with @name. </td>
+    </tr>
+    <tr>
+      <td><span class="syntax">[f <span class="variable">name</span>]</span></td>
+      <td>A shortcut for <span class="syntax">[file <span class="variable">name</span>]</span>. </td>
+    </tr>
+  </table>
+
+</div>
+</div>
+</div>

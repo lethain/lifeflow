@@ -442,3 +442,59 @@ div.files div.add {
 #render p {
     padding-bottom: 20px;
 }
+
+/* Styling for help portions. */
+
+div.help {
+    background-color: #CCCCFF;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 60%;
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+
+div.help div.section {
+    display: none;
+}
+div.help div.selected {
+    display: block;
+}
+
+div.help div.editor-headers {
+    overflow: auto;
+    border: dashed 1px white;
+    padding-bottom: 5px;
+}
+
+div.help a.section {
+    margin-right: 16px;
+    float: left;
+}
+
+div.help td.label {
+    color: grey;
+}
+
+div.help a.close {
+    float: right;
+}
+
+div.help div.editor-internal {
+}
+
+div.help span.syntax {
+    color: grey;
+}
+
+div.help span.variable {
+    color: red;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+a.help {
+    float: right;
+}

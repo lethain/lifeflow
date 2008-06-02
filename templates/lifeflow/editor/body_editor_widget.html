@@ -23,6 +23,11 @@ $(document).ready(function() {
   $("#text").hover(function(){},function(){ update(); });
   $("#use_markdown").change(function(){ update(); });
 });
+
+var show_editor_help = function() {
+  $("#editor-help").show();
+}
+
 </script>
 
 <div class="editing">
@@ -34,6 +39,8 @@ $(document).ready(function() {
     </select>
   </div>
   <div class="writing">
+    <a class="help" onclick="show_editor_help();">help</a>
+      {% include "lifeflow/editor/editor_tags_help.html" %}
     <textarea id="text" class="writing">{{ object.body }}</textarea>
   </div>
   <div class="buttons writing-buttons">
