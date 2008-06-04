@@ -32,7 +32,7 @@ from django.contrib.auth import views, authenticate
 def slugify(str):
     # This could be substantially more robust,
     # but for the moment it suffices.
-    return str.lower().replace(' ','-').replace('.','').replace(',','-').replace("'","")[:95]
+    return str.lower().replace(' ','-').replace('.','').replace(',','-').replace("'","").replace('"',"")[:95]
 
 def login(request):
     error_msg = u""
