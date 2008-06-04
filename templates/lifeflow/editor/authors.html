@@ -3,9 +3,31 @@
 
 {% block body %}
 
+<script>
+$(document).ready(function () {
+  $("#delete-author").click(function() {
+    var lst = $("#authors");
+    var index = lst[0].selectedIndex;
+    if (index == -1)
+      display_error("Please select an author to delete!");
+    else {
+      var chosen = lst.children()[index];
+      var onComplete = function(res,status) {
+        if (status == "success")
+          chosen.parentNode.removeChild(chosen);
+        else
+          display_error(res.responseText);
+      };
+      var pk = chosen.value;
+      delete_model("author",pk,onComplete);
+    }
+  });
+});
+</script>
+
 <div class="authors">
   <div class="selections" id="authors-list">
-    <a class="button positive" id="add-author"> Create </a>
+    <a class="button positive" href="create/" id="add-author"> Create </a>
     <a class="button negative" id="delete-author"> Delete </a>
     <select id="authors" size="20">
       {% for author in authors %}

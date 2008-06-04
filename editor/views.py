@@ -498,6 +498,12 @@ def create_project(request):
     obj = Project()
     obj.save()
     return HttpResponseRedirect("/editor/projects/%s/details/" % obj.pk)
+
+@login_required
+def create_author(request):
+    obj = Author()
+    obj.save()
+    return HttpResponseRedirect("/editor/authors/%s/" % obj.pk)
     
 
 @login_required
