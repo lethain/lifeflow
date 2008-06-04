@@ -8,8 +8,14 @@ var update_author = function() {
 }
 
 $(document).ready(function() {
-  $("#author-details").hover(function(){},function(){ update_author(); });
-});
+  $("#author-details").hover(
+    function(){},
+    function(){
+      var data = {name:$("#author-name").val(),
+                  slug:$("#author-slug").val(),
+                  bio:$("#author-bio").val()};
+      update_model("author", {{ author.pk }}, data);
+})});
 
 </script>
 
