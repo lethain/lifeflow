@@ -138,19 +138,14 @@ def authors(request):
 
 BOOLEAN_FIELDS = ["send_ping", "allow_comments", "use_markdown"]
 MANY_TO_MANY_FIELDS = ["flows", "tags", "series", "authors"]
-SPECIAL_FIELDS = ["translation"]
+SLUG_FIELDS = ["slug"]
 
 @login_required
 def update(request):
     dict = request.POST.copy()
     id = dict.pop('pk')[0]
     model = dict.pop('model')[0]
-    if model == u"draft":
-        object = Draft.objects.get(pk=id)
-    elif model == u"project":
-        object = Project.objects.get(pk=id)
-    else:
-        object = Entry.objects.get(pk=id)
+    object = get_class(model).objects.get(pk=id)
     obj_dict = object.__dict__
     for key in dict.keys():
         if obj_dict.has_key(key):
@@ -160,6 +155,9 @@ def update(request):
                     val = True
                 elif val == u"false":
                     val = False
+            elif key in SLUG_FIELDS:
+                val = slugify(val)
+
             obj_dict[key] = val
         elif key in MANY_TO_MANY_FIELDS:
             vals = dict.getlist(key)
