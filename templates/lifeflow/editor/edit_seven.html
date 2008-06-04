@@ -94,7 +94,23 @@ $(document).ready(function() {
     {% else %}
     <p><em> Drafts cannot participate in translations. </em></p>
     {% endifequal %}
-    </li>    
+    </li>
+
+    <li>
+    <p> Add a new language (used for catagorizing translations). </p>
+    <form method="post" action="/editor/create_model/">
+    <table>
+      <tr><td> Title: </td><td><input name="title"></td></tr>
+      <input type="hidden" value="language" name="model">
+      <tr><td></td><td>
+	<button type="submit" class="button positive"> Create Language </button>
+      </td></tr>
+    </table>
+
+    </form>
+    
+    </li>
+    
   </ul>
 </div>
 {% endblock %}

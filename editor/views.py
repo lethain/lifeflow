@@ -206,6 +206,12 @@ def create_model(request):
         if unique(slug, cls):
             f = cls(title=title, slug=slug)
             f.save()
+    elif model == u"language":
+        title = request.POST[u'title']
+        slug = slugify(title)
+        l = Language(title=title,slug=slug)
+        l.save()
+
     elif model == u"translation":
         translated_pk = int(request.POST[u'pk'])
         translated = Entry.objects.get(pk=translated_pk)
