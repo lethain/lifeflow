@@ -28,11 +28,22 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import views, authenticate
 
 
-
+CHARACTERS_TO_STRIP = """ .,!?'";:/\+=# """
 def slugify(str):
-    # This could be substantially more robust,
-    # but for the moment it suffices.
-    return str.lower().replace(' ','-').replace('.','').replace(',','-').replace("'","").replace('"',"")[:95]
+    new_str = ""
+    replaced_previous = False
+    for char in str.lower():
+        if char in CHARACTERS_TO_STRIP:
+            if replaced_previous:
+                pass
+            else:
+                new_str = new_str + "-"
+                replaced_previous = True
+        else:
+            replaced_previous = False
+            new_str = new_str + char
+    return new_str.strip("-")
+
 
 def login(request):
     error_msg = u""
