@@ -9,6 +9,8 @@ urlpatterns = patterns('lifeflow.editor.views',
 
     (r'^authors/$', 'authors'),
     (r'^authors/create/$', 'create_author'),
+    (r'^authors/(?P<id>\d+)/$', 'author_edit'),
+    (r'^authors/(?P<id>\d+)/create/$', 'create_author'),
 
     (r'^projects/$', 'projects'),
     (r'^projects/create/$', 'create_project'),

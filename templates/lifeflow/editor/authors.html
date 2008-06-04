@@ -22,7 +22,16 @@ $(document).ready(function () {
       delete_model("author",pk,onComplete);
     }
   });
+  $("#authors").change(function() {
+    var res = $("#authors");
+    var index = res[0].selectedIndex;
+    var pk = res[0][index].value;
+// update this to load via ajax
+    $("#author").load(pk + '/').show();
+  });
+
 });
+
 </script>
 
 <div class="authors">
@@ -35,10 +44,8 @@ $(document).ready(function () {
 	{% endfor %}
     </select>
   </div>
-  <div class="author">
-    {% with authors.0 as author %}
+  <div id="author" class="author">
     {% include "lifeflow/editor/author.html" %}
-    {% endwith %}
   </div>
 </div>
 {% endblock %}

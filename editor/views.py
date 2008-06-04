@@ -129,9 +129,18 @@ def project_body(request, id):
 @login_required
 def authors(request):
     authors = Author.objects.all()
+    author = authors[0]
     return render_to_response('lifeflow/editor/authors.html',
-                              {'authors':authors},
+                              {'author':author,'authors':authors},
                               RequestContext(request,{}))
+
+@login_required
+def author_edit(request,id):
+    author = Author.objects.get(pk=id)
+    return render_to_response('lifeflow/editor/author.html',
+                              {'author':author},
+                              RequestContext(request,{}))
+
     
     
 
@@ -500,10 +509,10 @@ def create_project(request):
     return HttpResponseRedirect("/editor/projects/%s/details/" % obj.pk)
 
 @login_required
-def create_author(request):
+def create_author(request,id=None):
     obj = Author()
     obj.save()
-    return HttpResponseRedirect("/editor/authors/%s/" % obj.pk)
+    return HttpResponseRedirect("/editor/authors/")
     
 
 @login_required
