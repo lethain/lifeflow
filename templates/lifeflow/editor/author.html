@@ -1,12 +1,5 @@
 
 <script>
-var update_author = function() {
-  var data = {name:$("#author-name").val(),
-              slug:$("#author-slug").val(),
-              bio:$("#author-bio").val()};
-  update_model("author", {{ author.pk }}, data);
-}
-
 $(document).ready(function() {
   $("#author-details").hover(
     function(){},
@@ -16,7 +9,6 @@ $(document).ready(function() {
                   bio:$("#author-bio").val()};
       update_model("author", {{ author.pk }}, data);
 })});
-
 </script>
 
 <div class="author-picture">
