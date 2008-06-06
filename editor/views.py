@@ -168,7 +168,6 @@ def update(request):
             elif key in SLUG_FIELDS:
                 val = slugify(val)
             elif key in DATETIME_FIELDS:
-                print val
                 t = time.mktime(time.strptime(val, "%Y-%m-%d %H:%M:%S"))
                 val = datetime.datetime.fromtimestamp(t)
             obj_dict[key] = val
