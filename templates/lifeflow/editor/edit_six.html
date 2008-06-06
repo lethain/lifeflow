@@ -5,7 +5,8 @@
 var update = function() {
   var send_ping = $("#send_ping").attr('value');
   var allow_comments = $("#allow_comments").attr('value')
-  var data = {allow_comments:allow_comments, send_ping:send_ping};
+  var datetime = $("#date").attr('value') + " " + $("#time").attr('value');
+  var data = {allow_comments:allow_comments, send_ping:send_ping, pub_date:datetime};
   update_model("{{model}}",{{object.pk}},data);
 }
 
@@ -29,9 +30,10 @@ $(document).ready(function() {
   <form>
   <ul>
     <li>
-      <p> Please select the date and time to publish this entry. </p>
-      <p> {{ object.pub_date }} </p>
-      <p> Not implemented yet. :-/ Currently, the pub_date is set to the current time the first time you move a draft into the published bucket, and that time will be retained. </p>
+      <p> Please select the date and time to publish this entry. The entry will not be visible on the blog until this after this date and time is passed. </p>
+      <p> Date: <input id="date" name="date" value="{% if object.pub_date %}{{ object.pub_date|date:"Y-m-d" }}{% else %}{% now "Y-m-d" %}{% endif %}"> </p>
+      <p> Time: <input id="time" name="time" value="{% if object.pub_date %}{{ object.pub_date|date:"H:i:s" }}{% else %}{% now "H:i:s" %}{% endif %}"> </p>
+
     </li>
     <li>
       <p class="dropdown"> Would you like to ping Technocratic when you publish this entry?</p>

@@ -15,7 +15,7 @@ TODO
 """
 
 
-import datetime, os.path
+import datetime, os.path, time
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponseServerError
@@ -148,6 +148,7 @@ def author_edit(request,id):
 BOOLEAN_FIELDS = ["send_ping", "allow_comments", "use_markdown"]
 MANY_TO_MANY_FIELDS = ["flows", "tags", "series", "authors"]
 SLUG_FIELDS = ["slug"]
+DATETIME_FIELDS = ["pub_date"]
 
 @login_required
 def update(request):
@@ -166,7 +167,10 @@ def update(request):
                     val = False
             elif key in SLUG_FIELDS:
                 val = slugify(val)
-
+            elif key in DATETIME_FIELDS:
+                print val
+                t = time.mktime(time.strptime(val, "%Y-%m-%d %H:%M:%S"))
+                val = datetime.datetime.fromtimestamp(t)
             obj_dict[key] = val
         elif key in MANY_TO_MANY_FIELDS:
             vals = dict.getlist(key)
