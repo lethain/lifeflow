@@ -13,6 +13,10 @@ var update = function() {
 $(document).ready(function() {
   $("#send_ping").change(function(){ update(); });
   $("#allow_comments").change(function(){ update(); });
+  $("#datetime").hover(
+    function() {},
+    function() { update(); }
+  );
 });
 </script>
 
@@ -29,7 +33,7 @@ $(document).ready(function() {
 <div class="editing">
   <form>
   <ul>
-    <li>
+    <li id="datetime">
       <p> Please select the date and time to publish this entry. The entry will not be visible on the blog until this after this date and time is passed. </p>
       <p> Date: <input id="date" name="date" value="{% if object.pub_date %}{{ object.pub_date|date:"Y-m-d" }}{% else %}{% now "Y-m-d" %}{% endif %}"> </p>
       <p> Time: <input id="time" name="time" value="{% if object.pub_date %}{{ object.pub_date|date:"H:i:s" }}{% else %}{% now "H:i:s" %}{% endif %}"> </p>
