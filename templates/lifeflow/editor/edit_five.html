@@ -20,6 +20,7 @@ $(document).ready(function() {
     function() {},
     function() {
       var selected = $.map($("a.selected"),function(x) { return x.id; });
+      if (selected.length == 0) selected.push(-1);
       var data = {"series":selected};
       update_model("{{model}}",{{object.pk}},data);
   });
