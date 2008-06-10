@@ -321,66 +321,66 @@ def display_resource(request, id):
 
 
 @login_required
-def edit_one(request, category, id):
+def article_title(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
-    return render_to_response('lifeflow/editor/edit_one.html',
+    return render_to_response('lifeflow/editor/article_title.html',
                               {'object':obj,
                                'model':category},
                               RequestContext(request, {}))
 
 @login_required
-def edit_two(request, category, id):
+def article_body(request, category, id):
     resources = Resource.objects.all()
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
-    return render_to_response('lifeflow/editor/edit_two.html',
+    return render_to_response('lifeflow/editor/article_body.html',
                               {'object':obj,
                                'resources':resources,
                                'model':category},
                               RequestContext(request, {}))
 
 @login_required
-def edit_three(request, category, id):
+def article_flows(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
     obj_flows = obj.flows.all()
     flows = [ (x, x in obj_flows) for x in Flow.objects.all()] 
-    return render_to_response('lifeflow/editor/edit_three.html',
+    return render_to_response('lifeflow/editor/article_flows.html',
                               {'object':obj,
                                'flows':flows,
                                'model':category},
                               RequestContext(request, {}))
 
 @login_required
-def edit_four(request, category, id):
+def article_tags(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
     obj_tags = obj.tags.all()
     tags = [ (x, x in obj_tags) for x in Tag.objects.all()]
-    return render_to_response('lifeflow/editor/edit_four.html',
+    return render_to_response('lifeflow/editor/article_tags.html',
                               {'object':obj,
                                'tags':tags,
                                'model':category},
                               RequestContext(request, {}))
 
 @login_required
-def edit_five(request, category, id):
+def article_series(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
     obj_series = obj.series.all()
     series = [ (x, x in obj_series) for x in Series.objects.all()]
-    return render_to_response('lifeflow/editor/edit_five.html',
+    return render_to_response('lifeflow/editor/article_series.html',
                               {'object':obj,
                                'series':series,
                                'model':category},
@@ -388,19 +388,19 @@ def edit_five(request, category, id):
 
 
 @login_required
-def edit_six(request, category, id):
+def article_options(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
         obj = Draft.objects.get(pk=id)
-    return render_to_response('lifeflow/editor/edit_six.html',
+    return render_to_response('lifeflow/editor/article_options.html',
                               {'object':obj,
                                'model':category},
                               RequestContext(request, {}))
 
 
 @login_required
-def edit_seven(request, category, id):
+def article_authors(request, category, id):
     if category == "entry":
         obj = Entry.objects.get(pk=id)
     else:
@@ -410,7 +410,7 @@ def edit_seven(request, category, id):
     langs = Language.objects.all()
     entries = Entry.objects.all()
     translations = Translation.objects.filter(translated=obj)
-    return render_to_response('lifeflow/editor/edit_seven.html',
+    return render_to_response('lifeflow/editor/article_authors.html',
                               {'object':obj,
                                'authors':authors,
                                'langs':langs,

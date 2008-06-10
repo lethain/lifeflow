@@ -1,0 +1,17 @@
+{% extends "lifeflow/editor/base.html" %}
+
+{% block body %}
+
+<div class="breadcrumbs">
+  <span><a href="../title/">Title & Summary</a> </span>
+  <span class="selected"> Body & Files </span>
+  <span> <a href="../flows/">Flows</a> </span>
+  <span> <a href="../tags/">Tags</a> </span>
+  <span> <a href="../series/">Series</a> </span>
+  <span> <a href="../options/">Date & Options</a> </span>
+  <span> <a href="../authors/">Authors & Translations</a> </span>
+</div>
+
+{% include "lifeflow/editor/body_editor_widget.html" %}
+
+{% endblock %}

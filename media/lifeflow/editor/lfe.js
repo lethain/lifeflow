@@ -57,13 +57,13 @@ var edit = function(lst, type) {
   var index = lst[0].selectedIndex
   if (index != -1) {
     var chosen = lst.children()[index]
-    window.location = "edit/" + type + "/" + chosen.value + "/1/";
+    window.location = "edit/" + type + "/" + chosen.value + "/title/";
   }
   else {
     display_error("You haven't selected anything to edit!");
   }
 };
-  
+
 var move = function (lst, dest, urlBase) {
   var index = lst[0].selectedIndex
   if (index == -1) { display_error("Nothing selected to move."); }
