@@ -10,7 +10,7 @@
     {% with object.authors.all as authors %}
     {% if authors %}
     <span class="authors"> by {% for author in authors %}{{ author.name_with_link|safe }}{% endfor %} </span>
-    <br>
+    <br />
     {% endif %}
     {% endwith %}
     
@@ -22,11 +22,11 @@
       <a href="{{ tag.get_absolute_url }}"> {{ tag.title }}</a>
     </span>
     {% endfor %}
-    <br>
+    <br />
     {% with object.translation_set.all as translations %}
     {% if translations %}
     <span class="translation-header">Translations: </span>
-    {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+    {% for translation in translations %}<span class="translation">{{ translation.get_link|safe }}</span>{% endfor %}
     {% endif %}
     {% endwith %}
 

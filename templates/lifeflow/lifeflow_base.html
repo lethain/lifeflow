@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-
-
 {% block sidebar %}
 
 {% block extra_sidebar %}{% endblock %}
@@ -10,6 +8,7 @@
   <li class="nav-link nav-link-header"><strong>Recent Entries</strong></li>
   {% for entry in recent_entries %}<li><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>{% endfor %}
 </ul>
+
 <ul class="nav-links">
   <li class="nav-link nav-link-header"><strong> Meta </strong></li>
   <li class="nav-link"><a href="/author/{{ lifeflow_author_slug }}/">About</a></li>
@@ -33,6 +32,5 @@
   {% for rand in random_entries %}
   <li class="nav-link"><a href="{{ rand.get_absolute_url }}">{{ rand.title|escape }}</a></li>
   {% endfor %}
-</ul>  
-</div>
+</ul>
 {% endblock %}
