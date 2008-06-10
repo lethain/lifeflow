@@ -28,8 +28,9 @@
 	  Responding to <a href="#comment_{{ comment.parent.pk }}">{{ comment.parent.name }}</a>
 	</span>
 	{% endif %}
+	<br />
       <div class="comment-body">
-        <p> {{ comment.html|safe }} </p>
+        {{ comment.html|safe }}
       </div>
       </div>
     </div>

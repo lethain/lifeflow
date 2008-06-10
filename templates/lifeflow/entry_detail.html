@@ -6,7 +6,7 @@
   {% with object.authors.all as authors %}
   {% if authors %}
   <span class="authors">by {% for author in authors %}{{ author.name_with_link|safe }}{% endfor %}</span>
-  <br>
+  <br />
   {% endif %}
   {% endwith %}
   <span class="date">
@@ -18,11 +18,11 @@
   </span>
   {% endfor %}
   
-  <br>
+  <br />
   {% with object.translation_set.all as translations %}
   {% if translations %}
   <span class="translation-header">Translations: </span>
-  {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+  {% for translation in translations %}<span class="translation">{{ translation.get_link|safe }}</span>{% endfor %}
   {% endif %}
   {% endwith %}
   {% with object.translated.all as translated %}
@@ -32,7 +32,7 @@
   {% endif %}
   {% endwith %}
 </div>
-<br>
+<br />
 
 {% with object.series.all as series %}
 {% if series %}

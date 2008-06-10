@@ -1,14 +1,14 @@
 {% with object.get_absolute_url|urlencode as obj_url %}
 {% with object.title|urlencode as obj_title %}
 {% with site.domain|urlencode as obj_domain %}
-<hr>
+<hr />
 <div class="social">
-  <span class="social"><a href="http://reddit.com/submit?url=http://{{ obj_domain }}{{ obj_url }}&title={{ obj_title }}">Reddit</a></span>
-  <span class="social"><a href="http://del.icio.us/post?url={{ obj_domain }}{{ obj_url }}&title={{ obj_title }}">Del.icio.us</a></span>
-  <span class="social"><a href="http://www.stumbleupon.com/submit?url={{ obj_domain }}{{ obj_url }}&title={{ obj_title }}">StumbleUpon</a></span>
-  <span class="social"><a href="http://digg.com/submit?phase=2&url={{ obj_domain }}{{ obj_url }}&title={{ obj_title }}">Digg</a></span>
+  <span class="social"><a href="http://reddit.com/submit?url=http://{{ obj_domain }}{{ obj_url }}&amp;title={{ obj_title }}">Reddit</a></span>
+  <span class="social"><a href="http://del.icio.us/post?url={{ obj_domain }}{{ obj_url }}&amp;title={{ obj_title }}">Del.icio.us</a></span>
+  <span class="social"><a href="http://www.stumbleupon.com/submit?url={{ obj_domain }}{{ obj_url }}&amp;title={{ obj_title }}">StumbleUpon</a></span>
+  <span class="social"><a href="http://digg.com/submit?phase=2&amp;url={{ obj_domain }}{{ obj_url }}&amp;title={{ obj_title }}">Digg</a></span>
 </div>
-<hr>
+<hr />
 {% endwith %}
 {% endwith %}
 {% endwith %}
