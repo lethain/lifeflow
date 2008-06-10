@@ -30,6 +30,13 @@ var capitalize_title = function () {
   var txt = titleCaps($("#title").val());
   $("#title").val(titleCaps($("#title").val()));
 }
+
+var delete_series = function(pk) {
+  delete_model("series",pk);
+  var id = "#series_" + pk;
+  $(id).fadeOut('slow');
+  $("#select_" + pk).fadeOut('slow');
+}
 </script>
 
 <div class="editing">
@@ -38,7 +45,7 @@ var capitalize_title = function () {
     <p> Click on the series that this article should appear in. </p>
     <div id="selectables" class="selectables">
       {% for serie, selected in series %}
-      <a class="selectable {% if selected %} selected{% endif %}" id="{{ serie.pk }}"> {{ serie.title }}</a>
+      <a id="select_{{ serie.pk }}" class="selectable {% if selected %} selected{% endif %}" id="{{ serie.pk }}"> {{ serie.title }}</a>
       {% endfor %}
     </div>
     </li>
@@ -52,6 +59,14 @@ var capitalize_title = function () {
         </table>
       </form>
     </li>
+    <li>
+    <p> Delete unwanted series. </p>
+    {% for serie, selected in series %}
+    <a id="series_{{ serie.pk}}" class="button negative" onclick="delete_series({{ serie.pk }});"> Delete "{{ serie }}"</a>
+    {% endfor %}
+
+    </li>
+    
   </ul>
 </div>
 {% endblock %}
