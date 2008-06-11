@@ -153,9 +153,29 @@ def flow(request, slug):
 
 
 def front(request):
+    num_per_request = 3
+    try:
+        first = int(request.GET["start"])
+        last = first + num_per_request
+    except KeyError:
+        first = 0
+        last = num_per_request
+    entries = Entry.current.all()[first:last]
+
+    previous = first - num_per_request
+    if previous <= 0:
+        previous = None
+
+    count = Entry.current.all().count()
+    if last >= count:
+        last = None
+
     return render_to_response(
         'lifeflow/front.html',
-        {},
+        {'articles':entries,
+         'previous':previous,
+         'next':last,
+         },
         RequestContext(request, {}),
         )
 

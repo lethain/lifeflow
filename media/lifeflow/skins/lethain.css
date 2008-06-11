@@ -59,3 +59,12 @@ a:hover {
 ol.entry-list div.comment {
     background: #cca2a2;
 }
+
+div.pagination-top {
+    border-bottom: dashed 2px #cca2a2;
+}
+
+div.pagination-bottom {
+    border-top: dashed 2px #cca2a2;
+    margin-bottom: 16px;
+}

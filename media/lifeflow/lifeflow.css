@@ -2,6 +2,19 @@ div.footer {
     text-align: center;
 }
 
+div.pagination {
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+div.pagination span.right {
+    float: right;
+}
+
+div.pagination span.left {
+    float: left;
+}
+
 span.tag {
     margin-left: 10px;
 }
