@@ -7,14 +7,13 @@ from django.dispatch import dispatcher
 from django.db.models import signals
 from django.core.mail import mail_admins
 from lifeflow.markdown.markdown import Markdown
-
+from lifeflow.markdown import mdx_lifeflow
+from lifeflow.markdown import mdx_code
+from lifeflow.markdown import mdx_footnotes
 
 
 def dbc_markup(txt, obj=None):
     "Apply Dynamic Blog Context markup"
-    from lifeflow.markdown import mdx_lifeflow
-    from lifeflow.markdown import mdx_code
-    from lifeflow.markdown import mdx_footnotes
     md = Markdown(txt,
                   extensions=[mdx_footnotes,
                               mdx_code,
@@ -22,13 +21,11 @@ def dbc_markup(txt, obj=None):
                   extension_configs={'lifeflow':obj},
                   )
     return md.convert()
-    
+
 
 def comment_markup(txt, obj=None):
-    from lifeflow.markdown import mdx_code
     md = Markdown(txt, extensions=[mdx_code])
     return md.convert()
-
 
 
 class Author(models.Model):
@@ -53,31 +50,24 @@ class Author(models.Model):
         help_text="If true body is filtered using MarkDown, otherwise html is expected.",
         )
 
-
     class Meta:
         ordering = ('name',)
-
 
     class Admin:
         list_display = ('name', 'link')
         search_fields = ['name']
 
-    
     def __unicode__(self):
         return self.name
-
 
     def get_absolute_url(self):
         return u"/author/%s/" % self.slug
 
-
     def latest(self, qty=10):
         return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})[:qty]
-
     
     def name_with_link(self):
         return u'<a href="%s">%s</a>' % (self.get_absolute_url(), self.name)
-
 
 
 class Comment(models.Model):
@@ -90,15 +80,12 @@ class Comment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     html = models.TextField(blank=True, null=True)
 
-
     class Meta:
         ordering = ('-date',)
-
 
     class Admin:
         list_display = ('entry', 'name', 'email', 'webpage', 'date')
         search_fields = ['name', 'email','body']
-
 
     def save(self):
         if self.name == u"name" or self.name == u"":
@@ -114,13 +101,10 @@ class Comment(models.Model):
         subject = u"[Comment] %s on %s" % (self.name, self.entry.title)
         body = u"Comment by %s [%s][%s] on %s\n\n%s" % (self.name, self.email, self.webpage, title, self.html) 
         mail_admins(subject, body, fail_silently=True)
-
         super(Comment,self).save()
-
 
     def get_absolute_url(self):
         return u"%s#comment_%s" % (self.entry.get_absolute_url(), self.pk)
-
 
     def __unicode__(self):
         name = self.name or "Unnamed Poster"
@@ -146,7 +130,6 @@ class Draft(models.Model):
     series = models.ManyToManyField('Series', blank=True, null=True)
     authors = models.ManyToManyField('Author', blank=True, null=True)
 
-
     def __unicode__(self):
         if self.title:
             return self.title
@@ -157,7 +140,6 @@ class Draft(models.Model):
 class CurrentEntryManager(models.Manager):
     def get_query_set(self):
         return super(CurrentEntryManager, self).get_query_set().filter(**{'pub_date__lte': datetime.datetime.now()}).filter(**{'is_translation':False})
-
 
 
 class Entry(models.Model):
@@ -219,12 +201,10 @@ class Entry(models.Model):
     # current manager, does not allow access entries published to future dates
     current = CurrentEntryManager()
 
-
     class Meta:
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
         verbose_name_plural = "entries"
-
 
     class Admin:
         list_display = ('title', 'pub_date')
@@ -239,17 +219,14 @@ class Entry(models.Model):
             ('Organization', {'fields': ('flows', 'tags',),}),
             )
 
-
     def __unicode__(self):
         return self.title
-
 
     def get_absolute_url(self):
         return u"/entry/%s/%s/" % (
             self.pub_date.strftime("%Y/%b/%d").lower(),
             self.slug,
             )
-
 
     def save(self):
         if self.use_markdown:
@@ -258,7 +235,6 @@ class Entry(models.Model):
             self.body_html = self.body
         if self.send_ping is True: self.ping()
         super(Entry,self).save()
-
 
     def ping(self):
         # ping all sites to ping (Ping-O-Matic, etc)
@@ -270,7 +246,6 @@ class Entry(models.Model):
             ping_google()
         except Exception:
             pass
-
     
     def get_next_article(self):
         next =  Entry.current.filter(**{'pub_date__gt': self.pub_date}).order_by('pub_date')
@@ -279,7 +254,6 @@ class Entry(models.Model):
         except IndexError:
             return None
 
-
     def get_previous_article(self):
         previous =  Entry.current.filter(**{'pub_date__lt': self.pub_date}).order_by('-pub_date')
         try:
@@ -287,13 +261,11 @@ class Entry(models.Model):
         except IndexError:
             return None
 
-
     def get_random_entries(self):
         return Entry.current.order_by('?')[:3]
 
     def get_recent_comments(self, qty=3):
         return Comment.objects.all().filter(entry=self)[:qty]
-
 
     def organize_comments(self):
         """
@@ -355,7 +327,6 @@ class Entry(models.Model):
             return group(flatten(relations[1]), 2)
 
 
-
 class Flow(models.Model):
     """
     A genre of entries. Like things about Cooking, or Japan.
@@ -365,14 +336,11 @@ class Flow(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(prepopulate_from=("title",))
 
-
     class Admin:
         pass
 
-
     def __unicode__(self):
         return self.title
-
 
     def latest(self, qty=None):
         if qty is None:
@@ -384,11 +352,9 @@ class Flow(models.Model):
         return u"/%s/" % self.slug
 
 
-
 class Language(models.Model):
     title = models.CharField(max_length=50, core=True)
     slug = models.SlugField(prepopulate_from=("title",))
-
 
     class Admin:
         pass
@@ -401,7 +367,6 @@ class Language(models.Model):
 
     def latest(self, qty=None):
         return self.translation_set.all().filter(**{'translated__pub_date__lte': datetime.datetime.now()})
-
 
 
 class Project(models.Model):
@@ -438,10 +403,8 @@ class Project(models.Model):
         help_text="Used for deciding order projects will be displayed in.",
         )
 
-
     class Meta:
         ordering = ('-size',)
-
 
     class Admin:
         list_display = ('title', 'language', 'license', 'size',)
@@ -451,11 +414,9 @@ class Project(models.Model):
                     'fields' : ('title', 'slug', 'size', 'language', 'license', 'use_markdown',)}),
             ('Content', {'fields': ('summary', 'body', 'resources')}),
             )
-
-        
+   
     def __unicode__(self):
         return self.title
-
 
     def size_string(self):
         if self.size == str(0): return "Script"
@@ -463,10 +424,8 @@ class Project(models.Model):
         elif self.size == str(2): return "Medium"
         elif self.size == str(3): return "Large"
 
-
     def get_absolute_url(self):
         return u"/projects/%s/" % self.slug
-
 
     def save(self):
         if self.use_markdown:
@@ -474,7 +433,6 @@ class Project(models.Model):
         else:
             self.body_html = self.body
         super(Project,self).save()
-
 
 
 class Resource(models.Model):
@@ -486,20 +444,16 @@ class Resource(models.Model):
     markdown_id = models.CharField(max_length=50)
     content = models.FileField(upload_to="lifeflow/resource")
 
-
     class Admin:
         pass
-
 
     def get_relative_url(self):
         # figure out why I named this relative instead of absolute
         # because... it sure as hell isn't relative
         return u"/media/%s" % self.content
 
-
     def __unicode__(self):
         return u"[%s] %s" % (self.markdown_id, self.title,)
-
 
 
 class RecommendedSite(models.Model):
@@ -511,14 +465,11 @@ class RecommendedSite(models.Model):
     title = models.CharField(max_length=50)
     url = models.URLField()
 
-
     class Admin:
         pass
 
-
     def __unicode__(self):
         return u"%s ==> %s" % (self.title, self.url)
-
 
 
 class Series(models.Model):
@@ -528,31 +479,24 @@ class Series(models.Model):
     title = models.CharField(max_length=200, core=True)
     slug= models.SlugField(prepopulate_from=("title",))
 
-
     class Meta:
         ordering = ('-id',)
         verbose_name_plural = "Series"
 
-
     class Admin:
         pass
-
 
     def __unicode__(self):
         return self.title
 
-
     def get_absolute_url(self):
         return u"/articles/%s/" % ( unicode(self.slug), )
-
 
     def latest(self, qty=10):
         return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})[:qty]
 
-
     def num_articles(self):
         return self.entry_set.all().count()
-
 
 
 class SiteToNotify(models.Model):
@@ -579,14 +523,11 @@ class SiteToNotify(models.Model):
     class Meta:
         verbose_name_plural = "Sites to Notify"
 
-
     class Admin:
         pass
 
-
     def __unicode__(self):
         return self.title
-
 
     def ping(self):
         def do_ping():
@@ -595,12 +536,10 @@ class SiteToNotify(models.Model):
         thread.start_new_thread(do_ping, ())
 
 
-
 class Tag(models.Model):
     "Tags are associated with Entry instances to describe their contents."
     title = models.CharField(max_length=50, core=True)
     slug = models.SlugField(prepopulate_from=("title",))
-
 
     class Admin:
         pass
@@ -608,21 +547,17 @@ class Tag(models.Model):
     class Meta:
         ordering = ('title',)
 
-
     def __unicode__(self):
         return self.title
 
-
     def get_absolute_url(self):
         return u"/tags/%s/" % self.slug
-
 
     def latest(self, qty=None):
         if qty is None:
             return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})
         else:
             return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})[:qty]
-
 
     def get_max_tags(self):
         max = cache.get('lifeflow_tags_max')
@@ -634,7 +569,6 @@ class Tag(models.Model):
                 if count > max: max = count
             cache.set('lifeflow_tags_max', max)
         return max
-
 
     def tag_size(self):
         max = self.get_max_tags()
@@ -648,7 +582,6 @@ class Tag(models.Model):
         else: return tag_name + "5"
 
 
-
 class Translation(models.Model):
     """
     Link together two entries, where @translated is a translation of
@@ -658,10 +591,8 @@ class Translation(models.Model):
     original = models.ForeignKey('Entry')
     translated = models.ForeignKey('Entry', related_name="translated")
 
-
     class Admin:
         pass
-
 
     def __unicode__(self):
         return u"Translation of %s into %s" % (self.original, self.language,)
@@ -673,7 +604,6 @@ class Translation(models.Model):
 
     def get_absolute_url(self):
         return self.translated.get_absolute_url()
-
 
 
 def resave_object(sender, instance, signal, *args, **kwargs):
@@ -702,7 +632,6 @@ def resave_object(sender, instance, signal, *args, **kwargs):
         thread.start_new_thread(do_save, ())
     else:
         resave_hist[id] = True
-
 
 
 resave_hist = {}
