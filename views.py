@@ -116,7 +116,7 @@ def comments(request, entry_id=None, parent_id=None):
 
 
 def flow(request, slug):
-    num_per_page = 3
+    num_per_page = 5
     try:
         first = request.GET["start"]
         first = int(first)
