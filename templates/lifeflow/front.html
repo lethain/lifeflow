@@ -4,12 +4,12 @@
 
 
 <div class="pagination pagination-top">
-{% if previous %}
-<span class="left"><a href="{{ object.get_absolute_url }}?start={{ previous }}">Newer</a></span>
+{% if not at_start %}
+<span class="left"><a href="?start={{ previous }}">Newer Entries</a></span>
 {% endif %}
 
-{% if next %}
-<span class="right"><a href="{{ object.get_absolute_url }}?start={{ next }}">Older</a></span>
+{% if not at_end %}
+<span class="right"><a href="?start={{ next }}">Older Entries</a></span>
 {% endif %}
 </div>
   
@@ -20,12 +20,12 @@
 
 
 <div class="pagination pagination-bottom">
-{% if previous %}
-<span class="left"><a href="{{ object.get_absolute_url }}?start={{ previous }}">Newer</a></span>
+{% if not at_start %}
+<span class="left"><a href="?start={{ previous }}">Newer Entries</a></span>
 {% endif %}
 
-{% if next %}
-<span class="right"><a href="{{ object.get_absolute_url }}?start={{ next }}">Older</a></span>
+{% if not at_end %}
+<span class="right"><a href="?start={{ next }}">Older Entries</a></span>
 {% endif %}
 </div>
  

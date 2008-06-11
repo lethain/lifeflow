@@ -1,22 +1,29 @@
 {% extends "lifeflow/lifeflow_base.html" %}
 {%block body %}
+
+<div class="pagination pagination-top">
 {% if not at_start %}
-<p>
-  <a href="{{ object.get_absolute_url }}?end_at={{ previous }}">
-    View more recent entries
-  </a>
-</p>
+<span class="left"><a href="?start={{ previous }}">Newer Entries</a></span>
 {% endif %}
+
+{% if not at_end %}
+<span class="right"><a href="?start={{ next }}">Older Entries</a></span>
+{% endif %}
+</div>
+
 
 {% with object_list as article_list %}
 {% include "lifeflow/show_articles_list.html" %}
 {% endwith %}
 
-{% if not at_end %}
-<p>
-  <a href="{{ object.get_absolute_url }}?end_at={{ last }}">
-    View older entries
-  </a>
-</p>
+<div class="pagination pagination-top">
+{% if not at_start %}
+<span class="left"><a href="?start={{ previous }}">Newer Entries</a></span>
 {% endif %}
+
+{% if not at_end %}
+<span class="right"><a href="?start={{ next }}">Older Entries</a></span>
+{% endif %}
+</div>
+
 {% endblock %}

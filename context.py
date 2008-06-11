@@ -6,7 +6,7 @@ from django.conf import settings
 def blog(request):
     def make_slug(str):
         return str.lower().replace(" ","-")
-    recent = Entry.current.all()[:4]
+    recent = Entry.current.all()[:3]
     random = Entry.current.all().order_by('?')[:3]
     blog_roll = RecommendedSite.objects.all()
     flows = Flow.objects.all()

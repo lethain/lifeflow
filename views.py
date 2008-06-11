@@ -116,9 +116,9 @@ def comments(request, entry_id=None, parent_id=None):
 
 
 def flow(request, slug):
-    num_per_page = 10
+    num_per_page = 3
     try:
-        first = request.GET["end_at"]
+        first = request.GET["start"]
         first = int(first)
         last = first + num_per_page
     except KeyError:
@@ -127,26 +127,29 @@ def flow(request, slug):
     flow = Flow.objects.get(slug=slug)
     object_list = flow.latest()[first:last]
     count = flow.entry_set.all().count()
+
+
+
+    if first <= 0:
+        at_start = True
+    else:
+        at_start = False
     if last >= count:
         at_end = True
     else:
         at_end = False
-    if first > 0:
-        at_start = False
-        previous = first - num_per_page
-    else:
-        at_start = True
-        previous = None
+
+    previous = first - num_per_page
 
     return render_to_response(
         'lifeflow/flow_detail.html',
         {
             'object' : flow,
             'object_list' : object_list,
-            'last' : last,
+            'next' : last,
             'previous' : previous,
-            'at_start' : at_start,
-            'at_end' : at_end,
+            'at_start':at_start,
+            'at_end':at_end,
          },
         RequestContext(request, {}),
         )
@@ -162,19 +165,25 @@ def front(request):
         last = num_per_request
     entries = Entry.current.all()[first:last]
 
-    previous = first - num_per_request
-    if previous <= 0:
-        previous = None
+    if first <= 0:
+        at_start = True
+    else:
+        at_start = False
 
     count = Entry.current.all().count()
     if last >= count:
-        last = None
+        at_end = True
+    else:
+        at_end = False
 
+    previous = first - num_per_request
     return render_to_response(
         'lifeflow/front.html',
         {'articles':entries,
          'previous':previous,
          'next':last,
+         'at_start':at_start,
+         'at_end':at_end,
          },
         RequestContext(request, {}),
         )
