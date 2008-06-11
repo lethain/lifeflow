@@ -36,7 +36,7 @@ var delete_series = function(pk) {
   delete_model("series",pk);
   var id = "#series_" + pk;
   $(id).fadeOut('slow');
-  $("#select_" + pk).fadeOut('slow');
+  $(pk).fadeOut('slow');
 }
 </script>
 
@@ -46,7 +46,7 @@ var delete_series = function(pk) {
     <p> Click on the series that this article should appear in. </p>
     <div id="selectables" class="selectables">
       {% for serie, selected in series %}
-      <a id="select_{{ serie.pk }}" class="selectable {% if selected %} selected{% endif %}" id="{{ serie.pk }}"> {{ serie.title }}</a>
+      <a id="{{ serie.pk }}" class="selectable {% if selected %} selected{% endif %}" id="{{ serie.pk }}"> {{ serie.title }}</a>
       {% endfor %}
     </div>
     </li>

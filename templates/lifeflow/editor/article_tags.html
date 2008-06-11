@@ -30,7 +30,7 @@ var delete_tag = function(pk) {
   delete_model("tag",pk);
   var id = "#tag_" + pk;
   $(id).fadeOut('slow');
-  $("#select_" + pk).fadeOut('slow');
+  $(pk).fadeOut('slow');
 }
 </script>
 
@@ -41,7 +41,7 @@ var delete_tag = function(pk) {
 
     <div id="selectables" class="selectables">
       {% for tag, selected in tags %}
-      <a id="select_{{ tag.pk}}" class="selectable {% if selected %} selected{% endif %}" id="{{ tag.pk }}"> {{ tag.title }}</a>
+      <a class="selectable {% if selected %} selected{% endif %}" id="{{ tag.pk }}"> {{ tag.title }}</a>
       {% endfor %}
     </div>
     </li>
