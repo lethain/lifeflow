@@ -307,6 +307,7 @@ class Entry(models.Model):
             else: id = comment.id
             try:
                 children = dict[id]
+                children.reverse()
                 return [(comment, depth), [build_relations(dict, x, depth+1) for x in children]]
             except:
                 return (comment, depth)
