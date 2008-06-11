@@ -2,8 +2,10 @@
 {% block title %}Archive of {{ year }}{% endblock %}
 {% block body %}
 
-<p> <a href="../"> Back to archive index. </a> </p>
-<h2> Archive of {{ year }}</h2>
+
+
+<h3> <a href="../">archive</a> / <a href="./">{{ year}}</a> </h3>
+
 <ol>
   {% for date in date_list %}
   <li> <a href="{{ date|date:"b" }}/">View entries from {{ date|date:"F, Y" }} </li>
