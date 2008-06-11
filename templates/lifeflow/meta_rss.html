@@ -1,22 +1,14 @@
 {% extends "lifeflow/lifeflow_base.html" %}
 {% block title %} RSS {% endblock %}
 {% block body %}
-<h3> General Feeds </h3>
+<h3> RSS Feeds </h3>
 
-<p><a href="/feeds/all/"> All Feed </a>: contains all entries. </p>
-<p><a href="/feeds/comment/"> Comment Feed </a>: contains recent comments. </p>
-{% for flow in flows %}
-<p><a href="/feeds/flow/{{ flow.slug }}/"> {{ flow.title }} Feed </a>: contains entries from the {{ flow.title }} flow. </p>
-{% endfor %}
-<p><a href="/feeds/projects/"> Project Feed </a>: contains all projects. </p>
-<p><a href="/feeds/translations/"> Translation Feed </a>: contains all translations. </p>
 
-<h3> Focused Feeds </h3>
 
-<p> Each <a href="/language/">language</a> has its own feed containing only translations in that specific language.</p>
-<p> Each entry has a feed for comments posted to it.</p>
-<p> Each <a href="/articles/">series</a> has its own feed. </p>
-<p> Each <a href="/tags/">tag</a> has its own feed. </p>
-<p> Each <a href="/author/">author</a> has its own feed as well. </p>
+<p> The <strong>most general feed</strong> contains <a href="/feeds/all/">all entries</a>. There is also a <a href="/feeds/comment/">comment feed</a>. For those with a more specialized palette, there are feeds for these categories of entries: {% for flow in flows %} <a href="/feeds/flow/{{ flow.slug }}/">{{ flow.title }}</a> {% endfor %}. Beyond that, there is a feed for <a href="/feeds/projects/">new projects</a>, as well as a feed for <a href="/feeds/translations/">translations</a>.</p>
+
+
+
+<p> <strong> Looking for another feed? </strong> There are also feeds for <a href="/language/">languages</a>, <a href="/tags/">tags</a>, <a href="/articles/">series</a>, and <a href="/author/">authors</a>.
 
 {% endblock %}
