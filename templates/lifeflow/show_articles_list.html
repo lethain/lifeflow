@@ -31,7 +31,35 @@
     {% endwith %}
 
   </div>
-<p class="summary">{{ object.summary|safe }}</p>
+  <p class="summary">{{ object.summary|safe }}</p>
+  {% for comment in object.get_recent_comments %}
+
+  <div class="comment">
+    {% if comment.webpage %}
+    <span class="comment-author">
+    <a href="{{ comment.webpage }}">{{ comment.name }}</a>
+    </span>
+    {% else %}
+    <span class="comment-author">
+    {{ comment.name }}
+    </span>
+    {% endif %}
+    <span class="comment-date"> on {{ comment.date|date:"F j, Y" }}</span>
+    
+    {% if comment.parent %}
+    <span class="comment-parent-link">
+    Responding to <a href="{{ comment.parent.get_absolute_url }}">{{ comment.parent.name }}</a>
+    </span>
+    {% endif %}
+    <br />
+  <div class="comment-body">
+    {{ comment.html|safe }}
+  </div>
+  </div>
+
+  {% endfor %}
+  
+  
 </li>
 {% endfor %}
 </ol>

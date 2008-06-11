@@ -7,16 +7,5 @@
 {% endwith %}
 
   
-{% if comments %}
-<hr />
-<h3> Latest Comments </h3>
-<ul>
-{% for comment in comments %}
-  <li>
-  <span><strong> {{ comment.name }} on  <a href="{{ comment.get_absolute_url }}"> {{ comment.entry.title }}</a></strong>, posted on {{ comment.date|date:"F j, Y" }}</span>
-  </li>
-{% endfor %}
-</ul>
-{% endif %}
 {% endblock %}
 

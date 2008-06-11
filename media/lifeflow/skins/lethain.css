@@ -55,3 +55,7 @@ a {
 a:hover { 
     text-decoration: underline;
 }
+
+ol.entry-list div.comment {
+    background: #cca2a2;
+}

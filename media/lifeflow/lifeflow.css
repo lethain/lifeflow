@@ -54,6 +54,12 @@ div.comment {
     overflow: auto;
 }
 
+ol.entry-list div.comment {
+    padding-top: 6px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
 div.comment-body {
     padding-left: 10px;
     padding-right: 10px;
@@ -66,6 +72,11 @@ span.comment-author {
 
 div.comments-subscribe {
     text-align: center;
+}
+
+span.comment-date {
+    float: left;
+    margin-left: 16px;
 }
 
 span.comment-reply {

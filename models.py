@@ -291,6 +291,9 @@ class Entry(models.Model):
     def get_random_entries(self):
         return Entry.current.order_by('?')[:3]
 
+    def get_recent_comments(self, qty=3):
+        return Comment.objects.all().filter(entry=self)[:qty]
+
 
     def organize_comments(self):
         """

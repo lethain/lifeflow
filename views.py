@@ -153,10 +153,9 @@ def flow(request, slug):
 
 
 def front(request):
-    comments = Comment.objects.all().order_by('-date')[:5]
     return render_to_response(
         'lifeflow/front.html',
-        {'comments':comments,},
+        {},
         RequestContext(request, {}),
         )
 
