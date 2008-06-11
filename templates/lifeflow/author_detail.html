@@ -10,11 +10,7 @@
   </div>
   {% endif %}
   <div class="author-description">
-    {% if object.use_markdown %}
     {{ object.bio|markdown }}
-    {% else %}
-    {{ object.bio|safe }}
-    {% endif %}
   </div>
   <div class="author-subscribe">
     <h3><a href="/feeds/author/{{ object.slug }}/">Subscribe to entries by {{ object.name }}</a></h3>
