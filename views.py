@@ -19,13 +19,8 @@ from lifeflow.models import Series, Flow, Entry, Comment
 from lifeflow.forms import CommentForm
 
 
-def articles(request):
-    def comp(a,b):
-        result = b.num_articles() - a.num_articles()
-        return int(result)
-        
-    object_list = Series.objects.all()._get_data()
-    object_list.sort(comp)
+def articles(request):       
+    object_list = Series.objects.all()
     return render_to_response(
         'lifeflow/articles.html',
         {'object_list' : object_list},
