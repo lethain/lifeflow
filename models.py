@@ -628,7 +628,7 @@ class Tag(models.Model):
         if max == None:
             tags = Tag.objects.all()
             max = 0
-            for tag in tags._get_data():
+            for tag in tags:
                 count = tag.entry_set.count()
                 if count > max: max = count
             cache.set('lifeflow_tags_max', max)
