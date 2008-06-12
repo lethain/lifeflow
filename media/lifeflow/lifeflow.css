@@ -36,6 +36,10 @@ ul.nav-links {
     list-style: none;
 }
 
+li.long-nav-link {
+    margin-bottom: 8px;
+}
+
 span.very-large {
     font-size: 2em;
     margin-bottom: 0.75em;
