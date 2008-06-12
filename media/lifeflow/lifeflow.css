@@ -1,3 +1,7 @@
+em {
+    background: none;
+}
+
 div.footer {
     text-align: center;
 }
@@ -26,6 +30,10 @@ span.translation {
 
 span.header-link {
     margin-left: 10px;
+}
+
+ul.nav-links {
+    list-style: none;
 }
 
 span.very-large {
