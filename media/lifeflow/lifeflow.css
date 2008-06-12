@@ -32,6 +32,11 @@ span.header-link {
     margin-left: 10px;
 }
 
+span.header-spacer {
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
 ul.nav-links {
     list-style: none;
 }
