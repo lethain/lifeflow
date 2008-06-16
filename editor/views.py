@@ -510,7 +510,7 @@ def published_to_edited(request, id):
 def create(request):
     obj = Draft()
     obj.save()
-    return HttpResponseRedirect("../edit/draft/%s/1/" % obj.pk)
+    return HttpResponseRedirect("../edit/draft/%s/title/" % obj.pk)
 
 @login_required
 def create_project(request):
