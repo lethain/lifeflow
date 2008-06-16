@@ -33,6 +33,7 @@
       {% for flow in lifeflow_flows %}
       <span class="header-link"><a href="{{ flow.get_absolute_url }}">{{ flow }}</a></span>
       {% endfor %}
+      <span class="header-link"><a href="/articles/">Articles</a></span>
       {% if lifeflow_use_projects %}
       <span class="header-link"><a href="/projects/">Projects</a></span>
       {% endif %}
