@@ -19,6 +19,14 @@ div.pagination span.left {
     float: left;
 }
 
+div.series-list {
+    padding-left: 8px;
+}
+
+span.series-list {
+    padding-left: 8px;
+}
+
 span.tag {
     margin-left: 10px;
 }
