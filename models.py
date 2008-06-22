@@ -495,6 +495,9 @@ class Series(models.Model):
     def latest(self, qty=10):
         return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})[:qty]
 
+    def in_order(self):
+        return self.entry_set.order_by('id')
+
     def num_articles(self):
         return self.entry_set.all().count()
 

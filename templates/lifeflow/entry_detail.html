@@ -38,16 +38,17 @@
 {% if series %}
 <div class="column span-6 first series-list">
   {% for article_series in series %}
-  <ul class="navLinks">
-    <li><strong> {{ article_series.title|escape }}</strong> <a href="/feeds/series/{{ article_series.slug }}/">subscribe</a> </li>
-    {% for entry in article_series.entry_set.all %}
+  <span class="series-list"> <strong>{{ article_series.title|escape }}</strong>
+  <a href="/feeds/series/{{article_series.slug }}/">subscribe</a> </span>
+  <ol class="navLinks">
+    {% for entry in article_series.in_order %}
     <li>
     <a href="{{ entry.get_absolute_url }}">
     {{ entry.title|escape|truncatewords:5 }}
     </a>
     </li>
     {% endfor %}
-  </ul>
+  </ol>
   {% endfor %}
 </div>
 {% endif %}
