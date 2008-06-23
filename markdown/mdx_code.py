@@ -4,6 +4,7 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_by_name
 
+
 class CodeExtension (markdown.Extension):
 
     def __name__(self):
@@ -15,35 +16,21 @@ class CodeExtension (markdown.Extension):
         md.textPreprocessors.insert(0, preprocessor)
 
 
-class CodeBlockPreprocessor :
+CODE_BLOCK_REGEX = re.compile(r"@@ (?P<syntax>\w+)\r?\n(?P<code>.*?)@@\r?\n", re.DOTALL)
+CODE_BLOCK_END = re.compile(r"@@\r?\n")
 
+
+class CodeBlockPreprocessor :
     def run (self, text):
-        text.replace("\r\n","\n")
-        lines = text.split("\n")
-        new_lines = []
-        seen_start = False
-        lang = None
-        block = []
-        for line in lines:
-            if line.startswith("@@") is True and seen_start is False:
-                lang = line.strip("@@ ")
-                seen_start = True
-            elif line.startswith("@@") is True and seen_start is True:
-                content = u"\n".join(block)
-                try:
-                    lexer = get_lexer_by_name(lang)
-                    highlighted = highlight(content, lexer, HtmlFormatter())
-                    new_lines.append(u"%s" % (highlighted))
-                except:
-                    new_lines.append(u"<pre>%s</pre>" % content)
-                lang = None
-                block = []
-                seen_start = False
-            elif seen_start is True:
-                block.append(line)
-            else:
-                new_lines.append(line)
-        return u"\n".join(new_lines)
+        while  1:
+            m = CODE_BLOCK_REGEX.search(text)
+            if not m: break;
+            lexer = get_lexer_by_name(m.group('syntax'))
+            color = highlight(m.group('code'), lexer, HtmlFormatter())
+            code = u"<pre><code>%s</code></pre>" % color
+            placeholder = self.md.htmlStash.store(code, safe=True)
+            text = '%s\n%s\n%s'% (text[:m.start()], placeholder, text[m.end():])
+        return text
 
 
 def makeExtension(configs=None) :
