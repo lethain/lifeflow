@@ -4,16 +4,10 @@ from lifeflow.models import *
 from lifeflow.sitemaps import ProjectSitemap
 from django.contrib.sitemaps import GenericSitemap
 
-
-
 flows = Flow.objects.all()
-
 projects = Project.objects.all()
-
 tags = Tag.objects.all().order_by('title')
-
 languages = Language.objects.all()
-
 authors = Author.objects.all().order_by('name')
 
 feeds = {
@@ -51,15 +45,11 @@ urlpatterns = patterns('',
     (r'^comments/create/(?P<entry_id>\d+)/(?P<parent_id>\d+)/$', 'lifeflow.views.comments'),
 
     # feeds and rss views
-    (r'^feeds/(?P<url>.*)/$', 
-     'django.contrib.syndication.views.feed', 
-     {'feed_dict': feeds}),
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^meta/rss/$', 'lifeflow.views.rss'),
 
     # date based generic views
-    (r'^entry/(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\w{1,2})/(?P<slug>[-\w]+)/$',
-     'django.views.generic.date_based.object_detail',
-     dict(all_dict, slug_field='slug')),
+    (r'^entry/(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\w{1,2})/(?P<slug>[-\w]+)/$', 'django.views.generic.date_based.object_detail', dict(all_dict, slug_field='slug')),
     (r'^entry/(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\w{1,2})/$', 'django.views.generic.date_based.archive_day',   all_dict),
     (r'^entry/(?P<year>\d{4})/(?P<month>[a-z]{3})/$', 'django.views.generic.date_based.archive_month', all_dict),
     (r'^entry/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year',  all_dict),
@@ -81,12 +71,8 @@ urlpatterns = patterns('',
     (r'^articles/$', 'lifeflow.views.articles'),
 
     # projects views
-    (r'^projects/$',
-     'django.views.generic.list_detail.object_list',
-     dict(queryset=projects)),
-    (r'^projects/(?P<slug>[-\w]+)/$',
-     'django.views.generic.list_detail.object_detail',
-     dict(queryset=projects, slug_field='slug')),
+    (r'^projects/$', 'django.views.generic.list_detail.object_list', dict(queryset=projects)),
+    (r'^projects/(?P<slug>[-\w]+)/$', 'django.views.generic.list_detail.object_detail', dict(queryset=projects, slug_field='slug')),
 
     # editor
     (r'^editor/', include('lifeflow.editor.urls')),
