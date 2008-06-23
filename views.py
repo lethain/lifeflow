@@ -98,6 +98,12 @@ def comments(request, entry_id=None, parent_id=None):
 
 def flow(request, slug):
     try:
+        flow = Flow.objects.get(slug=slug)
+    except Flow.DoesNotExist:
+        raise Http404
+
+
+    try:
         page = int(request.GET["page"])
     except:
         page = 1
