@@ -181,8 +181,10 @@ def update(request):
     return HttpResponse("success")
 
 
+API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite}
+
 def get_class(str):
-    return {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite}[str]
+    return API_CLASSES[str]
 
 @login_required
 def delete_model(request):
