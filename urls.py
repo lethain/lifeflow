@@ -10,7 +10,7 @@ flows = Flow.objects.all()
 projects = Project.objects.all()
 tags = Tag.objects.all().order_by('title')
 languages = Language.objects.all()
-authors = Author.objects.all().order_by('name')
+authors = Author.objects.all()
 
 feeds = {
     'author': AuthorFeed,

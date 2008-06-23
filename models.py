@@ -51,7 +51,7 @@ class Author(models.Model):
         )
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('id',)
 
     class Admin:
         list_display = ('name', 'link')

@@ -77,16 +77,15 @@ div.authors-list {
     overflow: hidden;
 }
 div.author-in-list {
-    height: 276px;
-    width: 146px;
+    height: 270px;
+    width: 180px;
     float: left;
-    padding: 8px;
+    margin: 8px;
+    overflow: hidden;
 }
 div.author-in-list img {
-    height: 260px;
-    width: 130px:
+    height: 100%;
     margin: 8px;
-    
 }
 
 /* Stylings for Social Links */
