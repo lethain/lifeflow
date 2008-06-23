@@ -19,6 +19,10 @@ from lifeflow.models import Series, Flow, Entry, Comment
 from lifeflow.forms import CommentForm
 
 
+def server_error(request):
+    return render_to_response(
+        '500.html',{},RequestContext(request,{}))
+
 def articles(request):       
     object_list = Series.objects.all()
     return render_to_response(

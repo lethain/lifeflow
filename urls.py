@@ -4,6 +4,8 @@ from lifeflow.models import *
 from lifeflow.sitemaps import ProjectSitemap
 from django.contrib.sitemaps import GenericSitemap
 
+handler500 = 'lifeflow.views.server_error'
+
 flows = Flow.objects.all()
 projects = Project.objects.all()
 tags = Tag.objects.all().order_by('title')
