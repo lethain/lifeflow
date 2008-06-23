@@ -29,6 +29,15 @@ $(document).ready(function() {$("#resource-delete").click(function() {
     }
     else { display_error(res.responseText); }
 }})})});
+
+var file_selected = function() {
+  var val = $("#file_select")[0].value;
+  if (val == "") {
+    display_error("Please select a file to upload.");
+    return false;
+  }
+  else return true;
+}
 </script>
 
 <div class="files">
@@ -55,13 +64,13 @@ $(document).ready(function() {$("#resource-delete").click(function() {
     </tr>
     <tr>
       <td> File </td>
-	  <td><input type="file" name="file" ></td>
+	  <td><input id="file_select" type="file" name="file" ></td>
 	</tr>
 	<tr>
 	  <td></td>
 	  <input type="hidden" name="pk" value="{{ object.pk }}">
 	  <input type="hidden" name="model" value="{{ model }}">
-	  <td><input type="submit" value="Upload"></td>
+	  <td><input type="submit" onclick="return file_selected();" value="Upload"></td>
 	</tr>
       </table>
       </form>
