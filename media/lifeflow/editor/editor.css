@@ -36,6 +36,16 @@ div.login {
     text-align: center;
 }
 
+div.pagination {
+    overflow: hidden;
+}
+div.pagination .left {
+    float: left;
+}
+div.pagination .right {
+    float: right;
+}
+
 div.control-bar {
     background-color: orange;
     width: 100%;

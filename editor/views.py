@@ -26,6 +26,7 @@ from django.conf import settings
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import views, authenticate
+from django.core.paginator import QuerySetPaginator
 
 
 CHARACTERS_TO_STRIP = """ .,!?'";:/\+=# """
@@ -84,9 +85,13 @@ def overview(request):
 
 @login_required
 def comments(request):
-    comments = Comment.objects.all()
+    try:
+        page = int(request.GET["page"])
+    except:
+        page = 1
+    page = QuerySetPaginator(Comment.objects.all(), 5).page(page)
     return render_to_response('lifeflow/editor/comments.html',
-                              {'comments':comments},
+                              {'page':page},
                               RequestContext(request,{}))
 
 @login_required
