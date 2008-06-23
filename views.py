@@ -20,18 +20,13 @@ from lifeflow.models import Series, Flow, Entry, Comment
 from lifeflow.forms import CommentForm
 
 
-
 def server_error(request):
-    return render_to_response(
-        '500.html',{},RequestContext(request,{}))
+    return render_to_response('500.html',{},RequestContext(request,{}))
+
 
 def articles(request):       
     object_list = Series.objects.all()
-    return render_to_response(
-        'lifeflow/articles.html',
-        {'object_list' : object_list},
-        RequestContext(request, {}),
-        )
+    return render_to_response('lifeflow/articles.html', {'object_list' : object_list},RequestContext(request, {}))
 
 
 def comments(request, entry_id=None, parent_id=None):
@@ -50,7 +45,6 @@ def comments(request, entry_id=None, parent_id=None):
     # TODO: validate ID, throw 500 otherwise
     entry = Entry.objects.get(pk=id)
     
-
     if request.POST.has_key('parent_id') and request.POST['parent_id'] != u"":
         parent_id = int(request.POST['parent_id'])
         parent = Comment.objects.get(pk=parent_id)
@@ -85,35 +79,21 @@ def comments(request, entry_id=None, parent_id=None):
         if identifier != make_identifier(id, now):
             raise Http404
 
-
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         webpage = form.cleaned_data['webpage']
         rendered = form.cleaned_data['rendered']
         body = form.cleaned_data['body']
-        c = Comment(entry=entry,
-                    parent=parent,
-                    name=name,
-                    email=email,
-                    webpage=webpage,
-                    body=body,
-                    html=rendered,
-                    )
+        c = Comment(entry=entry,parent=parent,name=name,email=email,
+                    webpage=webpage,body=body,html=rendered)
         c.save()
         url = u"%s#comment_%s" % (entry.get_absolute_url(), c.pk)
         return HttpResponseRedirect(url)
 
     return render_to_response(
         'lifeflow/comment.html',
-        {'object': entry,
-         'parent': parent,
-         'identifier' : identifier,
-         'time' : now,
-         'form': form,
-         },
-        RequestContext(request, {}),
-        )
-
+        {'object':entry,'parent':parent,'identifier':identifier,'time':now,'form':form},
+        RequestContext(request, {}))
 
 
 def flow(request, slug):
@@ -133,14 +113,9 @@ def front(request):
     except:
         page = 1
     page = QuerySetPaginator(Entry.current.all(), 3).page(page)
-    
     return render_to_response('lifeflow/front.html', {'page':page}, RequestContext(request, {}))
 
 
 def rss(request):
     flows = Flow.objects.all()
-    return render_to_response(
-        'lifeflow/meta_rss.html',
-        {'flows' : flows },
-        RequestContext(request, {}),
-        )
+    return render_to_response('lifeflow/meta_rss.html', {'flows' : flows }, RequestContext(request, {}))
