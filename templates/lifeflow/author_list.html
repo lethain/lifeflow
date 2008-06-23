@@ -8,7 +8,7 @@
 {% for object in object_list %}
   <div class="author-in-list">
     <a href="{{ object.slug }}/" >
-      <img src="{{ object.get_picture_url }}" alt="An picture of {{ object.name }}" />
+      <img src="{{ object.get_picture_url }}" alt="{{ object.name }}" />
     </a>
   </div>
 {% endfor %}
