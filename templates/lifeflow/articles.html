@@ -7,7 +7,10 @@
   <span><strong>{{ object }}</strong> <a href="/feeds/series/{{ object.slug }}/"> subscribe </a></span>
   <ol class="article-series">
     {% for entry in object.in_order %}
-    <li class="article-series-entry"><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>
+    <li class="article-series-entry">
+    <a href="{{ entry.get_absolute_url }}">{{ entry }}</a>
+    ({{ entry.pub_date|date:"F j, Y" }})
+    </li>
     {% endfor %}
   </ol>
 </div>
