@@ -35,13 +35,15 @@
   {% for comment in object.get_recent_comments %}
 
   <div class="comment">
+    <span class="comment-link"> </span> 
+    
     {% if comment.webpage %}
     <span class="comment-author">
-    <a href="{{ comment.webpage }}">{{ comment.name }}</a>
+    <a href="{{ comment.get_absolute_url}}">Comment</a> by <a href="{{ comment.webpage }}">{{ comment.name }}</a>
     </span>
     {% else %}
     <span class="comment-author">
-    {{ comment.name }}
+    <a href="{{ comment.get_absolute_url}}">Comment</a> by {{ comment.name }}
     </span>
     {% endif %}
     <span class="comment-date"> on {{ comment.date|date:"F j, Y" }}</span>
