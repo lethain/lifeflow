@@ -2,27 +2,27 @@
 {%block body %}
 
 <div class="pagination pagination-top">
-{% if paginator.has_previous %}
-<span class="left"><a href="?start={{ paginator.previous_page_number }}">Newer Entries</a></span>
+{% if page.has_previous %}
+<span class="left"><a href="?page={{ page.previous_page_number }}">Newer Entries</a></span>
 {% endif %}
 
-{% if paginator.has_next %}
-<span class="right"><a href="?start={{ paginator.next_page_number }}">Older Entries</a></span>
+{% if page.has_next %}
+<span class="right"><a href="?page={{ page.next_page_number }}">Older Entries</a></span>
 {% endif %}
 </div>
 
 
-{% with paginator.object_list.all as article_list %}
+{% with page.object_list.all as article_list %}
 {% include "lifeflow/show_articles_list.html" %}
 {% endwith %}
 
 <div class="pagination pagination-bottom">
-{% if paginator.has_previous %}
-<span class="left"><a href="?start={{ paginator.previous_page_number }}">Newer Entries</a></span>
+{% if page.has_previous %}
+<span class="left"><a href="?page={{ page.previous_page_number }}">Newer Entries</a></span>
 {% endif %}
 
-{% if paginator.has_next %}
-<span class="right"><a href="?start={{ paginator.next_page_number }}">Older Entries</a></span>
+{% if page.has_next %}
+<span class="right"><a href="?page={{ page.next_page_number }}">Older Entries</a></span>
 {% endif %}
 </div>
 

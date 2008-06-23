@@ -118,7 +118,7 @@ def comments(request, entry_id=None, parent_id=None):
 
 def flow(request, slug):
     try:
-        page = int(request.GET["start"])
+        page = int(request.GET["page"])
     except:
         page = 1
 
@@ -126,7 +126,7 @@ def flow(request, slug):
 
     return render_to_response(
         'lifeflow/flow_detail.html',
-        {'object' : flow, 'paginator' : page,},
+        {'object' : flow, 'page' : page,},
         RequestContext(request, {}),
         )
 
