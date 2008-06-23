@@ -121,49 +121,20 @@ def flow(request, slug):
         page = int(request.GET["page"])
     except:
         page = 1
-
     page = QuerySetPaginator(Flow.objects.get(slug=slug).entry_set.all(), 5).page(page)
-
-    return render_to_response(
-        'lifeflow/flow_detail.html',
-        {'object' : flow, 'page' : page,},
-        RequestContext(request, {}),
-        )
+    return render_to_response('lifeflow/flow_detail.html', 
+                              {'object' : flow, 'page' : page,},
+                              RequestContext(request, {}))
 
 
 def front(request):
-    num_per_request = 3
     try:
-        first = int(request.GET["start"])
-        last = first + num_per_request
-    except KeyError:
-        first = 0
-        last = num_per_request
-    entries = Entry.current.all()[first:last]
-
-    if first <= 0:
-        at_start = True
-    else:
-        at_start = False
-
-    count = Entry.current.all().count()
-    if last >= count:
-        at_end = True
-    else:
-        at_end = False
-
-    previous = first - num_per_request
-    return render_to_response(
-        'lifeflow/front.html',
-        {'articles':entries,
-         'previous':previous,
-         'next':last,
-         'at_start':at_start,
-         'at_end':at_end,
-         },
-        RequestContext(request, {}),
-        )
-
+        page = int(request.GET["page"])
+    except:
+        page = 1
+    page = QuerySetPaginator(Entry.current.all(), 3).page(page)
+    
+    return render_to_response('lifeflow/front.html', {'page':page}, RequestContext(request, {}))
 
 
 def rss(request):
