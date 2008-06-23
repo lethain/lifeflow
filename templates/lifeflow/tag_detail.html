@@ -11,10 +11,10 @@
 
 <h2> Entries tagged with {{ object }}</h2>
 
-<ul>
-  {% for entry in object.latest %}
-  <li><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>
-  {% endfor %}
-</ul>
+{% with object.latest as object_list %}
+<ol>
+  {% include "lifeflow/entry_summary_list.html" %}
+</ol>
+{% endwith %}
 
 {% endblock %}
