@@ -101,8 +101,6 @@ def flow(request, slug):
         flow = Flow.objects.get(slug=slug)
     except Flow.DoesNotExist:
         raise Http404
-
-
     try:
         page = int(request.GET["page"])
     except:
