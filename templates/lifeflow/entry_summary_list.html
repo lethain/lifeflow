@@ -3,7 +3,7 @@
   <span><strong>Title:</strong> </span> <a href="{{ entry.get_absolute_url}}">{{ entry }}</a>
   {% with entry.tags.all as tags %}
   {% if tags %}
-  <br>
+  <br />
   <span><strong>Tags: </strong></span>
   {% for tag in tags %}
   <span class="tag">
@@ -15,7 +15,7 @@
 
   {% with entry.series.all as series %}
   {% if series %}
-  <br>
+  <br />
   <span><strong>Series: </strong></span>
   {% for a_series in series %}
   <span><a href="{{ entry.get_absolute_url }}">{{ a_series.title }}</a></span>
@@ -25,7 +25,7 @@
 
   {% with entry.translation_set.all as translations %}
   {% if translations %}
-  <br>
+  <br />
   <span><em>Translations: </em></span>
   {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
   {% endif %}
@@ -33,7 +33,7 @@
   
   {% with entry.translated.all as translated %}
   {% if translated %}
-  <br>
+  <br />
   <span><em>Translation of</em></span>
   {% for translation in translated %}<span class="translation"><a href="{{ translation.original.get_absolute_url }}">{{ translation.original.title|safe  }}</a> <strong>in</strong> <a href="{{ translation.language.get_absolute_url}}">{{ translation.language }}</a></span>{% endfor %}
   {% endif %}
