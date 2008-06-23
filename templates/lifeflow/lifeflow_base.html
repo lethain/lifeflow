@@ -30,7 +30,7 @@
 <ul class="nav-links">
   <li class="nav-link nav-link-header"><strong>Random</strong></li>
   {% for rand in random_entries %}
-  <li class="long-nav-link""><a href="{{ rand.get_absolute_url }}">{{ rand.title|escape }}</a></li>
+  <li class="long-nav-link"><a href="{{ rand.get_absolute_url }}">{{ rand.title|escape }}</a></li>
   {% endfor %}
 </ul>
 {% endblock %}
