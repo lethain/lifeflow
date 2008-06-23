@@ -4,25 +4,26 @@
 {% block body %}
 <h2 class="author"><a href="{{ object.link }}">{{ object.name }}</a></h2>
 <div class="author">
-  {% if object.picture %}
-  <div class="author-picture">
-    <img src="{{ object.get_picture_url }}" alt="An picture of {{ object.name }}" />
+  <div class="details">
+    {% if object.picture %}
+    <div class="picture">
+      <img src="{{ object.get_picture_url }}" alt="An picture of {{ object.name }}" />
+    </div>
+    {% endif %}
+    <div class="author-description">
+      {{ object.bio|safe }}
+    </div>
   </div>
-  {% endif %}
-  <div class="author-description">
-    {{ object.bio|safe }}
-  </div>
-  <div class="author-subscribe">
+  <div class="subscribe">
     <h3><a href="/feeds/author/{{ object.slug }}/">Subscribe to entries by {{ object.name }}</a></h3>
   </div>
-  
   <div class="author-entries">
     <p><strong>Entries written by {{ object.name|escape }}</strong></p>
-    <ul class="author-entries-list">
+    <ol class="author-entries-list">
       {% for entry in object.entry_set.all %}
       <li class="author-entry"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></li>
       {% endfor %}
-    </ul>
+    </ol>
   </div>
 </div>
 {% endblock %}

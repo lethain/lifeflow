@@ -9,6 +9,10 @@ div.article-header {
     margin-bottom: 10px;
 }
 
+div.author div.subscribe {
+    background-color: #cca2a2;
+}
+
 div.series-list {
     font-size: 10pt;
     padding-top: 16px;

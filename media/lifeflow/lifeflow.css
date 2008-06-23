@@ -63,10 +63,24 @@ h3.reply {
     text-align: center;
 }
 
-div.author-picture {
+div.author div.details {
+    overflow: hidden;
+}
+
+div.author div.picture {
+    height: 270px;
+    width: 180px;
     float: left;
-    padding-right: 10px;
-    padding-bottom: 10px;
+    margin: 8px;
+    overflow: hidden;
+}
+
+div.author div.subscribe {
+    padding-top: 8px;
+    padding-bottom: 2px;
+    margin: 0 0 0 0;
+    width: 100%;
+    text-align: center;
 }
 
 div.author-subscribe {
