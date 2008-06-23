@@ -15,8 +15,10 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponseRedirect
 from django.conf import settings
+from django.core.paginator import QuerySetPaginator
 from lifeflow.models import Series, Flow, Entry, Comment
 from lifeflow.forms import CommentForm
+
 
 
 def server_error(request):
@@ -115,41 +117,16 @@ def comments(request, entry_id=None, parent_id=None):
 
 
 def flow(request, slug):
-    num_per_page = 5
     try:
-        first = request.GET["start"]
-        first = int(first)
-        last = first + num_per_page
-    except KeyError:
-        first = 0
-        last = num_per_page
-    flow = Flow.objects.get(slug=slug)
-    object_list = flow.latest()[first:last]
-    count = flow.entry_set.all().count()
+        page = int(request.GET["start"])
+    except:
+        page = 1
 
-
-
-    if first <= 0:
-        at_start = True
-    else:
-        at_start = False
-    if last >= count:
-        at_end = True
-    else:
-        at_end = False
-
-    previous = first - num_per_page
+    page = QuerySetPaginator(Flow.objects.get(slug=slug).entry_set.all(), 5).page(page)
 
     return render_to_response(
         'lifeflow/flow_detail.html',
-        {
-            'object' : flow,
-            'object_list' : object_list,
-            'next' : last,
-            'previous' : previous,
-            'at_start':at_start,
-            'at_end':at_end,
-         },
+        {'object' : flow, 'paginator' : page,},
         RequestContext(request, {}),
         )
 
