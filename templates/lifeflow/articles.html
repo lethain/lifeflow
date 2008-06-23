@@ -5,11 +5,11 @@
 {% for object in object_list %}
 <div class="article-series">
   <span><strong>{{ object }}</strong> <a href="/feeds/series/{{ object.slug }}/"> subscribe </a></span>
-  <ul class="article-series">
-    {% for entry in object.entry_set.all %}
+  <ol class="article-series">
+    {% for entry in object.in_order %}
     <li class="article-series-entry"><a href="{{ entry.get_absolute_url }}">{{ entry }}</a></li>
     {% endfor %}
-  </ul>
+  </ol>
 </div>
 {% endfor %}
 </div>
