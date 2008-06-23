@@ -27,7 +27,7 @@ var create_model = function(model, args, onCompleteFunc) {
 	complete:onCompleteFunc});
 }
 
-var update_model = function(model, pk, args) {
+var update_model = function(model, pk, args, onCompleteFunc) {
   var onComplete = function(res,status) {
     if (status == "success") {
       display_message("Saved.");
@@ -36,6 +36,8 @@ var update_model = function(model, pk, args) {
       display_error(res.responseText);
     }
   }
+  if (onCompleteFunc) onComplete = onCompleteFunc;
+
   if (!args) args = {};
   args["model"] = model;
   args["pk"] = pk;

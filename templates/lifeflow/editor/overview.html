@@ -36,7 +36,27 @@ $(document).ready(function () {
 	  };
 	  delete_model("draft", pk, onComplete);
 	}
-      })});
+      })
+$("#published-refresh").click(function() {
+  var lst = $("#published-entries");
+  var index = lst[0].selectedIndex;
+  if (index == -1)
+    display_error("Please select article to refresh.")
+  else {
+    var chosen = lst.children()[index];
+    var pk = chosen.value;
+    var onComplete = function(res,status) {
+       if (status = "success") display_message("Refreshed article.")
+       else display_error(res.responseText);
+    }
+    update_model("entry", pk, {}, onComplete);
+  }
+})
+
+});
+
+
+
 </script>
 
 <div class="panels">
@@ -74,6 +94,7 @@ $(document).ready(function () {
     <div class="top buttons">
       <a class="button positive" id="published-retreat"> << </a>
       <a class="button neutral" id="published-edit" onclick='edit($("#published-entries"), "entry");'> Edit </a>
+      <a class="button neutral" id="published-refresh"> Refresh </a>
     </div>
     {% with published as object_list %}
     <select id="published-entries" size="20" name="Published Drafts">
