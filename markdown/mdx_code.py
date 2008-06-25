@@ -16,7 +16,7 @@ class CodeExtension (markdown.Extension):
         md.textPreprocessors.insert(0, preprocessor)
 
 
-CODE_BLOCK_REGEX = re.compile(r"@@ (?P<syntax>[a-zA-Z0-9_-+]+)\r?\n(?P<code>.*?)@@\r?\n", re.DOTALL)
+CODE_BLOCK_REGEX = re.compile(r"@@ (?P<syntax>[a-zA-Z0-9_+-]+)\r?\n(?P<code>.*?)@@\r?\n", re.DOTALL)
 
 class CodeBlockPreprocessor :
     def run (self, text):
