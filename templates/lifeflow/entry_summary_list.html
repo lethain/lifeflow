@@ -27,7 +27,7 @@
   {% if translations %}
   <br />
   <span><em>Translations: </em></span>
-  {% for translation in translations %}<span class="translation"{{ translation.get_link|safe }}</span>{% endfor %}
+  {% for translation in translations %}<span class="translation">{{ translation.get_link|safe }}</span>{% endfor %}
   {% endif %}
   {% endwith %}
   
