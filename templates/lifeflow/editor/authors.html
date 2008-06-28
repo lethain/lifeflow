@@ -5,6 +5,7 @@
 
 <script>
 $(document).ready(function () {
+  $("option:first").attr("selected","true")
   $("#delete-author").click(function() {
     var lst = $("#authors");
     var index = lst[0].selectedIndex;
@@ -13,8 +14,12 @@ $(document).ready(function () {
     else {
       var chosen = lst.children()[index];
       var onComplete = function(res,status) {
-        if (status == "success")
+        if (status == "success") {
+          lst.children()[0].selected = true;
+          var pk = lst[0][0].value;
+          $("#author-content").load(pk + '/').show();
           chosen.parentNode.removeChild(chosen);
+        }
         else
           display_error(res.responseText);
       };
