@@ -134,9 +134,12 @@ def project_body(request, id):
 @login_required
 def authors(request):
     authors = Author.objects.all()
-    author = authors[0]
+    selected = len(authors)-1
+    author = authors[selected]
     return render_to_response('lifeflow/editor/authors.html',
-                              {'author':author,'authors':authors},
+                              {'author':author,
+                               'authors':authors,
+                               'selected':selected},
                               RequestContext(request,{}))
 
 @login_required

@@ -5,7 +5,7 @@
 
 <script>
 $(document).ready(function () {
-  $("option:first").attr("selected","true")
+  $("option:eq({{ selected }})").attr("selected","true")
   $("#delete-author").click(function() {
     var lst = $("#authors");
     var index = lst[0].selectedIndex;
