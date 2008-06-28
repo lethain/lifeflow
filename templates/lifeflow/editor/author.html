@@ -1,16 +1,3 @@
-
-<script>
-$(document).ready(function() {
-  $("#author-details").hover(
-    function(){},
-    function(){
-      var data = {name:$("#author-name").val(),
-                  slug:$("#author-slug").val(),
-                  bio:$("#author-bio").val()};
-      update_model("author", {{ author.pk }}, data);
-})});
-</script>
-
 <div class="author-picture">
   <img src="{{ author.get_picture_url }}" alt="An picture of {{ author.name }}" >
   <form action="/editor/add_author_picture/" method="post" enctype="multipart/form-data">
@@ -31,6 +18,9 @@ $(document).ready(function() {
       </tr>
       <tr>
 	<td>Slug</td><td> <input id="author-slug" value="{{ author.slug }}"></td>
+      </tr>
+      <tr>
+	<td>Link</td><td> <input id="author-link" value="{{ author.link }}"></td>
       </tr>
     </table>
 	

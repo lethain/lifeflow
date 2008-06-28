@@ -27,9 +27,18 @@ $(document).ready(function () {
     var index = res[0].selectedIndex;
     var pk = res[0][index].value;
 // update this to load via ajax
-    $("#author").load(pk + '/').show();
+    $("#author-content").load(pk + '/').show();
   });
-
+  $("#author").hover(
+    function(){},
+    function(){
+      var pk = $("option:selected").val();
+      var data = {name:$("#author-name").val(),
+                  slug:$("#author-slug").val(),
+                  link:$("#author-link").val(),
+                  bio:$("#author-bio").val()};
+      update_model("author", pk, data);
+  });
 });
 
 </script>
@@ -41,11 +50,13 @@ $(document).ready(function () {
     <select id="authors" size="20">
       {% for author in authors %}
       <option value="{{ author.pk }}"> {{ author.name }}</option>
-	{% endfor %}
+      {% endfor %}
     </select>
   </div>
-  <div id="author" class="author">
+  <div id="author">
+    <div id="author-content" class="author">
     {% include "lifeflow/editor/author.html" %}
+    </div>
   </div>
 </div>
 {% endblock %}
