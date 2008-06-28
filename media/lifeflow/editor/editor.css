@@ -485,9 +485,9 @@ div.files div.add {
 
 div.help {
     background-color: #CCCCFF;
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 60%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 70%;
     position: absolute;
     z-index: 100;
     display: none;
@@ -519,7 +519,11 @@ div.help a.close {
     float: right;
 }
 
-div.help div.editor-internal {
+div.help #editor-internal {
+    padding-left: 18px;
+    padding-right: 18px;
+    height: 300px;
+    overflow: auto;
 }
 
 div.help span.syntax {
