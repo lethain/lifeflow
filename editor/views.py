@@ -183,7 +183,7 @@ def update(request):
             vals = dict.getlist(key)
             manager = getattr(object, key)
             manager.clear()
-            if not (len(vals) == 1 and vals[0] == -1):
+            if not (len(vals) == 1 and int(vals[0]) == -1):
                 manager.add(*vals)
     object.save()
     return HttpResponse("success")
