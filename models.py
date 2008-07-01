@@ -10,13 +10,14 @@ from lifeflow.markdown.markdown import Markdown
 from lifeflow.markdown import mdx_lifeflow
 from lifeflow.markdown import mdx_code
 from lifeflow.markdown import mdx_footnotes
-
+from lifeflow.markdown import mdx_foreign_formats
 
 def dbc_markup(txt, obj=None):
     "Apply Dynamic Blog Context markup"
     md = Markdown(txt,
                   extensions=[mdx_footnotes,
                               mdx_code,
+                              mdx_foreign_formats,
                               mdx_lifeflow],
                   extension_configs={'lifeflow':obj},
                   )
