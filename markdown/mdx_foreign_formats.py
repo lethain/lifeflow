@@ -38,7 +38,7 @@ except ImportError:
     pass
 
 
-FOREIGN_FORMAT_BLOCK_REGEX = re.compile(r"~~~(?P<format>\w*)\r?\n(?P<txt>.*?)~~~\r?\n", re.DOTALL)
+FOREIGN_FORMAT_BLOCK_REGEX = re.compile(r"^~~~(?P<format>\w*)\r?\n(?P<txt>.*?)^~~~$", re.DOTALL|re.MULTILINE)
 
 
 class ForeignFormatsBlockPreprocessor :
