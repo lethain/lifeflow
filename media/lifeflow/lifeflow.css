@@ -2,6 +2,10 @@ em {
     background: none;
 }
 
+pre {
+    font-family: "Courier New", Courier, monospace;
+}
+
 div.footer {
     text-align: center;
 }
