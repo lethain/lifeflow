@@ -13,6 +13,9 @@ class AllFeed(Feed):
 
     def items(self):
         return Entry.current.all().order_by('-pub_date')[:25]
+    
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 
@@ -37,6 +40,9 @@ class FlowFeed(Feed):
 
     def items(self, obj):
         return obj.latest(qty=25)
+    
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 
@@ -62,6 +68,9 @@ class TagFeed(Feed):
     def items(self, obj):
         return obj.latest()
 
+
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 class AuthorFeed(Feed):
@@ -90,6 +99,9 @@ class AuthorFeed(Feed):
         return obj.latest()
 
 
+    def item_pubdate(self, item):
+        return item.pub_date
+
 
 class LanguageFeed(Feed):
     def get_object(self, bits):
@@ -115,6 +127,10 @@ class LanguageFeed(Feed):
     
     def items(self, obj):
         return obj.latest()
+    
+    
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 
@@ -139,6 +155,10 @@ class SeriesFeed(Feed):
     
     def items(self, obj):
         return obj.latest()
+        
+        
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 
@@ -151,6 +171,10 @@ class TranslationFeed(Feed):
 
     def items(self):
         return Entry.objects.all().filter(**{'pub_date__lte': datetime.datetime.now()}).filter(**{'is_translation':True})
+    
+    
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 
@@ -175,6 +199,10 @@ class CommentFeed(Feed):
 
     def items(self):
         return Comment.objects.all().order_by('-date',)[:20]
+        
+    
+    def item_pubdate(self, item):
+        return item.date
 
 
 
@@ -205,3 +233,8 @@ class EntryCommentFeed(Feed):
     
     def items(self, obj):
         return obj.comment_set.all().order_by('-date')
+        
+    
+    def item_pubdate(self, item):
+        return item.date
+    
