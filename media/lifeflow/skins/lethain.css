@@ -78,14 +78,16 @@ div.pagination-bottom {
 div.highlight {
     padding: 8px;
     margin: 8px;
+    overflow: auto;
 }
+
+td.linenos, td.linenos pre {
+    padding: 0px;
+    margin: 0px;
+}
+
 
 div.highlight pre {
     margin: 0px;
     padding: 0px;
-}
-
-div.highlight p {
-    padding: 0px;
-    margin: 0px;
 }

@@ -16,7 +16,7 @@ class CodeExtension (markdown.Extension):
         md.textPreprocessors.insert(0, preprocessor)
 
 
-CODE_BLOCK_REGEX = re.compile(r"^(?P<spaces>[ ]*)@@ (?P<syntax>[a-zA-Z0-9_+-]+)$(?P<code>.*?)@@$", re.DOTALL | re.MULTILINE)
+CODE_BLOCK_REGEX = re.compile(r"^(?P<spaces>[ ]*)@@ (?P<syntax>[a-zA-Z0-9_+-]+)[ ]?(?P<linenos>[a-zA-Z]*)$(?P<code>.*?)@@$", re.DOTALL | re.MULTILINE)
 
 class CodeBlockPreprocessor :
     def run (self, text):
@@ -25,8 +25,9 @@ class CodeBlockPreprocessor :
             if not m: break;
             spaces = len(m.group('spaces'))
             lexer = get_lexer_by_name(m.group('syntax'))
+            linenos = m.group('linenos')
             unspaced = [x[spaces:] for x in re.split('\r?\n', m.group('code'))]
-            color = highlight("\n".join(unspaced), lexer, HtmlFormatter())
+            color = highlight("\n".join(unspaced), lexer, HtmlFormatter(linenos=linenos))
             placeholder = self.md.htmlStash.store(color, safe=True)
             text = '%s\n%s\n%s'% (text[:m.start()], (' '*spaces)+placeholder, text[m.end():])
         return text
