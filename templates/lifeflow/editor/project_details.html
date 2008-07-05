@@ -5,7 +5,7 @@
 var update = function() {
   var size = $("#size");
   var selected = size.children()[size[0].selectedIndex].value;
-  var data = { title:$("#title").val(),summary:$("#summary").val(),slug:$("#slug").val(),language:$("#language").val(),size:selected };
+  var data = { title:$("#title").val(),summary:$("#summary").val(),slug:$("#slug").val(),language:$("#language").val(),size:selected,license:$("#license").val() };
   update_model("project", {{ object.pk }}, data);
 }
 
@@ -41,6 +41,9 @@ var capitalize_title = function () {
       </tr>
       <tr>
 	<td> Language </td> <td><input id="language" value="{{ object.language }}"></td>
+      </tr>
+      <tr>
+	<td> License </td> <td><input id="license" value="{{ object.license }}"></td>
       </tr>
       <tr>
 	<td> Size </td>
