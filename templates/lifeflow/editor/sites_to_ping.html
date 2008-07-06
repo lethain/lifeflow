@@ -1,0 +1,61 @@
+{% extends "lifeflow/editor/admin_base.html" %}
+
+{% block body2 %}
+<script>
+
+var delete_site_to_notify = function(pk) {
+  delete_model("site_to_notify",pk);
+  var id = "#site_to_notify_" + pk;
+  $(id).fadeOut('slow');
+}
+</script>
+
+
+<div class="editing blogs">
+<ul>
+  <li>
+  <form method="post" action="/editor/create_model/">
+  <table>
+    <tr><td></td><td> Add a site to ping. </td></tr>
+    <tr><td> Title </td><td><input name="title"></td>
+    <td> The name of the site you are pinging. </td>
+    </tr>
+    <tr><td> Url to Ping </td><td><input name="url_to_ping" value="http://"></td></tr>
+    <tr><td> Blog Title </td><td><input name="blog_title"></td>
+    <td> The name used for this blog. </td>
+    </tr>
+    <tr>
+      <td> Blog Url </td>
+      <td><input name="blog_url"></td>
+      <td> Url for the site to begin searching your site at. </td>
+    </tr>
+    <input type="hidden" value="site_to_notify" name="model">
+    <tr><td></td><td><button type="submit" class="button positive">Create</button></td></tr>
+    </table>
+  </form>
+    
+  </li>
+  <li>
+  <ul>
+{% for site in sites_to_notify %}
+  <li id="site_to_notify_{{ site.pk }}">
+  <div class="data left">
+    <p> {{ site.title }}:  <a href="{{site.url_to_ping}}">{{ site.url_to_ping }}</a></p>
+    <p> {{ site.blog_title }}: <a href="{{ site.blog_url }}">{{ site.blog_url }}</a></p>
+    
+  </div>
+  <div class="controls right">
+    <a class="button negative" onclick="delete_site_to_notify({{ site.pk }})">delete</a>
+  </div>
+  </li>
+{% endfor %}
+  </ul>
+  </li>
+
+</ul>
+
+</div>
+
+
+
+{% endblock %}

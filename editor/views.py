@@ -102,6 +102,13 @@ def blogroll(request):
                               RequestContext(request,{}))
 
 @login_required
+def sites_to_notify(request):
+    sites = SiteToNotify.objects.all()
+    return render_to_response('lifeflow/editor/sites_to_ping.html',
+                              {'sites_to_notify':sites},
+                              RequestContext(request,{}))
+
+@login_required
 def files(request):
     resources = Resource.objects.all()
     return render_to_response('lifeflow/editor/files.html',
@@ -189,7 +196,7 @@ def update(request):
     return HttpResponse("success")
 
 
-API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite}
+API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite,'site_to_notify':SiteToNotify}
 
 def get_class(str):
     return API_CLASSES[str]
@@ -225,7 +232,13 @@ def create_model(request):
         slug = slugify(title)
         l = Language(title=title,slug=slug)
         l.save()
-
+    elif model == u"site_to_notify":
+        title = request.POST[u'title']
+        url_to_ping = request.POST[u'url_to_ping']
+        blog_title = request.POST[u'blog_title']
+        blog_url = request.POST[u'blog_url']
+        s = SiteToNotify(title=title,url_to_ping=url_to_ping,blog_title=blog_title,blog_url=blog_url)
+        s.save()
     elif model == u"translation":
         translated_pk = int(request.POST[u'pk'])
         translated = Entry.objects.get(pk=translated_pk)
