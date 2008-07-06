@@ -4,8 +4,9 @@ from lifeflow.models import *
 urlpatterns = patterns('lifeflow.editor.views',
     (r'^$', 'overview'),
     (r'^comments/$', 'comments'),
-    (r'^blogroll/$', 'blogroll'),
     (r'^files/$', 'files'),
+
+    (r'^admin/$', 'blogroll'),
 
     (r'^authors/$', 'authors'),
     (r'^authors/create/$', 'create_author'),
