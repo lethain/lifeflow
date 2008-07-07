@@ -55,6 +55,14 @@ $(document).ready(function() {
     update_model("{{ model }}",{{ object.pk }}, data);
   });
 });
+
+var delete_language = function(pk) {
+  delete_model("language",pk);
+  var id = "#language_" + pk;
+  var opt = "#language_option_" + pk;
+  $(id).fadeOut('slow');
+  $(opt).fadeOut('slow');
+}
 </script>
 
 <div class="editing">
@@ -84,7 +92,7 @@ $(document).ready(function() {
       <select class="small" id="language" size="10" name="Language">
 	{% with langs as object_list %}
 	{% for object in object_list %}
-	<option value="{{ object.pk }}"> {{ object }} </option>
+	<option id="language_option_{{ object.pk }}" value="{{ object.pk }}"> {{ object }} </option>
 	  {% endfor %}
 	  {% endwith %}
       </select>
@@ -112,6 +120,14 @@ $(document).ready(function() {
     </form>
     
     </li>
+    <li>
+    <p> Delete unwanted languages. </p>
+      {% for language in langs %}
+      <a id="language_{{ language.pk}}" class="button negative" onclick="delete_language({{ language.pk }})"> Delete  "{{ language }}" </a>
+      {% endfor %}
+
+    </li>
+
     
   </ul>
 </div>

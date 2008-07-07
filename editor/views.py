@@ -204,7 +204,7 @@ def update(request):
     return HttpResponse("success")
 
 
-API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite,'site_to_notify':SiteToNotify,'site':Site}
+API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite,'site_to_notify':SiteToNotify,'site':Site,"language":Language}
 
 def get_class(str):
     return API_CLASSES[str]
