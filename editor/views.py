@@ -15,7 +15,7 @@ TODO
 """
 
 
-import datetime, os.path, time
+import datetime, os.path, time, re
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponseServerError
@@ -29,22 +29,9 @@ from django.contrib.auth import views, authenticate
 from django.core.paginator import QuerySetPaginator
 from django.contrib.sites.models import Site
 
-
-CHARACTERS_TO_STRIP = """ .,!?'";:/\+=# """
-def slugify(str):
-    new_str = ""
-    replaced_previous = False
-    for char in str.lower():
-        if char in CHARACTERS_TO_STRIP:
-            if replaced_previous:
-                pass
-            else:
-                new_str = new_str + "-"
-                replaced_previous = True
-        else:
-            replaced_previous = False
-            new_str = new_str + char
-    return new_str.strip("-")
+CHARACTERS_TO_STRIP = re.compile(r"[ \.,\!\?'\";:/\\+=#]+")
+def sluggify(str):
+    return CHARACTERS_TO_STRIP.subn(u"-", str.lower())[0].strip("-")
 
 
 def login(request):
@@ -189,7 +176,7 @@ def update(request):
                 elif val == u"false":
                     val = False
             elif key in SLUG_FIELDS:
-                val = slugify(val)
+                val = sluggify(val)
             elif key in DATETIME_FIELDS:
                 t = time.mktime(time.strptime(val, "%Y-%m-%d %H:%M:%S"))
                 val = datetime.datetime.fromtimestamp(t)
@@ -231,13 +218,13 @@ def create_model(request):
     if model in [u"flow", u"tag", u"series"]:
         cls = get_class(model)
         title = request.POST[u'title']
-        slug = slugify(title)
+        slug = sluggify(title)
         if unique(slug, cls):
             f = cls(title=title, slug=slug)
             f.save()
     elif model == u"language":
         title = request.POST[u'title']
-        slug = slugify(title)
+        slug = sluggify(title)
         l = Language(title=title,slug=slug)
         l.save()
     elif model == u"site_to_notify":
@@ -492,7 +479,7 @@ def edited_to_published(request, id):
             dict['pub_date'] = datetime.datetime.now()
         del dict['edited']
         if dict['slug'] is None and dict['title'] is not None:
-            dict['slug'] = slugify(dict['title'])
+            dict['slug'] = sluggify(dict['title'])
         entry = Entry(**dict)
         valid = check(entry.__dict__)
         if valid != True:
