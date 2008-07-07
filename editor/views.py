@@ -27,6 +27,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import views, authenticate
 from django.core.paginator import QuerySetPaginator
+from django.contrib.sites.models import Site
 
 
 CHARACTERS_TO_STRIP = """ .,!?'";:/\+=# """
@@ -106,6 +107,13 @@ def sites_to_notify(request):
     sites = SiteToNotify.objects.all()
     return render_to_response('lifeflow/editor/sites_to_ping.html',
                               {'sites_to_notify':sites},
+                              RequestContext(request,{}))
+
+@login_required
+def site_config(request):
+    site = Site.objects.get_current()
+    return render_to_response('lifeflow/editor/site.html',
+                              {'sites_to_notify':site},
                               RequestContext(request,{}))
 
 @login_required
@@ -196,7 +204,7 @@ def update(request):
     return HttpResponse("success")
 
 
-API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite,'site_to_notify':SiteToNotify}
+API_CLASSES = {"comment":Comment, "project":Project, "flow":Flow, "tag":Tag, "series":Series, "draft":Draft, "entry":Entry, "author":Author, "resource":Resource, "recommendedsite":RecommendedSite,'site_to_notify':SiteToNotify,'site':Site}
 
 def get_class(str):
     return API_CLASSES[str]

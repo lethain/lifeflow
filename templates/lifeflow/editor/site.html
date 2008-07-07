@@ -1,0 +1,30 @@
+{% extends "lifeflow/editor/admin_base.html" %}
+
+{% block body2 %}
+<script>
+var update = function() {
+  var data = { name:$("#name").val(), domain:$("#domain").val()};
+  update_model("site", {{ site.pk }}, data);
+}
+
+$(document).ready(function() {
+  $("#name").hover(function(){},function(){ update(); });
+  $("#domain").hover(function(){},function(){ update(); });
+});
+</script>
+
+<div class="editing">
+<ul>
+  <li>
+  <p> The name of site used for this blog. (This can be anything.) </p>
+  <input id="name" name="name" value="{{ site.name }}">
+  <p> The URL of the site this blog is hosted at. (For example
+  'example.com', no http:// or trailing slash.)
+  <input id="domain" name="domain" value="{{ site.domain }}">
+  </p>
+  </li>
+</div>
+
+
+
+{% endblock %}
