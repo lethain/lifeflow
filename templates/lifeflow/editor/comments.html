@@ -7,6 +7,16 @@ var delete_comment = function(pk) {
   var id = "#comment_" + pk;
   $(id).fadeOut('slow');
 }
+var update_comment = function(pk) {
+  var data = { body:$("#"+pk).val() }
+  update_model("comment", pk, data);
+}
+
+$(document).ready(function() {
+  $("textarea").hover(function(){},function(){ update_comment(this.id); });
+});
+
+
 </script>
 
 <div class="editing comments">
@@ -24,7 +34,11 @@ var delete_comment = function(pk) {
     <li id="comment_{{ comment.pk }}">
     <div class="data">
       <p> {{ comment.name }} ({{ comment.email }}) at {{ comment.date }} on {{ comment.entry }}. </p>
-      <p>{{ comment.html|safe }}</p>
+      {% ifequal comment.body "" %}
+      <p class="html"> {{ comment.html|safe }} </p>
+      {% else %}
+      <textarea id="{{ comment.pk }}" class="body">{{ comment.body }} </textarea>
+      {% endifequal %}
     </div>
     <div class="controls">
       <a class="button negative" onclick="delete_comment({{ comment.pk }})">delete</a>
