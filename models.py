@@ -362,7 +362,8 @@ class Language(models.Model):
         return u"/language/%s/" % self.slug
 
     def latest(self, qty=None):
-        return self.translation_set.all().filter(**{'translated__pub_date__lte': datetime.datetime.now()})
+        translations = self.translation_set.all().filter(**{'translated__pub_date__lte': datetime.datetime.now()})
+        return [ x.translated for x in translations ]
 
 
 class Project(models.Model):
