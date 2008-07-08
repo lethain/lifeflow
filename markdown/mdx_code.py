@@ -20,13 +20,9 @@ CODE_BLOCK_REGEX = re.compile(r"\r?\n(?P<spaces>[ ]*)(?P<fence>^@{2,})[[ ]*(?P<s
 
 class CodeBlockPreprocessor :
     def run (self, text):
-        print "searching for matches"
-        print text
-        print len(text)
         while  1:
             m = CODE_BLOCK_REGEX.search(text)
             if not m: break;
-            print m
             spaces = len(m.group('spaces'))
             lexer = get_lexer_by_name(m.group('syntax'))
             linenos = m.group('linenos')
