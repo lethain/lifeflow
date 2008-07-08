@@ -52,18 +52,20 @@ def make_syntax():
 
     # [remember my previous entry?][previous]
     def previous(entry, str):
-        prev = entry.get_previous_article()
-        if prev is None:
-            return None
-        return str % prev.get_absolute_url()
+        if entry.__class__.__name__ == "Entry":
+            prev = entry.get_previous_article()
+            if prev is None:
+                return None
+            return str % prev.get_absolute_url()
 
 
     # [Update: I clarified this in the next entry!][next]
     def next(entry, str):
-        nxt = entry.get_next_article()
-        if nxt is None:
-            return None
-        return str % nxt.get_absolute_url()
+        if entry.__class__.__name__ == "Entry":
+            nxt = entry.get_next_article()
+            if nxt is None:
+                return None
+            return str % nxt.get_absolute_url()
 
 
     # [Check out the first entry in this series][series 1]
