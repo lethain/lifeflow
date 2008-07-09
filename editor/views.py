@@ -30,6 +30,11 @@ from django.contrib.auth import views, authenticate
 from django.core.paginator import QuerySetPaginator
 from django.contrib.sites.models import Site
 
+from pygments import highlight
+from pygments.util import ClassNotFound
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_for_filename
+
 CHARACTERS_TO_STRIP = re.compile(r"[ \.,\!\?'\";:/\\+=#]+")
 def sluggify(str):
     return CHARACTERS_TO_STRIP.subn(u"-", str.lower())[0].strip("-")
@@ -316,27 +321,27 @@ CODE_EXTS = ["css", "html", "htm", "c", "o", "py", "lisp", "js", "xml",
 
 @login_required
 def display_resource(request, id):
-    def guess_type(resource):
-        path = resource.content
-        print path
-        ext = path.split(".")[-1]
-        print ext
-        if ext in IMAGE_EXTS:
-            return "image"
-        elif ext in ZIP_EXTS:
-            return "zip"
-        elif ext in CODE_EXTS:
-            return "code"
-        else:
-            return "file"
     res = Resource.objects.get(pk=id)
     file = res.content.split("/")[-1]
-    type = guess_type(res)
-    return render_to_response('lifeflow/editor/resource.html',
-                              {'object':res,
-                               'file':file,
-                              'type':type},
-                              RequestContext(request, {}))
+    opts = {'object':res,'file':file}
+    ext = opts['file'].split(".")[-1]
+    opts['type'] = 'file'
+    if ext in IMAGE_EXTS:
+        opts['type'] = "image"
+    elif ext in ZIP_EXTS:
+        opts['type'] = "zip"
+    else:
+        try:
+            lexer = get_lexer_for_filename(file)
+            f = open(res.get_content_filename(),'r')
+            data = f.read()
+            f.close()
+            opts['highlighted_code'] = highlight(data,lexer,HtmlFormatter())
+            opts['type'] = "code"
+        except ClassNotFound:
+            opts['type'] = "file"
+
+    return render_to_response('lifeflow/editor/resource.html',opts,RequestContext(request, {}))
 
 
 @login_required
