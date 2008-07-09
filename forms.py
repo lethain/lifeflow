@@ -1,6 +1,6 @@
 import cgi
 from django import newforms as forms
-from lifeflow.models import comment_markup
+from lifeflow.text_filters import comment_markup
 
 
 class CommentForm(forms.Form):
@@ -40,28 +40,6 @@ class CommentForm(forms.Form):
 
     def clean_body(self):
         body = self.cleaned_data['body']
-        lines = body.split("\n")
-        new_lines = []
-        in_code = False
-
-        # at the moment you could disable all parsing simply by
-        # having initial @@'s but no closing @@'s. Instead this
-        # should only disable code escaping for code-syntax blocks
-        # if there is a closing @@ as well as an opening @@
-        # (admittedly, it may well crash the markdownpp if 
-        # it is improperly formed... if thats any consulation)
-        for line in lines:
-            if line.startswith("@@") and in_code is True:
-                in_code = False
-            elif line.startswith("@@") and in_code is False:
-                in_code = True
-            if in_code is False:
-                if line.startswith(">"):
-                    line = ">%s" % cgi.escape(line[1:])
-                else:
-                    line = cgi.escape(line)
-            new_lines.append(line)
-        escaped = u"\n".join(new_lines)
-        self.cleaned_data['rendered'] = unicode(comment_markup(escaped))
+        self.cleaned_data['html'] = unicode(comment_markup(body))
         return body
         

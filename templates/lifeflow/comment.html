@@ -11,10 +11,10 @@
 <h3> You are responding to <a href="{{ object.get_absolute_url }}#comment_{{ parent.id }}"> this comment</a> written by {{ parent.name }} on {{ parent.date|date:"F jS Y, H:i" }}.</h3>
 <p> {{ parent.html|safe }} </p>
 {% endif %}
-{% if form.cleaned_data.rendered %}
+{% if form.cleaned_data.html %}
 <hr>
 <h3> Preview of your comment: </h3>
-{{ form.cleaned_data.rendered|safe }}
+{{ form.cleaned_data.html|safe }}
 {% endif %}
 <hr>
 <p> Please be aware that comment forms go stale after one hour.</p>

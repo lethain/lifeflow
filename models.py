@@ -6,22 +6,7 @@ from django.contrib.sites.models import Site
 from django.dispatch import dispatcher
 from django.db.models import signals
 from django.core.mail import mail_admins
-from lifeflow.markdown.markdown import Markdown
-from lifeflow.markdown import mdx_lifeflow
-from lifeflow.markdown import mdx_code
-from lifeflow.markdown import mdx_footnotes
-from lifeflow.markdown import mdx_foreign_formats
-
-def dbc_markup(txt, obj=None):
-    "Apply Dynamic Blog Context markup"
-    exts = [mdx_footnotes,mdx_code,mdx_foreign_formats, mdx_lifeflow]
-    md = Markdown(txt,extensions=exts,extension_configs={'lifeflow':obj})
-    return md.convert()
-
-
-def comment_markup(txt, obj=None):
-    md = Markdown(txt, extensions=[mdx_code])
-    return md.convert()
+from lifeflow.text_filters import entry_markup, comment_markup
 
 
 class Author(models.Model):
@@ -226,7 +211,7 @@ class Entry(models.Model):
 
     def save(self):
         if self.use_markdown:
-            self.body_html = dbc_markup(self.body, self)
+            self.body_html = entry_markup(self.body, self)
         else:
             self.body_html = self.body
         if self.send_ping is True: self.ping()
@@ -426,7 +411,7 @@ class Project(models.Model):
 
     def save(self):
         if self.use_markdown:
-            self.body_html = dbc_markup(self.body, self)
+            self.body_html = entry_markup(self.body, self)
         else:
             self.body_html = self.body
         super(Project,self).save()

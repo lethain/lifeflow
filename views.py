@@ -82,10 +82,10 @@ def comments(request, entry_id=None, parent_id=None):
         name = form.cleaned_data['name']
         email = form.cleaned_data['email']
         webpage = form.cleaned_data['webpage']
-        rendered = form.cleaned_data['rendered']
+        html = form.cleaned_data['html']
         body = form.cleaned_data['body']
         c = Comment(entry=entry,parent=parent,name=name,email=email,
-                    webpage=webpage,body=body,html=rendered)
+                    webpage=webpage,body=body,html=html)
         c.save()
         url = u"%s#comment_%s" % (entry.get_absolute_url(), c.pk)
         return HttpResponseRedirect(url)

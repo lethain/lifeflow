@@ -20,6 +20,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponseServerError
 from lifeflow.models import *
+from lifeflow.text_filters import entry_markup
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -545,8 +546,13 @@ def create_author(request,id=None):
 
 @login_required
 def render(request, model=None, id=None):
+    print request, id, model
+    if id is None and request.POST.has_key('pk'):
+        id = request.POST['pk']
+    print request, id
+
     if id is None:
-        txt = dbc_markup(request.POST['txt'])
+        txt = entry_markup(request.POST['txt'])
     else:
         if model == u"draft":
             obj = Draft.objects.get(pk=id)
@@ -555,7 +561,7 @@ def render(request, model=None, id=None):
         elif model == u"project":
             obj = Project.objects.get(pk=id)
         if obj.use_markdown:
-            txt = dbc_markup(obj.body, obj)
+            txt = entry_markup(obj.body, obj)
         else:
             txt = obj.body
     return HttpResponse(txt)
