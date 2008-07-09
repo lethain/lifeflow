@@ -1,4 +1,4 @@
-import datetime, copy, xmlrpclib, thread, time, cgi
+import datetime, copy, xmlrpclib, thread, time
 from django.db import models
 from django.core.cache import cache
 from django.contrib.sitemaps import ping_google
@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 from django.dispatch import dispatcher
 from django.db.models import signals
 from django.core.mail import mail_admins
-from lifeflow.text_filters import entry_markup, comment_markup
+from lifeflow.text_filters import entry_markup
 
 
 class Author(models.Model):
