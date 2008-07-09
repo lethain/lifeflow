@@ -49,7 +49,7 @@ def entry_markup(txt,obj=None):
 
 def comment_markdown(txt,obj=None):
     exts = (mdx_code,)
-    md = Markdown(txt,extensions=exts,safe_mode=True)
+    md = Markdown(txt,extensions=exts,safe_mode="escape")
     return md.convert()
 
 
