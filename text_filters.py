@@ -19,7 +19,6 @@
     and optionally a related model.
 """
 
-import cgi, re
 from django.conf import settings
 from lifeflow.markdown.markdown import Markdown
 from lifeflow.markdown import mdx_lifeflow
