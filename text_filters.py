@@ -27,9 +27,15 @@ from lifeflow.markdown import mdx_footnotes
 from lifeflow.markdown import mdx_foreign_formats
 
 
+def convert_string(str):
+    if LOCALS.has_key(str):
+        return LOCALS[str]
+    else:
+        return str
 
 def comment_markup(txt,obj=None):
     filters = getattr(settings,'LIFEFLOW_COMMENT_FILTERS', DEFAULT_COMMENT_FILTERS)
+    filters = [convert_string(filter) for filter in filters]
     for filter in filters:
         txt = filter(txt)
     return txt
@@ -52,6 +58,6 @@ def entry_markdown(txt,obj=None):
     md = Markdown(txt,extensions=exts,extension_configs={'lifeflow':obj})
     return md.convert()
     
-
+LOCALS = locals()
 DEFAULT_COMMENT_FILTERS = (comment_markdown,)
 DEFAULT_ENTRY_FILTERS = (entry_markdown,)
