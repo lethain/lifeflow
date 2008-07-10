@@ -15,6 +15,14 @@
 {% endifequal %}
 
 {% ifequal type "zip" %}
+<div class="extra">
+  <ul>
+    {% for file in files_list %}
+    <li>{{ file }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
 {% endifequal %}
 
 {% ifequal type "code" %}

@@ -35,6 +35,8 @@ from pygments.util import ClassNotFound
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import get_lexer_for_filename
 
+from zipfile import ZipFile
+
 CHARACTERS_TO_STRIP = re.compile(r"[ \.,\!\?'\";:/\\+=#]+")
 def sluggify(str):
     return CHARACTERS_TO_STRIP.subn(u"-", str.lower())[0].strip("-")
@@ -329,7 +331,13 @@ def display_resource(request, id):
     if ext in IMAGE_EXTS:
         opts['type'] = "image"
     elif ext in ZIP_EXTS:
-        opts['type'] = "zip"
+        try:
+            opts['type'] = "zip"
+            zf = ZipFile(res.get_content_filename(),'r')
+            opts['files_list'] = zf.namelist()
+            zf.close()
+        except IOError:
+            opts['type'] = "file"
     else:
         try:
             lexer = get_lexer_for_filename(file)
