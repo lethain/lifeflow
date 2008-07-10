@@ -340,6 +340,8 @@ def display_resource(request, id):
             opts['type'] = "code"
         except ClassNotFound:
             opts['type'] = "file"
+        except IOError:
+            opts['type'] = "file"
 
     return render_to_response('lifeflow/editor/resource.html',opts,RequestContext(request, {}))
 
