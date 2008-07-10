@@ -1,4 +1,6 @@
-
+pre, code {
+    font-family: "Courier New", Courier, monospace;
+}
 
 
 body {
@@ -132,6 +134,21 @@ div.editing {
     overflow: auto;
 }
 
+#render li {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    list-style: "decimal";
+}
+
+#render ul {
+    list-style: disc;
+}
+
+#render ol {
+    list-style: "decimal";
+}
+
 div.li-mimic {
     padding: 10px;
     margin: 5px;
@@ -169,12 +186,6 @@ div.li-mimic {
 textarea.writing {
     width: 100%;
     height: 300px;
-}
-
-
-
-li {
-    list-style: none;
 }
 
 .error-msg p {
@@ -225,7 +236,7 @@ div.top {
     
 }
 
-ul {
+.editing ul {
     text-decoration: none;
 }
 
@@ -400,6 +411,10 @@ div.author {
     margin: 16px;
     border: dashed 1px cyan;
     width: 75%;
+}
+
+div.author-details {
+    padding: 16px;
 }
 
 div.author-picture {
