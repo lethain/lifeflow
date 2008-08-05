@@ -12,7 +12,6 @@ from lifeflow.text_filters import entry_markup
 class Author(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(
-        prepopulate_from=('name',),
         help_text="Automatically built from author's name.",
         )
     link = models.CharField(
@@ -33,10 +32,6 @@ class Author(models.Model):
 
     class Meta:
         ordering = ('id',)
-
-    class Admin:
-        list_display = ('name', 'link')
-        search_fields = ['name']
 
     def __unicode__(self):
         return self.name
@@ -63,10 +58,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-date',)
-
-    class Admin:
-        list_display = ('entry', 'name', 'email', 'webpage', 'date')
-        search_fields = ['name', 'email','body']
 
     def save(self):
         if self.name == u"name" or self.name == u"":
@@ -96,7 +87,6 @@ class Comment(models.Model):
 class Draft(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     slug = models.SlugField(unique_for_date='pub_date',
-                            prepopulate_from=('title',),
                             blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     body = models.TextField(blank=True, null=True)
@@ -130,7 +120,6 @@ class Entry(models.Model):
         )
     slug = models.SlugField(
         unique_for_date='pub_date',
-        prepopulate_from=('title',),
         help_text='Automatically built from the title.'
         )
     summary = models.TextField(help_text="One paragraph. Don't add &lt;p&gt; tag.")
@@ -158,23 +147,23 @@ class Entry(models.Model):
         help_text="If true users may add comments on this entry.",
         )
     flows = models.ManyToManyField(
-        'Flow', filter_interface=models.HORIZONTAL, blank=True, null=True,
+        'Flow', blank=True, null=True,
         help_text="Determine which pages and feeds to show entry on.",
         )
     tags = models.ManyToManyField(
-        'Tag', filter_interface=models.HORIZONTAL, blank=True, null=True,
+        'Tag', blank=True, null=True,
         help_text="Select tags to associate with this entry.",
         )
     series = models.ManyToManyField(
-        'Series', filter_interface=models.HORIZONTAL, blank=True, null=True,
+        'Series', blank=True, null=True,
         help_text='Used to associated groups of entries together under one theme.',
         )
     resources = models.ManyToManyField(
-        'Resource', filter_interface=models.HORIZONTAL, blank=True, null=True,
+        'Resource', blank=True, null=True,
         help_text='Files or images used in entries. MarkDown links are automatically generated.',
         )
     authors = models.ManyToManyField(
-        'Author', filter_interface=models.HORIZONTAL, blank=True, null=True,
+        'Author', blank=True, null=True,
         help_text='The authors associated with this entry.',
         )
     # main manager, allows access to all entries, required primarily for admin functionality
@@ -186,19 +175,6 @@ class Entry(models.Model):
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
         verbose_name_plural = "entries"
-
-    class Admin:
-        list_display = ('title', 'pub_date')
-        search_fields = ['title', 'summary', 'body']
-        fields = (
-            (None, {'fields' : ('title', 'slug', 'pub_date',)}),
-            ('Content', {'fields': ('summary', 'body',)}),
-            ('Options', {'fields': ('use_markdown', 'is_translation', 'send_ping', 'allow_comments', ), 'classes': 'collapse'}),
-            ('Authors', {'fields' : ('authors',), 'classes': 'collapse'}),
-            ('Resources', {'fields' : ('resources',), 'classes': 'collapse'}),
-            ('Series', {'fields': ('series',), 'classes': 'collapse'}),
-            ('Organization', {'fields': ('flows', 'tags',),}),
-            )
 
     def __unicode__(self):
         return self.title
@@ -315,10 +291,7 @@ class Flow(models.Model):
     at /slug/ instead of /tags/slug/
     """
     title = models.CharField(max_length=100)
-    slug = models.SlugField(prepopulate_from=("title",))
-
-    class Admin:
-        pass
+    slug = models.SlugField()
 
     def __unicode__(self):
         return self.title
@@ -335,10 +308,7 @@ class Flow(models.Model):
 
 class Language(models.Model):
     title = models.CharField(max_length=50, core=True)
-    slug = models.SlugField(prepopulate_from=("title",))
-
-    class Admin:
-        pass
+    slug = models.SlugField()
 
     def __unicode__(self):
         return self.title
@@ -357,7 +327,6 @@ class Project(models.Model):
     """
     title = models.CharField(max_length=50)
     slug = models.SlugField(
-        prepopulate_from=('title',),
         help_text='Automatically built from the title.'
         )
     summary = models.TextField(help_text="One paragraph. Don't add &lt;p&gt; tag.")
@@ -373,7 +342,7 @@ class Project(models.Model):
         max_length=50,
         help_text="The license under which the project is released.",
         )
-    resources = models.ManyToManyField('Resource', filter_interface=models.HORIZONTAL, blank=True, null=True)
+    resources = models.ManyToManyField('Resource', blank=True, null=True)
     SIZE_CHOICES = (
         ('0', 'Script'),
         ('1', 'Small'),
@@ -388,14 +357,6 @@ class Project(models.Model):
     class Meta:
         ordering = ('-size',)
 
-    class Admin:
-        list_display = ('title', 'language', 'license', 'size',)
-        search_fields = ['title', 'summary', 'body']
-        fields = (
-            (None, {
-                    'fields' : ('title', 'slug', 'size', 'language', 'license', 'use_markdown',)}),
-            ('Content', {'fields': ('summary', 'body', 'resources')}),
-            )
    
     def __unicode__(self):
         return self.title
@@ -426,8 +387,6 @@ class Resource(models.Model):
     markdown_id = models.CharField(max_length=50)
     content = models.FileField(upload_to="lifeflow/resource")
 
-    class Admin:
-        pass
 
     def get_relative_url(self):
         # figure out why I named this relative instead of absolute
@@ -447,8 +406,6 @@ class RecommendedSite(models.Model):
     title = models.CharField(max_length=50)
     url = models.URLField()
 
-    class Admin:
-        pass
 
     def __unicode__(self):
         return u"%s ==> %s" % (self.title, self.url)
@@ -459,14 +416,12 @@ class Series(models.Model):
     A series is a collection of Entry instances on the same theme.
     """
     title = models.CharField(max_length=200, core=True)
-    slug= models.SlugField(prepopulate_from=("title",))
+    slug= models.SlugField()
 
     class Meta:
         ordering = ('-id',)
         verbose_name_plural = "Series"
 
-    class Admin:
-        pass
 
     def __unicode__(self):
         return self.title
@@ -508,8 +463,6 @@ class SiteToNotify(models.Model):
     class Meta:
         verbose_name_plural = "Sites to Notify"
 
-    class Admin:
-        pass
 
     def __unicode__(self):
         return self.title
@@ -524,10 +477,8 @@ class SiteToNotify(models.Model):
 class Tag(models.Model):
     "Tags are associated with Entry instances to describe their contents."
     title = models.CharField(max_length=50, core=True)
-    slug = models.SlugField(prepopulate_from=("title",))
+    slug = models.SlugField()
 
-    class Admin:
-        pass
 
     class Meta:
         ordering = ('title',)
@@ -575,9 +526,7 @@ class Translation(models.Model):
     language = models.ForeignKey('Language')
     original = models.ForeignKey('Entry')
     translated = models.ForeignKey('Entry', related_name="translated")
-
-    class Admin:
-        pass
+    
 
     def __unicode__(self):
         return u"Translation of %s into %s" % (self.original, self.language,)
