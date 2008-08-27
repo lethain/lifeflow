@@ -274,14 +274,14 @@ def create_model(request):
 def add_author_picture(request):
     id = request.POST['pk']
     file = request.FILES['file']
-    filename = file['filename']
+    filename = file.name
     filebase = '%s/lifeflow/author/' % settings.MEDIA_ROOT
     filepath = "%s%s" % (filebase, filename)
     while (os.path.isfile(filepath)):
         filename = "_%s" % filename
         filepath = "%s%s" % (filebase, filename)
     fd = open(filepath, 'wb')
-    fd.write(file['content'])
+    fd.write(file.read())
     fd.close()
     
     author = Author.objects.get(pk=id)
@@ -299,14 +299,16 @@ def add_resource(request):
     file = request.FILES['file']
     title = request.POST['title']
     markdown_id = request.POST['markdown_id']
-    filename = file['filename']
+    filename = file.name
     filebase = '%s/lifeflow/resource/' % settings.MEDIA_ROOT
     filepath = "%s%s" % (filebase, filename)
     while (os.path.isfile(filepath)):
         filename = "_%s" % filename
         filepath = "%s%s" % (filebase, filename)
+    print filepath
     fd = open(filepath, 'wb')
-    fd.write(file['content'])
+
+    fd.write(file.read())
     fd.close()
     rec = Resource(title=title, markdown_id=markdown_id, content="lifeflow/resource/%s" % filename)
     rec.save()
@@ -324,7 +326,7 @@ CODE_EXTS = ["css", "html", "htm", "c", "o", "py", "lisp", "js", "xml",
 @login_required
 def display_resource(request, id):
     res = Resource.objects.get(pk=id)
-    file = res.content.split("/")[-1]
+    file = res.content.path.split("/")[-1]
     opts = {'object':res,'file':file}
     ext = opts['file'].split(".")[-1]
     opts['type'] = 'file'
@@ -333,7 +335,7 @@ def display_resource(request, id):
     elif ext in ZIP_EXTS:
         try:
             opts['type'] = "zip"
-            zf = ZipFile(res.get_content_filename(),'r')
+            zf = ZipFile(res.content.path,'r')
             opts['files_list'] = zf.namelist()
             zf.close()
         except IOError:
@@ -341,7 +343,7 @@ def display_resource(request, id):
     else:
         try:
             lexer = get_lexer_for_filename(file)
-            f = open(res.get_content_filename(),'r')
+            f = open(res.content.path,'r')
             data = f.read()
             f.close()
             opts['highlighted_code'] = highlight(data,lexer,HtmlFormatter())

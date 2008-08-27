@@ -307,7 +307,7 @@ class Flow(models.Model):
 
 
 class Language(models.Model):
-    title = models.CharField(max_length=50, core=True)
+    title = models.CharField(max_length=50)
     slug = models.SlugField()
 
     def __unicode__(self):
@@ -415,7 +415,7 @@ class Series(models.Model):
     """
     A series is a collection of Entry instances on the same theme.
     """
-    title = models.CharField(max_length=200, core=True)
+    title = models.CharField(max_length=200)
     slug= models.SlugField()
 
     class Meta:
@@ -476,7 +476,7 @@ class SiteToNotify(models.Model):
 
 class Tag(models.Model):
     "Tags are associated with Entry instances to describe their contents."
-    title = models.CharField(max_length=50, core=True)
+    title = models.CharField(max_length=50)
     slug = models.SlugField()
 
 
