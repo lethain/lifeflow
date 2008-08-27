@@ -40,6 +40,8 @@ def comments(request, entry_id=None, parent_id=None):
     if request.POST.has_key('entry_id'):
         id = int(request.POST['entry_id'])
     # otherwise use the parameter
+    elif entry_id is None:
+        return render_to_response('lifeflow/invalid_comment.html',{},RequestContext(request, {}))
     else:
         id = int(entry_id)
     # TODO: validate ID, throw 500 otherwise
