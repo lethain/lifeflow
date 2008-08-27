@@ -3,7 +3,7 @@ from django.db import models
 from django.core.cache import cache
 from django.contrib.sitemaps import ping_google
 from django.contrib.sites.models import Site
-from django.dispatch import dispatcher
+from django.dispatch import Signal
 from django.db.models import signals
 from django.core.mail import mail_admins
 from lifeflow.text_filters import entry_markup
@@ -569,5 +569,5 @@ def resave_object(sender, instance, signal, *args, **kwargs):
 
 
 resave_hist = {}
-dispatcher.connect(resave_object, signal=signals.post_save, sender=Project)
-dispatcher.connect(resave_object, signal=signals.post_save, sender=Entry)
+signals.post_save.connect(resave_object, sender=Project)
+signals.post_save.connect(resave_object, sender=Entry)

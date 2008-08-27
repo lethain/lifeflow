@@ -1,5 +1,5 @@
 import cgi
-from django import newforms as forms
+from django import  forms
 from lifeflow.text_filters import comment_markup
 
 
