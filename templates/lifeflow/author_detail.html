@@ -1,6 +1,6 @@
 {% extends "lifeflow/lifeflow_base.html" %}
 {% load markup %}
-{% block title %}{{ object.name|escape }}{% endblock %}
+{% block title %}{{ object.name|escape }} @ {{ lifeflow_blog_name }}{% endblock %}
 {% block body %}
 <h2 class="author"><a href="{{ object.link }}">{{ object.name }}</a></h2>
 <div class="author">

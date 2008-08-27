@@ -1,6 +1,8 @@
 {% extends "lifeflow/lifeflow_base.html" %}
-{%block body %}
 
+{% block title %} {{ object.title }} @ {{ lifeflow_blog_name }} {% endblock %}
+
+{%block body %}
 <div class="pagination pagination-top">
 {% if page.has_previous %}
 <span class="left"><a href="?page={{ page.previous_page_number }}">Newer Entries</a></span>

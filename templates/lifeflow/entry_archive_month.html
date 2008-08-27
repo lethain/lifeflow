@@ -1,5 +1,5 @@
 {% extends "lifeflow/lifeflow_base.html" %}
-{% block title %}Archive of {{ month|date:"F, Y" }}{% endblock %}
+{% block title %}Archive: {{ month|date:"F, Y" }} @ {{ lifeflow_blog_name }}{% endblock %}
 {% block body %}
 
 <h3> <a href="../../">archive</a> / <a href="../">{{ month|date:"Y" }}</a> / <a href="./">{{ month|date:"F" }}</a> </h3>
