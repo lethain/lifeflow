@@ -107,7 +107,7 @@ def flow(request, slug):
         page = int(request.GET["page"])
     except:
         page = 1
-    page = QuerySetPaginator(Flow.objects.get(slug=slug).entry_set.all(), 5).page(page)
+    page = QuerySetPaginator(Flow.objects.get(slug=slug).latest(), 5).page(page)
     return render_to_response('lifeflow/flow_detail.html', 
                               {'object' : flow, 'page' : page,},
                               RequestContext(request, {}))
