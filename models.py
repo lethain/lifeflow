@@ -489,6 +489,9 @@ class Tag(models.Model):
     def get_absolute_url(self):
         return u"/tags/%s/" % self.slug
 
+    def random(self):
+        return self.entry_set.all().order_by('?')
+
     def latest(self, qty=None):
         if qty is None:
             return self.entry_set.all().filter(**{'pub_date__lte': datetime.datetime.now()})
