@@ -4,13 +4,16 @@
 
 
 {% block body %}
-<h3> <a href="./">archive</a> </h3>
-
-
-<ol>
-  {% for date in date_list %}
-  <li><a href="{{ date.year }}/">Archive for {{ date.year }}</a></li>
-  {% endfor %}
-</ol>
-
+<ul id="archive">
+  <li>
+  <a href="./">archive</a>
+  </li>
+  <li>
+  <ol>
+    {% for date in date_list %}
+    <li><a href="{{ date.year }}/">{{ date.year }}</a></li>
+    {% endfor %}
+  </ol>
+  </li>
+</ul>
 {% endblock %}

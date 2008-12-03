@@ -2,14 +2,15 @@
 {% block title %}Archive: {{ year }} @ {{ lifeflow_blog_name }}{% endblock %}
 {% block body %}
 
+<ul id="archive">
+  <li><a href="../">archive</a></li>
+  <li><ol><li><a href="./">{{ year }}</a></li></ol></li>
+  <li><ol>
+    {% for date in date_list %}
+    <li><a href="{{ date|date:"b" }}/">{{ date|date:"F" }}</a></li>
+    {% endfor %}
+  </ol></li>
+</ul>
 
-
-<h3> <a href="../">archive</a> / <a href="./">{{ year}}</a> </h3>
-
-<ol>
-  {% for date in date_list %}
-  <li> <a href="{{ date|date:"b" }}/">View entries from {{ date|date:"F, Y" }} </li>
-  {% endfor %}
-</ol>
 
 {% endblock %}

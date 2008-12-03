@@ -6,6 +6,35 @@ pre, code {
     font-family: "Courier New", Courier, monospace;
 }
 
+div.content-main-internal {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#archive {
+    width: 100%;
+    overflow: auto;
+    font-size: 1.5em;
+    padding:0;
+    margin:0;
+    white-space: nowrap;
+    list-style-type: none;
+}
+
+#archive li {
+    float: left;
+    margin-left: 1em;
+    display: inline;
+}
+
+#archive ol li {
+    float: none;
+    display: block;
+}
+
+
+
+
 div.footer {
     text-align: center;
 }

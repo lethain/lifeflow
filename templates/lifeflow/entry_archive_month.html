@@ -2,10 +2,14 @@
 {% block title %}Archive: {{ month|date:"F, Y" }} @ {{ lifeflow_blog_name }}{% endblock %}
 {% block body %}
 
-<h3> <a href="../../">archive</a> / <a href="../">{{ month|date:"Y" }}</a> / <a href="./">{{ month|date:"F" }}</a> </h3>
+<ul id="archive" class="one">
+  <li><a href="../../">archive</a></li>
+  <li><ol><li><a href="../">{{ month|date:"Y" }}</a></li></ol></li>
+  <li><ol><li><a href="./">{{ month|date:"F" }}</a></li></ol></li>
+</ul>
 
-<ol>
-{% include "lifeflow/entry_summary_list.html" %}
-</ol>
+{% with object_list as article_list %}
+{% include "lifeflow/show_articles_list.html" %}
+{% endwith %}
 
 {% endblock %}
