@@ -9,15 +9,11 @@
   <br />
   {% endif %}
   {% endwith %}
-  <span class="date">
-  {{ object.pub_date|date:"F j, Y" }}
-  </span>
   {% for tag in object.tags.all %}
   <span class="tag">
   <a href="{{ tag.get_absolute_url }}"> {{ tag.title }}</a>
   </span>
   {% endfor %}
-  
   <br />
   {% with object.translation_set.all as translations %}
   {% if translations %}
