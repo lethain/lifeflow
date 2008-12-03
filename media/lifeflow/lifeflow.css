@@ -32,9 +32,6 @@ div.content-main-internal {
     display: block;
 }
 
-
-
-
 div.footer {
     text-align: center;
 }
@@ -152,6 +149,10 @@ span.social {
 div.comment {
     margin-top: 18px;
     overflow: auto;
+}
+
+ol.entry-list {
+    list-style-type: none;
 }
 
 ol.entry-list div.comment {
