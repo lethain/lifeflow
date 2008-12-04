@@ -50,8 +50,7 @@ MEDIA_URL = 'http://127.0.0.1:8000/media/'
 MEDIA_ROOT = os.path.join(ROOT_PATH,'media')
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'aaaaa23f1tkf4opkfpokfw'
-# List of callables that know how to import templates from various sources.
+SECRET_KEY = 'c#zi(mv^n+4te_sy$hpb*zdo7#f7ccmp9ro84yz9bmmfqj9y*c'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
