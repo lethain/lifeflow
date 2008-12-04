@@ -26,16 +26,10 @@ def blog(request):
 
     author_slug = make_slug(author)
     blog_name = getattr(settings, 'LIFEFLOW_BLOG_NAME', "Unconfigured LifeFlow")
-    custom_css = getattr(settings, 'LIFEFLOW_CUSTOM_CSS', None)
-    custom_js_header = getattr(settings, 'LIFEFLOW_CUSTOM_JS_HEADER', None)
-    custom_js_footer = getattr(settings, 'LIFEFLOW_CUSTOM_JS_FOOTER', None)
     return {
         'blog_roll' : blog_roll,
         'lifeflow_google_analytics_id':analytics_id,
         'lifeflow_blog_name':blog_name,
-        'lifeflow_custom_css':custom_css,
-        'lifeflow_custom_js_header':custom_js_header,
-        'lifeflow_custom_js_footer':custom_js_footer,
         'lifeflow_flows':flows,
         'lifeflow_keywords':keywords,
         'lifeflow_description':description,
