@@ -1,0 +1,557 @@
+pre, code {
+    font-family: "Courier New", Courier, monospace;
+}
+
+
+body {
+    font-size: 12pt;
+}
+
+div.login {
+    width:40%;
+    color: grey;
+    margin-left:30%;
+    margin-right:30%;
+    margin-top:75px;
+    padding: 20px;
+    border: dashed 3px orange;
+    overflow: auto;
+}
+
+.login tr {
+    font-size: 15pt;
+}
+
+.login input {
+    height: 20px;
+    width: 100%;
+    font-size: 15pt;
+}
+
+.login td {
+    border: none;
+}
+
+.login button {
+    height: 30px;
+    width: 90%;
+    text-align: center;
+}
+
+div.pagination {
+    overflow: hidden;
+}
+div.pagination .left {
+    float: left;
+}
+div.pagination .right {
+    float: right;
+}
+
+div.control-bar {
+    background-color: orange;
+    width: 100%;
+    overflow: hidden;
+}
+
+.control-bar a {
+
+    float: right;
+    text-decoration: none;
+    color: white;
+}
+.control-bar a:hover {
+    color: black;
+}
+.control-bar a.right {
+    margin-right: 30px;
+    float: right;
+}
+
+.control-bar a.left {
+    float: left;
+    margin-left: 30px;
+}
+
+div.breadcrumbs {
+    background-color: black;
+    color: grey;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+}
+
+
+.breadcrumbs a {
+    text-decoration: none;
+    color: grey;
+}
+
+.breadcrumbs a:hover {
+    color: white;
+}
+
+.breadcrumbs span {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.breadcrumbs span:hover {
+    color: white;
+}
+
+.breadcrumbs span.selected {
+    color: white;
+}
+
+div.error-msg {
+    font-size: 16pt;
+    background-color: red;
+}
+
+div.normal-msg {
+    background-color: #0099FF;
+    z-index: 100;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+div.editing {
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+
+.editing li {
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px cyan;
+    overflow: auto;
+}
+
+#render li {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    list-style: "decimal";
+}
+
+#render ul {
+    list-style: disc;
+}
+
+#render ol {
+    list-style: "decimal";
+}
+
+div.li-mimic {
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px cyan;
+    overflow: auto;
+}
+
+.li-mimic p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.editing input {
+    width: 400px;
+}
+
+.editing select.dropdown {
+    width: 200px;
+    margin-left: 20px;
+    float: right;
+}
+
+.editing p.dropdown {
+    float: left;
+}
+
+.editing textarea {
+    width: 400px;
+}
+
+.editing span {
+    margin-right: 10px;
+}
+
+textarea.writing {
+    width: 100%;
+    height: 300px;
+}
+
+.error-msg p {
+    width: 100%;
+    text-align: center;
+}
+
+div.panels {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 98%;
+}
+
+div.panel {
+    float: left;
+    width: 33%;
+}
+
+div.wide {
+    width:50%;
+}
+
+div.narrow {
+    width:25%
+}
+
+h3.centered {
+    text-align: center;
+}
+
+.panel h3 {
+    text-align: center;
+}
+
+.published h3 {
+    color: orange;
+}
+
+.edited h3 {
+    color: cyan;
+}
+
+.rough h3 {
+    color: blue;
+}
+
+div.top {
+    
+}
+
+.editing ul {
+    text-decoration: none;
+}
+
+.panel select {
+    width: 100%;
+    height: 350px;
+}
+
+select.small {
+    height: 100px;
+}
+
+div.buttons {
+    width: 100%;
+    overflow: hidden;
+}
+
+
+div.resource-select {
+    width: 33%;
+    float: left;
+    height: 220px;
+}
+
+.resource-select select {
+    width: 100%;
+}
+
+.resource div.details {
+    padding: 5px;
+    width: 30%;
+    margin-left: 5px;
+    border: solid 1px cyan;
+    float: left;
+}
+
+
+
+.resource div.extra {
+    padding: 5px;
+    width: 30%;
+    margin-left: 5px;
+    border: solid 1px cyan;
+    float: left;
+}
+
+
+
+.resource .extra img {
+    margin: 0px;
+    width: 100%;
+    float: left;
+}
+
+div.add-resource {
+    padding: 5px;
+    height: 100%;
+    width: 64%;
+    margin-left: 5px;
+    border: solid 1px cyan;
+    float: left;
+}
+
+div.selectables {
+    margin: 10px;
+}
+
+a.selectable {
+    //border: solid 1px cyan;
+    padding: 5px;
+    margin: 20px;
+    text-decoration: none;
+}
+
+a.selected {
+    background: orange;
+    border: none;
+}
+
+
+.writing-buttons a {
+    float: right;
+    width: 150px;
+    text-align: center;
+}
+
+.top a {
+    width: 25%;
+    text-align: center;
+}
+
+.bottom a {
+    width: 90%;
+    text-align: center;
+}
+
+a.button {
+    margin: 0px;
+}
+
+a.titlecase {
+    text-decoration: none;
+    
+}
+
+a.positive:hover {
+    background-color: blue;
+}
+
+a.neutral:hover {
+    background-color: cyan;
+}
+
+a.negative:hover {
+    background-color: orange;
+}
+
+a.right {
+    float: right;
+}
+    
+
+div.entries {
+    overflow: auto;
+}
+
+div.render-div {
+    margin: 20px;   
+}
+
+div.projects {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+div.projects select {
+    width: 95%;
+}
+
+div.comments {
+    
+}
+
+div.comments div.data {
+}
+
+div.comments div.controls {
+
+}
+
+div.blogs div.data {
+    width: 80%;
+    float: left;
+}
+div.blogs div.controls {
+    float: right;
+    width: 20%;
+}
+
+
+div.authors {
+    width: 100%;
+}
+
+div.files {
+    width: 100%;
+}
+
+div.author {
+    float: left;
+    margin: 16px;
+    border: dashed 1px cyan;
+    width: 75%;
+}
+
+div.author-details {
+    padding: 16px;
+}
+
+div.author-picture {
+    float: right;
+    margin: 16px;
+    border: dotted 1px cyan;
+}
+
+div.author-picture img {
+    width: 200px;
+    height: 200px;
+    margin: 8px;
+}
+
+div.selections {
+    width: 210px;
+    float: left;
+    height: 100%;
+}
+
+.authors div.selections {
+    float: left;
+    height: 100%;
+    width: 20%;
+}
+
+
+div.selections select {
+    width: 100%;
+}
+
+div.files div.details {
+    padding: 5px;
+    height: 100px;
+    width: 75%;
+    border: solid 1px cyan;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div.files div.extra {
+    padding: 5px;
+    width: 75%;
+    margin-left: 5px;
+    border: solid 1px cyan;
+    float: left;
+}
+
+div.files div.resource-extra img {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+div.files div.add {
+    padding: 5px;
+    height: 100%;
+    width: 75%;
+    margin-top: 5px;
+    margin-left: 5px;
+    border: solid 1px cyan;
+    float: left;
+}
+
+
+/* Styling for the Rendering view */
+
+#render {
+    overflow: auto;
+}
+
+#render em {
+    background: none;
+}
+
+#render p {
+    padding-bottom: 20px;
+}
+
+/* Styling for help portions. */
+
+div.help {
+    background-color: #CCCCFF;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 70%;
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+
+div.help div.section {
+    display: none;
+}
+div.help div.selected {
+    display: block;
+}
+
+div.help div.editor-headers {
+    overflow: auto;
+    border: dashed 1px white;
+    padding-bottom: 5px;
+}
+
+div.help a.section {
+    margin-right: 16px;
+    float: left;
+}
+
+div.help td.label {
+    color: grey;
+}
+
+div.help a.close {
+    float: right;
+}
+
+div.help #editor-internal {
+    padding-left: 18px;
+    padding-right: 18px;
+    height: 300px;
+    overflow: auto;
+}
+
+div.help span.syntax {
+    color: grey;
+}
+
+div.help span.variable {
+    color: red;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+a.help {
+    float: right;
+}
