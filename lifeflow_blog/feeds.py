@@ -176,20 +176,6 @@ class TranslationFeed(Feed):
     def item_pubdate(self, item):
         return item.pub_date
 
-
-
-class ProjectFeed(Feed):
-    title = u"%s: Projects" % settings.LIFEFLOW_BLOG_NAME
-    link = u"/"
-    description = u"Latest projects on %s." % settings.LIFEFLOW_BLOG_NAME
-    copyright = u'Creative Commons License'
-
-
-    def items(self):
-        return Project.objects.all().order_by('-id')
-
-
-
 class CommentFeed(Feed):
     title = u"%s: Comments" % settings.LIFEFLOW_BLOG_NAME
     link = "/"
