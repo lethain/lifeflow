@@ -20,7 +20,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "lifeflow.context.blog",
 )
 INSTALLED_APPS = (
-    'lifeflow',
+    'lifeflow_core',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

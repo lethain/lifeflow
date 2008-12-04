@@ -22,3 +22,19 @@ code to make it easier to work with and less complex.
     other applications to manipulate LifeFlow.
 *  ``lifeflow_editor`` is a full-featured editor which
     is based on the ``lifeflow_api``.
+
+### Setup & Usage
+
+1.  Add all applications to Python path.
+    
+        ln -s /Users/will/git/lifeflow/lifeflow_core /Library/Python/2.5/site-packages/lifeflow_core
+        ln -s /Users/will/git/lifeflow/lifeflow_blog /Library/Python/2.5/site-packages/lifeflow_blog
+        ln -s /Users/will/git/lifeflow/lifeflow_api /Library/Python/2.5/site-packages/lifeflow_api
+        ln -s /Users/will/git/lifeflow/lifeflow_editor /Library/Python/2.5/site-packages/lifeflow_editor
+
+
+2.  Sym-link contents of application media folders
+    into your project's media folder.
+3.  Run sync-db.
+4.  Customize...
+5.  Profits...
