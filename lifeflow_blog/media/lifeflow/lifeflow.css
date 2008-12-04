@@ -1,0 +1,259 @@
+em {
+    background: none;
+}
+
+pre, code {
+    font-family: "Courier New", Courier, monospace;
+}
+
+div.content-main-internal {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#archive {
+    width: 100%;
+    overflow: auto;
+    font-size: 1.5em;
+    padding:0;
+    margin:0;
+    white-space: nowrap;
+    list-style-type: none;
+}
+
+#archive li {
+    float: left;
+    margin-left: 1em;
+    display: inline;
+}
+
+#archive ol li {
+    float: none;
+    display: block;
+}
+
+div.footer {
+    text-align: center;
+}
+
+div.pagination {
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+div.pagination span.right {
+    float: right;
+}
+
+div.pagination span.left {
+    float: left;
+}
+
+div.series-list {
+    padding-left: 8px;
+}
+
+span.series-list {
+    padding-left: 8px;
+}
+
+span.tag {
+    margin-left: 10px;
+}
+
+span.translation {
+    margin-right: 10px;
+}
+
+
+span.header-link {
+    margin-left: 10px;
+}
+
+span.header-spacer {
+    margin-left: 10px;
+    margin-right: 50px;
+}
+
+ul.nav-links {
+    list-style: none;
+}
+
+li.long-nav-link {
+    margin-bottom: 8px;
+}
+
+span.very-large {
+    font-size: 2em;
+    margin-bottom: 0.75em;
+}
+
+h3.reply {
+    margin-top: 18px;
+    text-align: center;
+}
+
+div.author div.details {
+    overflow: hidden;
+}
+
+div.author div.picture {
+    height: 270px;
+    width: 180px;
+    float: left;
+    margin: 8px;
+    overflow: hidden;
+}
+
+div.author div.subscribe {
+    padding-top: 8px;
+    padding-bottom: 2px;
+    margin: 0 0 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+div.author-subscribe {
+    text-align: center;
+}
+
+div.authors-list {
+    overflow: hidden;
+}
+div.author-in-list {
+    height: 270px;
+    width: 180px;
+    float: left;
+    margin: 8px;
+    overflow: hidden;
+}
+div.author-in-list img {
+    height: 100%;
+    margin: 8px;
+}
+
+/* Stylings for Social Links */
+
+div.social {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+span.social {
+    margin-right: 18px;
+}
+
+/* Stylings for comments. */
+
+div.comment {
+    margin-top: 18px;
+    overflow: auto;
+}
+
+ol.entry-list {
+    list-style-type: none;
+}
+
+ol.entry-list div.comment {
+    padding-top: 6px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+div.comment-body {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+span.comment-author {
+    float: left;
+    margin-left: 5px;
+}
+
+div.comments-subscribe {
+    text-align: center;
+}
+
+span.comment-date {
+    float: left;
+    margin-left: 16px;
+}
+
+span.comment-reply {
+    float: right;
+    margin-right: 10px;
+}
+
+span.comment-parent-link {
+    float: right;
+    margin-right: 10px;
+}
+
+div.comment_0 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.comment_1 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+div.comment_2 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+div.comment_3 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+div.comment_4 {
+    overflow: auto;
+    border: 1px dashed;
+    margin-left: 50px;
+    margin-right: 10px;
+}
+
+
+/* Styling for honeypot section of comments */
+
+div.honey {
+    display: none;
+}
+
+/* Stylings for the tag-cloud. */
+
+.tag-cloud LI {
+    display: inline;
+}
+
+.tag-cloud .size1 {
+    font-size: 1em
+}
+
+.tag-cloud .size2 {
+    font-size: 1.3em
+}
+
+.tag-cloud .size3 {
+    font-size: 1.6em
+}
+
+.tag-cloud .size4 {
+    font-size: 1.9em
+}
+
+.tag-cloud .size5 {
+    font-size: 2.2em
+}

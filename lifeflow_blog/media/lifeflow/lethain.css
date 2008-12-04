@@ -1,0 +1,93 @@
+html, body {
+    background-color: #525252;
+    font-size: 11pt;
+}
+pre {
+    margin-left: 15px;
+}
+div.article-header {
+    margin-bottom: 10px;
+}
+
+div.author div.subscribe {
+    background-color: #cca2a2;
+}
+
+div.series-list {
+    font-size: 10pt;
+    padding-top: 16px;
+    background: #cca2a2;
+}
+div.series-list ul {
+    list-style: none;
+}
+
+
+div.heading {
+    background-color: #363942;   
+}
+.heading a {
+    color: #ff7f24;
+}
+h3.author-list-heading {
+    display: none;
+}
+div.content-main {
+    background-color: #eeb4b4;
+    overflow: hidden;
+}
+div.content-main-internal {
+    padding-top: 18px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+div.content-sidebar {
+    padding-top: 18px;
+    margin-left: -10px;
+    padding-right: 10px;
+    background-color: #ff7f24;
+}
+
+.article-body img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #940505;
+}
+a:hover { 
+    text-decoration: underline;
+}
+
+ol.entry-list div.comment {
+    background: #cca2a2;
+}
+
+div.pagination-top {
+    border-bottom: dashed 2px #cca2a2;
+}
+
+div.pagination-bottom {
+    border-top: dashed 2px #cca2a2;
+    margin-bottom: 16px;
+}
+
+/* Highlighted Code block */
+
+div.highlight {
+    padding: 8px;
+    margin: 8px;
+    overflow: auto;
+}
+
+td.linenos, td.linenos pre {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+div.highlight pre {
+    margin: 0px;
+    padding: 0px;
+}
