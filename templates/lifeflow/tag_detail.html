@@ -11,9 +11,9 @@
 
 <h2> Entries tagged with {{ object }}</h2>
 
-{% with object.latest as object_list %}
+{% with object.latest as article_list %}
 <ol>
-  {% include "lifeflow/entry_summary_list.html" %}
+  {% include "lifeflow/show_articles_list.html" %}
 </ol>
 {% endwith %}
 
