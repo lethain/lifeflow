@@ -391,7 +391,7 @@ class Resource(models.Model):
     def get_relative_url(self):
         # figure out why I named this relative instead of absolute
         # because... it sure as hell isn't relative
-        return u"/media/%s" % self.content
+        return self.content.url
 
     def __unicode__(self):
         return u"[%s] %s" % (self.markdown_id, self.title,)
