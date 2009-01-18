@@ -7,7 +7,7 @@
   <div class="details">
     {% if object.picture %}
     <div class="picture">
-      <img src="{{ object.get_picture_url }}" alt="An picture of {{ object.name }}" />
+      <img src="{{ object.picture.url }}" alt="An picture of {{ object.name }}" />
     </div>
     {% endif %}
     <div class="author-description">
