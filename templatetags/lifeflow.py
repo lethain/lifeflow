@@ -21,14 +21,11 @@ register.filter('boundary', boundary)
 def nearby(lst, obj, count=5):
     lst = list(lst)
     l = len(lst)
-    print l
     try:
         pos = lst.index(obj)
     except ValueError:
         pos = 0
     dist = count / 2
-    print pos
-    print dist
     if pos <= dist:
         return lst[:count]
     if pos >= l - dist:
