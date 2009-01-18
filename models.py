@@ -490,7 +490,7 @@ class Tag(models.Model):
         return u"/tags/%s/" % self.slug
 
     def random(self):
-        return self.entry_set.all().order_by('?')
+        return self.entry_set.filter(**{'pub_date__lte': datetime.datetime.now()}).order_by('?')
 
     def latest(self, qty=None):
         if qty is None:
