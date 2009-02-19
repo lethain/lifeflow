@@ -118,7 +118,7 @@ def front(request):
         page = int(request.GET["page"])
     except:
         page = 1
-    page = QuerySetPaginator(Entry.current.all(), 3).page(page)
+    page = QuerySetPaginator(Entry.current.all(), 5).page(page)
     return render_to_response('lifeflow/front.html', {'page':page}, RequestContext(request, {}))
 
 
