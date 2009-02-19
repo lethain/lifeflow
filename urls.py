@@ -8,7 +8,7 @@ handler500 = 'lifeflow.views.server_error'
 
 flows = Flow.objects.all()
 projects = Project.objects.all()
-tags = Tag.objects.all().order_by('title')
+tags = Tag.objects.all()
 languages = Language.objects.all()
 authors = Author.objects.all()
 

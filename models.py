@@ -473,15 +473,10 @@ class SiteToNotify(models.Model):
             remote_server.weblogUpdates.ping(self.blog_title, self.blog_url)
         thread.start_new_thread(do_ping, ())
 
-
 class Tag(models.Model):
     "Tags are associated with Entry instances to describe their contents."
     title = models.CharField(max_length=50)
     slug = models.SlugField()
-
-
-    class Meta:
-        ordering = ('title',)
 
     def __unicode__(self):
         return self.title
