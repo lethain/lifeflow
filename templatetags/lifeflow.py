@@ -33,4 +33,12 @@ def nearby(lst, obj, count=5):
     else:
         return lst[pos-dist:pos+dist+1]
 
-register.filter('nearby', nearby)            
+register.filter('nearby', nearby)
+
+def human(lst, field):
+    lst = list(lst)
+    lst.sort(lambda a,b : cmp(getattr(a,field).lower(),
+                              getattr(b,field).lower()))
+    return lst
+
+register.filter('human', human)

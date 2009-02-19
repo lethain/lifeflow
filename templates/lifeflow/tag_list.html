@@ -1,11 +1,12 @@
 {% extends "lifeflow/lifeflow_base.html" %}
+{% load lifeflow %}
 
 {% block title %} Tag Cloud @ {{ lifeflow_blog_name }}{% endblock %}
 
 {% block body %}
 
 <div class="tag-cloud">
-  {% for object in object_list %}
+  {% for object in object_list|human:"title" %}
   <span class="{{ object.tag_size }}"><a href="{{ object.get_absolute_url }}">{{ object }}</a></span>
   {% endfor %}
 </div>
