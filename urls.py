@@ -3,6 +3,13 @@ from lifeflow.feeds import *
 from lifeflow.models import *
 from lifeflow.sitemaps import ProjectSitemap
 from django.contrib.sitemaps import GenericSitemap
+from django.views.decorators.cache import cache_page
+from django.contrib.syndication.views import feed
+
+# Cache
+def cache(type):
+    return cache_page(type, 60*30)
+
 
 handler500 = 'lifeflow.views.server_error'
 
@@ -46,7 +53,7 @@ urlpatterns = patterns(
     url(r'^comments/create/(?P<entry_id>\d+)/(?P<parent_id>\d+)/$', 'lifeflow.views.comments'),
 
     # feeds and rss views
-    url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
+    url(r'^feeds/(?P<url>.*)/$', cache(feed), {'feed_dict': feeds}),
     url(r'^meta/rss/$', 'lifeflow.views.rss'),
 
     # date based generic views
