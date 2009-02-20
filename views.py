@@ -18,6 +18,17 @@ from django.conf import settings
 from django.core.paginator import QuerySetPaginator
 from lifeflow.models import Series, Flow, Entry, Comment
 from lifeflow.forms import CommentForm
+from django.core.cache import cache
+from django.http import HttpRequest
+from django.utils.cache import get_cache_key
+
+def expire_page(path):
+    'http://www.djangosnippets.org/snippets/936/'
+    request = HttpRequest()
+    request.path = path
+    key = get_cache_key(request)
+    if cache.has_key(key):
+        cache.delete(key)
 
 
 def server_error(request):
@@ -90,6 +101,7 @@ def comments(request, entry_id=None, parent_id=None):
                     webpage=webpage,body=body,html=html)
         c.save()
         url = u"%s#comment_%s" % (entry.get_absolute_url(), c.pk)
+        expire_page(entry.get_absolute_url())
         return HttpResponseRedirect(url)
 
     return render_to_response(
