@@ -305,7 +305,6 @@ def add_resource(request):
     while (os.path.isfile(filepath)):
         filename = "_%s" % filename
         filepath = "%s%s" % (filebase, filename)
-    print filepath
     fd = open(filepath, 'wb')
 
     fd.write(file.read())
@@ -563,10 +562,8 @@ def create_author(request,id=None):
 
 @login_required
 def render(request, model=None, id=None):
-    print request, id, model
     if id is None and request.POST.has_key('pk'):
         id = request.POST['pk']
-    print request, id
 
     if id is None:
         txt = entry_markup(request.POST['txt'])
