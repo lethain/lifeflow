@@ -8,7 +8,7 @@ class EntryDocument(solango.SearchDocument):
     content = solango.fields.TextField(copy=True)
 
     def transform_tags(self, instance):
-        tags = list(intance.tags.all())
+        tags = list(instance.tags.all())
         texts = [ tag.title for tag in tags ]
         return ",".join(texts)
     
